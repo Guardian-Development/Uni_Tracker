@@ -55,4 +55,4 @@ freeline/
 freeline_project_description.json
 
 # secrets
-**/*/res/values/secrets.xml
+app/src/main/res/values/secrets.xml
