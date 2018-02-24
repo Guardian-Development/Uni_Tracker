@@ -1,42 +1,59 @@
 package mobile.joehonour.newcastleuniversity.unitracker.viewmodels
 
+import com.nhaarman.mockito_kotlin.doAnswer
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import com.twitter.sdk.android.core.TwitterAuthToken
 import com.twitter.sdk.android.core.TwitterSession
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
-import org.junit.Assert.*
 import org.junit.Test
 import org.mockito.Mockito
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when` as _when
 
 class LoginViewModelTests {
 
     @Test
     fun canAuthenticateWithTwitterSuccess() {
-        val authProvider = Mockito.mock(IProvideAuthentication::class.java)
-        val authToken = Mockito.spy(TwitterAuthToken("token", "secret"))
-        val viewModel = LoginViewModel(authProvider)
-        val twitterSession = Mockito.mock(TwitterSession::class.java)
+        val callback = mock<(Boolean, String?) -> Unit>()
 
-        _when(twitterSession.authToken).then { authToken }
-        //_when(authProvider.authenticateWithTwitterSession())
-        //https://github.com/nhaarman/mockito-kotlin/issues/145
-        //val mock = mock<() -> Unit>()
-        //doSomething(mock)
-        //verify(mock).invoke()
-
-        viewModel.authenticateWithTwitterSession(twitterSession) {
-            status, errorMessage ->
-                assertTrue(status)
-                assertNull(errorMessage)
+        val authProvider = mock<IProvideAuthentication> {
+            on {
+                authenticateWithTwitterSession("token", "secret", callback)
+            } doAnswer { callback.invoke(true, null) }
         }
 
-        //TODO: implement
-        fail()
+        val authToken = Mockito.spy(TwitterAuthToken("token", "secret"))
+
+        val twitterSession = mock<TwitterSession> {
+            on { getAuthToken() } doReturn authToken
+        }
+
+        val viewModel = LoginViewModel(authProvider)
+
+        viewModel.authenticateWithTwitterSession(twitterSession, callback)
+        verify(callback).invoke(true, null)
     }
 
     @Test
     fun canAuthenticateWithTwitterFailure() {
-        fail()
+
+        val callback = mock<(Boolean, String?) -> Unit>()
+
+        val authProvider = mock<IProvideAuthentication> {
+            on {
+                authenticateWithTwitterSession("token", "secret", callback)
+            } doAnswer { callback.invoke(false, "failed twitter") }
+        }
+
+        val authToken = Mockito.spy(TwitterAuthToken("token", "secret"))
+
+        val twitterSession = mock<TwitterSession> {
+            on { getAuthToken() } doReturn authToken
+        }
+
+        val viewModel = LoginViewModel(authProvider)
+
+        viewModel.authenticateWithTwitterSession(twitterSession, callback)
+        verify(callback).invoke(false, "failed twitter")
     }
 }

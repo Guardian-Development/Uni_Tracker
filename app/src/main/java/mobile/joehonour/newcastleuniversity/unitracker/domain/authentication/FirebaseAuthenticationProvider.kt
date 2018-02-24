@@ -5,9 +5,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.TwitterAuthProvider
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 
-class FirebaseAuthenticationProvider : IProvideAuthentication {
-
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+class FirebaseAuthenticationProvider
+    (private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()) : IProvideAuthentication {
 
     override val userLoggedIn: Boolean
         get() = firebaseAuth.currentUser.notNull()
@@ -31,5 +30,4 @@ class FirebaseAuthenticationProvider : IProvideAuthentication {
                     callback(it.isSuccessful, it.exception?.message)
                 }
     }
-
 }

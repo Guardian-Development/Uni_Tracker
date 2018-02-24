@@ -1,15 +1,26 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.extensions
 
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-import org.junit.Assert.*
-
-/**
- * Created by joehonour on 24/02/2018.
- */
 class NullHelperExtensionsTests {
+
     @Test
-    fun notNull() {
+    fun nullableNotNullFalse() {
+        val int: Int? = null
+        assertFalse(int.notNull())
     }
 
+    @Test
+    fun nullableNotNullTrue() {
+        val double: Double? = 0.0
+        assertTrue(double.notNull())
+    }
+
+    @Test
+    fun objectNotNullTrue() {
+        val double = 0.0
+        assertTrue(double.notNull())
+    }
 }

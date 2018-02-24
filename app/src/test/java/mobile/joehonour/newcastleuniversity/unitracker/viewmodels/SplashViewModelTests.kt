@@ -1,17 +1,19 @@
 package mobile.joehonour.newcastleuniversity.unitracker.viewmodels
 
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.junit.Assert.*
-import org.mockito.Mockito
-import org.mockito.Mockito.`when` as _when
 
 class SplashViewModelTests {
 
     @Test
     fun canGetUserLoggedInTrue() {
-        val authProviderMock = Mockito.mock(IProvideAuthentication::class.java)
-        _when(authProviderMock.userLoggedIn).then { true }
+        val authProviderMock = mock<IProvideAuthentication> {
+            on { userLoggedIn } doReturn true
+        }
 
         val viewModel = SplashViewModel(authProviderMock)
         assertTrue(viewModel.userLoggedIn)
@@ -19,8 +21,9 @@ class SplashViewModelTests {
 
     @Test
     fun canGetUserLoggedInFalse() {
-        val authProviderMock = Mockito.mock(IProvideAuthentication::class.java)
-        _when(authProviderMock.userLoggedIn).then { false }
+        val authProviderMock = mock<IProvideAuthentication> {
+            on { userLoggedIn } doReturn false
+        }
 
         val viewModel = SplashViewModel(authProviderMock)
         assertFalse(viewModel.userLoggedIn)
