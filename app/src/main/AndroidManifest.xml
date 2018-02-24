@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mobile.joehonour.newcastleuniversity.unitracker">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -19,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.LoginActivity" />
     </application>
 
 </manifest>

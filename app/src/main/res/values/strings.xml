@@ -1,3 +1,10 @@
+<!--
+secrets.xml resource file should be added to values folder containing:
+
+    - com.twitter.sdk.android.CONSUMER_KEY
+    - com.twitter.sdk.android.CONSUMER_SECRET
+-->
+
 <resources>
     <string name="app_name">Uni_Tracker</string>
 </resources>
