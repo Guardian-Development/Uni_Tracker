@@ -8,6 +8,9 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 class FirebaseAuthenticationProvider
     (private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()) : IProvideAuthentication {
 
+    override val userUniqueId: String?
+        get() = firebaseAuth.currentUser?.uid
+
     override val userLoggedIn: Boolean
         get() = firebaseAuth.currentUser.notNull()
 

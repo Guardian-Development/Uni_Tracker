@@ -6,6 +6,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 
 class LoginViewModel(private val authProvider: IProvideAuthentication) : ViewModel() {
 
+    val userHasCompletedSetup: Boolean = false
+
+    val userLoggedIn: Boolean by lazy { authProvider.userLoggedIn }
+
     fun authenticateWithTwitterSession(
             session: TwitterSession,
             callback: (status: Boolean, errorMessage: String?) -> Unit) {

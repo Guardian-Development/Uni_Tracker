@@ -18,6 +18,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        //this allows the mocking of Firebase classes with the mock-maker-inline flag
+        unitTests.all {
+            jvmArgs '-noverify'
+        }
+    }
 }
 
 dependencies {
@@ -27,14 +33,16 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "android.arch.lifecycle:extensions:1.1.0"
 
-    compile 'org.koin:koin-android-architecture:0.8.2'
-    compile 'com.google.firebase:firebase-auth:11.8.0'
-    compile 'com.twitter.sdk.android:twitter-core:3.1.1'
+    implementation 'org.koin:koin-android-architecture:0.8.2'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
 
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
+    testImplementation 'android.arch.core:core-testing:1.1.0'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

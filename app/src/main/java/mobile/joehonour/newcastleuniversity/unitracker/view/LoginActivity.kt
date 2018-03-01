@@ -3,6 +3,7 @@ package mobile.joehonour.newcastleuniversity.unitracker.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_login.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.viewmodels.LoginViewModel
@@ -17,7 +18,18 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        twitterLoginButton.callback = viewModel.handleTwitterSession(this)
+        twitterLoginButton.callback = viewModel.handleTwitterSession(
+                { Log.e("LoginViewModel", it) },
+                this::redirectFromSuccessfulLogin)
+    }
+
+    private fun redirectFromSuccessfulLogin() {
+        when(viewModel.userHasCompletedSetup) {
+            true -> startActivity(Intent(this, MainActivity::class.java))
+            false -> startActivity(Intent(this, InitialSetupActivity::class.java))
+        }
+
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {

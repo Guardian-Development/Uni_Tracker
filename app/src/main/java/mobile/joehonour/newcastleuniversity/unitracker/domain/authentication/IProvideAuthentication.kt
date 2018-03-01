@@ -8,4 +8,5 @@ interface IProvideAuthentication {
             callback: (status: Boolean, errorMessage: String?) -> Unit)
 
     val userLoggedIn: Boolean
+    val userUniqueId: String?
 }
