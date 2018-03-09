@@ -10,11 +10,12 @@ import mobile.joehonour.newcastleuniversity.unitracker.viewmodels.LoginViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.viewmodels.extensions.handleTwitterSession
 import org.koin.android.architecture.ext.viewModel
 
-class LoginActivity : AppCompatActivity() {
-
+class LoginActivity : AppCompatActivity()
+{
     private val viewModel: LoginViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -23,17 +24,19 @@ class LoginActivity : AppCompatActivity() {
                 this::redirectFromSuccessfulLogin)
     }
 
-    private fun redirectFromSuccessfulLogin() {
+    private fun redirectFromSuccessfulLogin()
+    {
         viewModel.userHasCompletedSetup {
             when(it) {
-                true -> startActivity(Intent(this, MainActivity::class.java))
+                true -> startActivity(Intent(this, CoreAppTabContainerActivity::class.java))
                 false -> startActivity(Intent(this, InitialSetupActivity::class.java))
             }
         }
         finish()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
+    {
         super.onActivityResult(requestCode, resultCode, data)
         twitterLoginButton.onActivityResult(requestCode, resultCode, data)
     }

@@ -4,9 +4,9 @@ class InitialSetupYearWeightingModelValidatorBuilder(
         var weightingMinimum: Int = 0,
         var weightingMaximum:Int = 100
 ) {
-
     fun withEdits(builder: InitialSetupYearWeightingModelValidatorBuilder.() -> Unit)
-            : InitialSetupYearWeightingModelValidatorBuilder {
+            : InitialSetupYearWeightingModelValidatorBuilder
+    {
         builder.invoke(this)
         return this
     }
@@ -16,7 +16,8 @@ class InitialSetupYearWeightingModelValidatorBuilder(
                     weightingMinimum,
                     weightingMaximum)
 
-    companion object {
+    companion object
+    {
         fun initialSetupYearWeightingModelValidatorBuilder() : InitialSetupYearWeightingModelValidatorBuilder =
                 InitialSetupYearWeightingModelValidatorBuilder()
     }

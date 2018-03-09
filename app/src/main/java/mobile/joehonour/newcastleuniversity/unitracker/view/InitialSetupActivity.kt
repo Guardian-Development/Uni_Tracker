@@ -13,11 +13,12 @@ import mobile.joehonour.newcastleuniversity.unitracker.view.support.bindButtonCl
 import mobile.joehonour.newcastleuniversity.unitracker.viewmodels.InitialSetupViewModel
 import org.koin.android.architecture.ext.viewModel
 
-class InitialSetupActivity : AppCompatActivity() {
-
+class InitialSetupActivity : AppCompatActivity()
+{
     private val viewModel: InitialSetupViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_initial_setup)
 
@@ -25,7 +26,8 @@ class InitialSetupActivity : AppCompatActivity() {
         bindContinueButtonToAction()
     }
 
-    private fun bindDataFieldsToViewModel() {
+    private fun bindDataFieldsToViewModel()
+    {
         bindTextChangedListener(universityName, viewModel) {
             universityName.value = it
         }
@@ -51,7 +53,8 @@ class InitialSetupActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindContinueButtonToAction() {
+    private fun bindContinueButtonToAction()
+    {
         bindButtonClickedListener(continueSetup, viewModel) {
             when(viewModel.validDataEntered) {
                 true -> {

@@ -12,14 +12,15 @@ import org.junit.rules.TestRule
 import org.mockito.ArgumentMatchers
 
 
-class InitialSetupViewModelTests {
-
+class InitialSetupViewModelTests
+{
     // allows live data to work outside of an android environment
     @Rule @JvmField
     val rule: TestRule = InstantTaskExecutorRule()
 
     @Test
-    fun canBuildInitialSetupDataModelFromLiveDataSuccess() {
+    fun canBuildInitialSetupDataModelFromLiveDataSuccess()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     "Newcastle",
@@ -45,7 +46,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun buildingInitialSetupDataCorrectlyIncludesUniversityName() {
+    fun buildingInitialSetupDataCorrectlyIncludesUniversityName()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     ArgumentMatchers.eq("Edinburgh"),
@@ -62,7 +64,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun buildingInitialSetupDataCorrectlyIncludesYearStarted() {
+    fun buildingInitialSetupDataCorrectlyIncludesYearStarted()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     ArgumentMatchers.any(),
@@ -79,7 +82,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun buildingInitialSetupDataCorrectlyIncludesCourseLength() {
+    fun buildingInitialSetupDataCorrectlyIncludesCourseLength()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     ArgumentMatchers.any(),
@@ -96,7 +100,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun buildingInitialSetupDataCorrectlyIncludesTargetPercentage() {
+    fun buildingInitialSetupDataCorrectlyIncludesTargetPercentage()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     ArgumentMatchers.any(),
@@ -113,7 +118,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun buildingInitialSetupDataCorrectlyIncludesTotalCredits() {
+    fun buildingInitialSetupDataCorrectlyIncludesTotalCredits()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     ArgumentMatchers.any(),
@@ -130,7 +136,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun validDataEnteredReturnsTrueWithCorrectFields() {
+    fun validDataEnteredReturnsTrueWithCorrectFields()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     "Leeds",
@@ -150,7 +157,8 @@ class InitialSetupViewModelTests {
     }
 
     @Test
-    fun validDataEnteredReturnsFalseWithCorrectFields() {
+    fun validDataEnteredReturnsFalseWithCorrectFields()
+    {
         val validator = mock<InitialSetupDataModelValidator> {
             on { validate(
                     "Leeds",

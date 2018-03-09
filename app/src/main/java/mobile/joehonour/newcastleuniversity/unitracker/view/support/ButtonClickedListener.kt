@@ -5,7 +5,7 @@ import android.widget.Button
 fun <T> bindButtonClickedListener(
         button: Button,
         bindingSource: T,
-        onClicked: T.() -> Unit) {
-
+        onClicked: T.() -> Unit)
+{
     button.setOnClickListener { bindingSource.onClicked() }
 }

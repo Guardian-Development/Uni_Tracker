@@ -15,11 +15,12 @@ import mobile.joehonour.newcastleuniversity.unitracker.view.support.bindButtonCl
 import mobile.joehonour.newcastleuniversity.unitracker.viewmodels.InitialSetupYearWeightingViewModel
 import org.koin.android.architecture.ext.viewModel
 
-class InitialSetupYearWeightingActivity : AppCompatActivity() {
-
+class InitialSetupYearWeightingActivity : AppCompatActivity()
+{
     private val viewModel: InitialSetupYearWeightingViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_initial_setup_year_weighting)
 
@@ -31,7 +32,8 @@ class InitialSetupYearWeightingActivity : AppCompatActivity() {
         bindCompleteSetupButtonToAction()
     }
 
-    private fun bindNewYearWeightingToModel() {
+    private fun bindNewYearWeightingToModel()
+    {
         viewModel.bindModelForCurrentYear {
             currentYearWeighting ->
                 yearBeingSelected.text = viewModel.currentYear.toString()
@@ -44,7 +46,8 @@ class InitialSetupYearWeightingActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindContinueButtonToAction() {
+    private fun bindContinueButtonToAction()
+    {
         bindButtonClickedListener(continueButton, viewModel) {
             when(viewModel.validDataEnteredForCurrentYearWeighting) {
                 true -> progressYearWeightingEntry()
@@ -56,7 +59,8 @@ class InitialSetupYearWeightingActivity : AppCompatActivity() {
         }
     }
 
-    private fun progressYearWeightingEntry() {
+    private fun progressYearWeightingEntry()
+    {
         viewModel.finishEditingCurrentYear()
         when(viewModel.completedWeightingsForAllYear) {
             true -> {
@@ -72,10 +76,13 @@ class InitialSetupYearWeightingActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindCompleteSetupButtonToAction() {
+    private fun bindCompleteSetupButtonToAction()
+    {
         bindButtonClickedListener(completeSetup, viewModel) {
             saveInitialSetup({ Log.e("initial setup", it ?: "error")}) {
-                startActivity(Intent(this@InitialSetupYearWeightingActivity, MainActivity::class.java))
+                startActivity(Intent(
+                        this@InitialSetupYearWeightingActivity,
+                        CoreAppTabContainerActivity::class.java))
             }
         }
     }

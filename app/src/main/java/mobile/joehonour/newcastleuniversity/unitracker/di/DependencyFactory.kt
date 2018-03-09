@@ -1,5 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.FirebaseAuthenticationProvider
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
@@ -19,7 +20,7 @@ import org.koin.dsl.module.Module
 import org.koin.dsl.module.applicationContext
 
 private val domainModule = applicationContext {
-    provide { FirebaseAuthenticationProvider() as IProvideAuthentication }
+    provide { FirebaseAuthenticationProvider(FirebaseAuth.getInstance()) as IProvideAuthentication }
     provide { FirebaseDataStorage(FirebaseDatabase.getInstance().reference) as IProvideDataStorage }
     provide { FirebaseDataAccess(FirebaseDatabase.getInstance().reference) as IProvideDataAccess }
     provide { UserStateQuery(get(), get()) as IQueryUserState }

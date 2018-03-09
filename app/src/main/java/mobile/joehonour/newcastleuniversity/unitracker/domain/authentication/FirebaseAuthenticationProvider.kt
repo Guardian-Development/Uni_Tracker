@@ -5,9 +5,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.TwitterAuthProvider
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 
-class FirebaseAuthenticationProvider
-    (private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()) : IProvideAuthentication {
-
+class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : IProvideAuthentication
+{
     override val userUniqueId: String?
         get() = firebaseAuth.currentUser?.uid
 
@@ -17,8 +16,8 @@ class FirebaseAuthenticationProvider
     override fun authenticateWithTwitterSession(
             userToken: String,
             userSecret: String,
-            callback: (status: Boolean, errorMessage: String?) -> Unit) {
-
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
         val credential = TwitterAuthProvider.getCredential(userToken, userSecret)
 
         firebaseAuth

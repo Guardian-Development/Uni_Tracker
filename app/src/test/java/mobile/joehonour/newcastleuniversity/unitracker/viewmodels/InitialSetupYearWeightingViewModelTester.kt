@@ -8,14 +8,15 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDa
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupDataModel
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupYearWeightingModelValidator
 
-class InitialSetupYearWeightingViewModelTester(private val viewModel: InitialSetupYearWeightingViewModel) {
-
+class InitialSetupYearWeightingViewModelTester(private val viewModel: InitialSetupYearWeightingViewModel)
+{
     fun withInitialSetupDataModel(
             universityName: String = "default",
             yearStarted: Int = 0,
             courseLength: Int = 0,
             targetPercentage: Int = 0,
-            totalCredits: Int = 0) : InitialSetupYearWeightingViewModelTester {
+            totalCredits: Int = 0) : InitialSetupYearWeightingViewModelTester
+    {
         val initialSetupData = InitialSetupDataModel(
                 universityName,
                 yearStarted,
@@ -27,12 +28,15 @@ class InitialSetupYearWeightingViewModelTester(private val viewModel: InitialSet
         return this
     }
 
-    fun performActions(action: InitialSetupYearWeightingViewModel.() -> Unit) : InitialSetupYearWeightingViewModelTester {
+    fun performActions(action: InitialSetupYearWeightingViewModel.() -> Unit)
+            : InitialSetupYearWeightingViewModelTester
+    {
         action.invoke(viewModel)
         return this
     }
 
-    fun assertCompletedWeightingsForAllYearsFalse() : InitialSetupYearWeightingViewModelTester {
+    fun assertCompletedWeightingsForAllYearsFalse() : InitialSetupYearWeightingViewModelTester
+    {
         assertFalse(viewModel.completedWeightingsForAllYear)
         return this
     }
@@ -46,12 +50,14 @@ class InitialSetupYearWeightingViewModelTester(private val viewModel: InitialSet
     fun assertValidDataEnteredForCurrentYearWeightingFalse()
             = assertFalse(viewModel.validDataEnteredForCurrentYearWeighting)
 
-    companion object {
+    companion object
+    {
         fun initialSetupYearWeightingViewModelTester(
                 validator: InitialSetupYearWeightingModelValidator = mock(),
                 dataStorage: IProvideDataStorage = mock(),
                 authProvider: IProvideAuthentication = mock())
-                : InitialSetupYearWeightingViewModelTester {
+                : InitialSetupYearWeightingViewModelTester
+        {
             return InitialSetupYearWeightingViewModelTester(
                     InitialSetupYearWeightingViewModel(validator, dataStorage, authProvider))
         }

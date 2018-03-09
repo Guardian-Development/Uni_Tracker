@@ -9,17 +9,19 @@ class InitialSetupDataModelTester(
         var targetPercentage: Int,
         var totalCredits: Int
 ){
-
-    fun withEdits(tester: InitialSetupDataModelTester.() -> Unit) : InitialSetupDataModelTester {
+    fun withEdits(tester: InitialSetupDataModelTester.() -> Unit) : InitialSetupDataModelTester
+    {
         tester.invoke(this)
         return this
     }
 
-    fun validateConformsTo(validator: InitialSetupDataModelValidator)  {
+    fun validateConformsTo(validator: InitialSetupDataModelValidator)
+    {
         Assert.assertTrue(validate(validator))
     }
 
-    fun validateDoesNotConformTo(validator: InitialSetupDataModelValidator) {
+    fun validateDoesNotConformTo(validator: InitialSetupDataModelValidator)
+    {
         Assert.assertFalse(validate(validator))
     }
 
@@ -31,7 +33,8 @@ class InitialSetupDataModelTester(
                     targetPercentage,
                     totalCredits)
 
-    companion object {
+    companion object
+    {
         fun initialDataModelTester(validator: InitialSetupDataModelValidator) : InitialSetupDataModelTester =
                 InitialSetupDataModelTester(
                         "Valid Name",

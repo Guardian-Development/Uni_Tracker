@@ -8,10 +8,11 @@ import org.junit.Test
 
 import org.junit.Assert.*
 
-class UserStateQueryTests {
-
+class UserStateQueryTests
+{
     @Test
-    fun canGetUserHasCompletedInitialSetupTrue() {
+    fun canGetUserHasCompletedInitialSetupTrue()
+    {
         val callback = mock<(Boolean) -> Unit>()
         val authProvider = mock<IProvideAuthentication> {
             on { userLoggedIn } doReturn true
@@ -32,7 +33,8 @@ class UserStateQueryTests {
     }
 
     @Test
-    fun canGetUserHasCompletedInitialSetupFalse() {
+    fun canGetUserHasCompletedInitialSetupFalse()
+    {
         val callback = mock<(Boolean) -> Unit>()
         val authProvider = mock<IProvideAuthentication> {
             on { userLoggedIn } doReturn true
@@ -53,7 +55,8 @@ class UserStateQueryTests {
     }
 
     @Test
-    fun userNotLoggedInCauseInitialSetupFalse() {
+    fun userNotLoggedInCauseInitialSetupFalse()
+    {
         val callback = mock<(Boolean) -> Unit>()
         val authProvider = mock<IProvideAuthentication> {
             on { userLoggedIn } doReturn false

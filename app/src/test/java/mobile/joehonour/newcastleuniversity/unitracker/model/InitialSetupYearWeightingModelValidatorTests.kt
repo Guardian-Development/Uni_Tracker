@@ -4,10 +4,11 @@ import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupYearWei
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupYearWeightingModelValidatorBuilder.Companion.initialSetupYearWeightingModelValidatorBuilder
 import org.junit.Test
 
-class InitialSetupYearWeightingModelValidatorTests {
-
+class InitialSetupYearWeightingModelValidatorTests
+{
     @Test
-    fun validateYearWeightingModelValidDataModelDetected() {
+    fun validateYearWeightingModelValidDataModelDetected()
+    {
         val initialYearWeightingValidator = initialSetupYearWeightingModelValidatorBuilder()
                 .withEdits {
                     weightingMinimum = 0
@@ -24,7 +25,8 @@ class InitialSetupYearWeightingModelValidatorTests {
     }
 
     @Test
-    fun validateYearWeightingModelBelowYearWeightingMinValueDetected() {
+    fun validateYearWeightingModelBelowYearWeightingMinValueDetected()
+    {
         val initialYearWeightingValidator = initialSetupYearWeightingModelValidatorBuilder()
                 .withEdits {
                     weightingMinimum = 30
@@ -41,7 +43,8 @@ class InitialSetupYearWeightingModelValidatorTests {
     }
 
     @Test
-    fun validateYearWeightingModelAboveYearWeightingMinValueDetected() {
+    fun validateYearWeightingModelAboveYearWeightingMinValueDetected()
+    {
         val initialYearWeightingValidator = initialSetupYearWeightingModelValidatorBuilder()
                 .withEdits {
                     weightingMinimum = 0

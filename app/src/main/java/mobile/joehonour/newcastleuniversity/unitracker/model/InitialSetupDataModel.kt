@@ -12,8 +12,8 @@ data class InitialSetupDataModel(
         val courseLength: Int,
         val targetPercentage: Int,
         val totalCredits: Int
-) : Parcelable {
-
+) : Parcelable
+{
    constructor(parcel: Parcel) : this(
            parcel.readString(),
            parcel.readInt(),
@@ -21,7 +21,8 @@ data class InitialSetupDataModel(
            parcel.readInt(),
            parcel.readInt())
 
-   override fun writeToParcel(parcel: Parcel, flags: Int) {
+   override fun writeToParcel(parcel: Parcel, flags: Int)
+   {
       parcel.writeString(universityName)
       parcel.writeInt(yearStarted)
       parcel.writeInt(courseLength)
@@ -29,16 +30,20 @@ data class InitialSetupDataModel(
       parcel.writeInt(totalCredits)
    }
 
-   override fun describeContents(): Int {
+   override fun describeContents(): Int
+   {
       return 0
    }
 
-   companion object CREATOR : Parcelable.Creator<InitialSetupDataModel> {
-      override fun createFromParcel(parcel: Parcel): InitialSetupDataModel {
+   companion object CREATOR : Parcelable.Creator<InitialSetupDataModel>
+   {
+      override fun createFromParcel(parcel: Parcel): InitialSetupDataModel
+      {
          return InitialSetupDataModel(parcel)
       }
 
-      override fun newArray(size: Int): Array<InitialSetupDataModel?> {
+      override fun newArray(size: Int): Array<InitialSetupDataModel?>
+      {
          return arrayOfNulls(size)
       }
    }

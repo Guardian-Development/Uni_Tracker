@@ -10,9 +10,10 @@ class InitialSetupDataModelAssert(
         var courseLength: FieldAssert<Int>? = null,
         var targetPercentage: FieldAssert<Int>? = null,
         var totalCredits: FieldAssert<Int>? = null
-) : Assert<InitialSetupDataModel> {
-
-    override fun doAssert(actualValue: InitialSetupDataModel) {
+) : Assert<InitialSetupDataModel>
+{
+    override fun doAssert(actualValue: InitialSetupDataModel)
+    {
         universityName?.doAssert(actualValue.universityName)
         yearStarted?.doAssert(actualValue.yearStarted)
         courseLength?.doAssert(actualValue.courseLength)

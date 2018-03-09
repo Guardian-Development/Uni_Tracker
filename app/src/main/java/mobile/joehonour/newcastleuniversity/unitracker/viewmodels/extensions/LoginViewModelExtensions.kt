@@ -8,9 +8,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.viewmodels.LoginViewModel
 
 fun LoginViewModel.handleTwitterSession(
         failureCallback: ((String?) -> Unit)? = null,
-        successCallback: () -> Unit) = object : Callback<TwitterSession>() {
-
-    override fun success(result: Result<TwitterSession>) {
+        successCallback: () -> Unit) = object : Callback<TwitterSession>()
+{
+    override fun success(result: Result<TwitterSession>)
+    {
         authenticateWithTwitterSession(result.data) { status, message ->
             when (status) {
                 true -> successCallback()
@@ -19,7 +20,8 @@ fun LoginViewModel.handleTwitterSession(
         }
     }
 
-    override fun failure(exception: TwitterException) {
+    override fun failure(exception: TwitterException)
+    {
         failureCallback?.invoke(exception.message)
     }
 }

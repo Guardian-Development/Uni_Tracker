@@ -15,8 +15,8 @@ import org.junit.rules.TestRule
 import org.mockito.ArgumentMatchers
 
 
-class InitialSetupYearWeightingViewModelTests {
-
+class InitialSetupYearWeightingViewModelTests
+{
     // allows live data to work outside of an android environment
     @Rule
     @JvmField
@@ -27,7 +27,8 @@ class InitialSetupYearWeightingViewModelTests {
     var thrown: ExpectedException = ExpectedException.none()
 
     @Test
-    fun completedWeightingsForAllYearsFalseWhenNoInitialSetupData() {
+    fun completedWeightingsForAllYearsFalseWhenNoInitialSetupData()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator>()
 
         initialSetupYearWeightingViewModelTester(validator)
@@ -38,7 +39,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun completedWeightingsForAllYearsFalseWhenNotCompleted() {
+    fun completedWeightingsForAllYearsFalseWhenNotCompleted()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(ArgumentMatchers.any()) } doReturn true
         }
@@ -55,7 +57,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun completedWeightingsForAllYearsTrueWhenCompleted() {
+    fun completedWeightingsForAllYearsTrueWhenCompleted()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(ArgumentMatchers.any()) } doReturn true
         }
@@ -72,7 +75,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun bindModelForCurrentYearCallsBindCorrectly() {
+    fun bindModelForCurrentYearCallsBindCorrectly()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator>()
         val bindingFunction = mock<(MutableLiveData<Int>) -> Unit>()
 
@@ -86,7 +90,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun bindModelForCurrentYearNoSetupDataThrowsException() {
+    fun bindModelForCurrentYearNoSetupDataThrowsException()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator>()
 
         thrown.expect(IllegalStateException::class.java)
@@ -99,7 +104,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun finishEditingCurrentYearOnLastYearSetsCompletedWeightingsForAllYearsTrue() {
+    fun finishEditingCurrentYearOnLastYearSetsCompletedWeightingsForAllYearsTrue()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(ArgumentMatchers.any()) } doReturn true
         }
@@ -119,7 +125,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun validDataEnteredForCurrentYearWeightingReturnsTrueCorrectly() {
+    fun validDataEnteredForCurrentYearWeightingReturnsTrueCorrectly()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(20) } doReturn true
         }
@@ -133,7 +140,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun validDataEnteredForCurrentYearWeightingReturnsFalseCorrectly() {
+    fun validDataEnteredForCurrentYearWeightingReturnsFalseCorrectly()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(78) } doReturn false
         }
@@ -147,7 +155,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun userLoggedInSaveInitialDataExecutesSuccess() {
+    fun userLoggedInSaveInitialDataExecutesSuccess()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(any()) } doReturn true
         }
@@ -180,7 +189,8 @@ class InitialSetupYearWeightingViewModelTests {
     }
 
     @Test
-    fun userNotLoggedInSaveInitialDataExecutesFailure() {
+    fun userNotLoggedInSaveInitialDataExecutesFailure()
+    {
         val validator = mock<InitialSetupYearWeightingModelValidator> {
             on { validate(any()) } doReturn true
         }

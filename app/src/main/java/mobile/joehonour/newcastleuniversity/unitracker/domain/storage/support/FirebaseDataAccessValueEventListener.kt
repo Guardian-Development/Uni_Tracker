@@ -9,7 +9,8 @@ class FirebaseDataAccessValueEventListener<T>(
         private val onSuccess: (T) -> Unit,
         private val type: Class<T>) : ValueEventListener
 {
-    override fun onDataChange(data: DataSnapshot?) {
+    override fun onDataChange(data: DataSnapshot?)
+    {
         try {
             val item = data?.getValue(type)
             when(item) {

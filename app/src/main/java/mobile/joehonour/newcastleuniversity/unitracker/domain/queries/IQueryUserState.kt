@@ -1,6 +1,7 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.queries
 
-interface IQueryUserState {
+interface IQueryUserState
+{
     fun userHasCompletedInitialSetup(result: (Boolean) -> Unit)
 }
 

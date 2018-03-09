@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add_result"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_result"
+        android:title="add_result"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/modules"
+        android:enabled="true"
+        android:icon="@drawable/ic_modules"
+        android:title="modules"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/dashboard"
+        android:enabled="true"
+        android:icon="@drawable/ic_dashboard"
+        android:title="dashboard"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/configuration"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings"
+        android:title="config"
+        app:showAsAction="ifRoom" />
+</menu>

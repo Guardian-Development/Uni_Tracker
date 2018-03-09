@@ -1,7 +1,7 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.authentication
 
-interface IProvideAuthentication {
-
+interface IProvideAuthentication
+{
     fun authenticateWithTwitterSession(
             userToken: String,
             userSecret: String,

@@ -8,10 +8,11 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class FirebaseAuthenticationProviderTests {
-
+class FirebaseAuthenticationProviderTests
+{
     @Test
-    fun canGetUserLoggedInTrue() {
+    fun canGetUserLoggedInTrue()
+    {
         val firebaseUser = mock<FirebaseUser>()
         val firebaseAuth = mock<FirebaseAuth> {
             on { currentUser } doReturn firebaseUser
@@ -22,7 +23,8 @@ class FirebaseAuthenticationProviderTests {
     }
 
     @Test
-    fun canGetUserLoggedInFalse() {
+    fun canGetUserLoggedInFalse()
+    {
         val firebaseAuth = mock<FirebaseAuth> {
             on { currentUser }.doReturn<FirebaseUser?>(null)
         }

@@ -13,8 +13,8 @@ import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupYearWei
 class InitialSetupYearWeightingViewModel(
         private val dataValidator: InitialSetupYearWeightingModelValidator,
         private val dataStorage: IProvideDataStorage,
-        private val authProvider: IProvideAuthentication) : ViewModel() {
-
+        private val authProvider: IProvideAuthentication) : ViewModel()
+{
     var initialSetupData: InitialSetupDataModel? = null
 
     var currentYear = 1

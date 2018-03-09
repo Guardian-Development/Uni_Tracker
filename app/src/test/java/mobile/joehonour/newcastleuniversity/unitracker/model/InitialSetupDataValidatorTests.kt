@@ -4,10 +4,11 @@ import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupDataMod
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupDataModelValidatorBuilder.Companion.initialSetupDataModelValidatorBuilder
 import org.junit.Test
 
-class InitialSetupDataValidatorTests {
-
+class InitialSetupDataValidatorTests
+{
     @Test
-    fun validateDataModelValidDataModelDetected() {
+    fun validateDataModelValidDataModelDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     yearStartedMinValue = 2000
@@ -32,7 +33,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelBelowYearStartedMinValueDetected() {
+    fun validateDataModelBelowYearStartedMinValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     yearStartedMinValue = 2000
@@ -48,7 +50,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelAboveYearStartedMaxValueDetected() {
+    fun validateDataModelAboveYearStartedMaxValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     yearStartedMinValue = 1970
@@ -64,7 +67,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelBelowCourseLengthMinValueDetected() {
+    fun validateDataModelBelowCourseLengthMinValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     courseLengthMinValue = 3
@@ -80,7 +84,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelAboveCourseLengthMaxValueDetected() {
+    fun validateDataModelAboveCourseLengthMaxValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     courseLengthMinValue = 80
@@ -96,7 +101,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelBelowTargetPercentageMinValueDetected() {
+    fun validateDataModelBelowTargetPercentageMinValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     targetPercentageMinValue = 10
@@ -112,7 +118,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelAboveTargetPercentageMaxValueDetected() {
+    fun validateDataModelAboveTargetPercentageMaxValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     targetPercentageMinValue = 10
@@ -128,7 +135,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelBelowTotalCreditsMinValueDetected() {
+    fun validateDataModelBelowTotalCreditsMinValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     totalCreditsMinValue = 50
@@ -144,7 +152,8 @@ class InitialSetupDataValidatorTests {
     }
 
     @Test
-    fun validateDataModelAboveTotalCreditsMaxValueDetected() {
+    fun validateDataModelAboveTotalCreditsMaxValueDetected()
+    {
         val initialDataModelValidator = initialSetupDataModelValidatorBuilder()
                 .withEdits {
                     totalCreditsMinValue = 50

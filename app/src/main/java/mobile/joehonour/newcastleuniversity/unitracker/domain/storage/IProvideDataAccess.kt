@@ -1,7 +1,7 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.storage
 
-interface IProvideDataAccess {
-
+interface IProvideDataAccess
+{
     fun <T> readItemFromDatabase(key: String,
                                  type: Class<T>,
                                  onError: (String?) -> Unit,

@@ -11,10 +11,11 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUser
 import org.junit.Test
 import org.mockito.Mockito
 
-class LoginViewModelTests {
-
+class LoginViewModelTests
+{
     @Test
-    fun canAuthenticateWithTwitterSuccess() {
+    fun canAuthenticateWithTwitterSuccess()
+    {
         val callback = mock<(Boolean, String?) -> Unit>()
 
         val authProvider = mock<IProvideAuthentication> {
@@ -36,8 +37,8 @@ class LoginViewModelTests {
     }
 
     @Test
-    fun canAuthenticateWithTwitterFailure() {
-
+    fun canAuthenticateWithTwitterFailure()
+    {
         val callback = mock<(Boolean, String?) -> Unit>()
 
         val authProvider = mock<IProvideAuthentication> {
@@ -59,7 +60,8 @@ class LoginViewModelTests {
     }
 
     @Test
-    fun canDistinguishUserCompletedSetupTrue() {
+    fun canDistinguishUserCompletedSetupTrue()
+    {
         val callback = mock<(Boolean) -> Unit>()
 
         val userStateQuery = mock<IQueryUserState> {
@@ -73,7 +75,8 @@ class LoginViewModelTests {
     }
 
     @Test
-    fun canDistinguishUserCompletedSetupFalse() {
+    fun canDistinguishUserCompletedSetupFalse()
+    {
         val callback = mock<(Boolean) -> Unit>()
 
         val userStateQuery = mock<IQueryUserState> {

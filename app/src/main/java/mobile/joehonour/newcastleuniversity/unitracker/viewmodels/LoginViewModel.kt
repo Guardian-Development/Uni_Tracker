@@ -6,8 +6,8 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 
 class LoginViewModel(private val authProvider: IProvideAuthentication,
-                     private val userStateQuery: IQueryUserState) : ViewModel() {
-
+                     private val userStateQuery: IQueryUserState) : ViewModel()
+{
     fun userHasCompletedSetup(result: (Boolean) -> Unit) =
         userStateQuery.userHasCompletedInitialSetup(result)
 

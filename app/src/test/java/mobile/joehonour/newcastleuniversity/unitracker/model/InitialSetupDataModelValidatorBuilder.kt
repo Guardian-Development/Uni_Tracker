@@ -14,7 +14,8 @@ class InitialSetupDataModelValidatorBuilder(
 ) {
 
     fun withEdits(builder: InitialSetupDataModelValidatorBuilder.() -> Unit)
-            : InitialSetupDataModelValidatorBuilder {
+            : InitialSetupDataModelValidatorBuilder
+    {
         builder.invoke(this)
         return this
     }
@@ -30,7 +31,8 @@ class InitialSetupDataModelValidatorBuilder(
                     totalCreditsMinValue,
                     totalCreditsMaxValue)
 
-    companion object {
+    companion object
+    {
         fun initialSetupDataModelValidatorBuilder() : InitialSetupDataModelValidatorBuilder =
                 InitialSetupDataModelValidatorBuilder()
     }

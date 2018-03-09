@@ -4,9 +4,10 @@ import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupDataModelValidator
 
-class InitialSetupViewModelTester(private val viewModel: InitialSetupViewModel) {
-
-    fun performActions(action: InitialSetupViewModel.() -> Unit) : InitialSetupViewModelTester {
+class InitialSetupViewModelTester(private val viewModel: InitialSetupViewModel)
+{
+    fun performActions(action: InitialSetupViewModel.() -> Unit) : InitialSetupViewModelTester
+    {
         action.invoke(viewModel)
         return this
     }
@@ -19,7 +20,8 @@ class InitialSetupViewModelTester(private val viewModel: InitialSetupViewModel) 
                 targetPercentage.value = 0
                 totalCredits.value = 0 }
 
-    fun buildAndAssertInitialSetupData(builder: InitialSetupDataModelAssert.() -> Unit) {
+    fun buildAndAssertInitialSetupData(builder: InitialSetupDataModelAssert.() -> Unit)
+    {
         val assert = InitialSetupDataModelAssert()
         builder.invoke(assert)
         assert.doAssert(viewModel.buildInitialSetupData())
@@ -28,7 +30,8 @@ class InitialSetupViewModelTester(private val viewModel: InitialSetupViewModel) 
     fun assertValidDataTrue() = assertTrue(viewModel.validDataEntered)
     fun assertValidDataFalse() = assertFalse(viewModel.validDataEntered)
 
-    companion object {
+    companion object
+    {
         fun initialSetupViewModelTester(validator: InitialSetupDataModelValidator) : InitialSetupViewModelTester =
                 InitialSetupViewModelTester(InitialSetupViewModel(validator))
     }

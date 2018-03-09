@@ -7,76 +7,88 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class NullHelperExtensionsTests {
-
+class NullHelperExtensionsTests
+{
     @Test
-    fun notNullDetectsNullableNull() {
+    fun notNullDetectsNullableNull()
+    {
         val int: Int? = null
         assertFalse(int.notNull())
     }
 
     @Test
-    fun notNullDetectsNullableNotNull() {
+    fun notNullDetectsNullableNotNull()
+    {
         val double: Double? = 0.0
         assertTrue(double.notNull())
     }
 
     @Test
-    fun notNullDetectsNotNullable() {
+    fun notNullDetectsNotNullable()
+    {
         val double = 0.0
         assertTrue(double.notNull())
     }
 
     @Test
-    fun notNullOrEmptyDetectsNull() {
+    fun notNullOrEmptyDetectsNull()
+    {
         val string: String? = null
         assertFalse(string.notNullOrEmpty())
     }
 
     @Test
-    fun notNullOrEmptyDetectsEmpty() {
+    fun notNullOrEmptyDetectsEmpty()
+    {
         val string = ""
         assertFalse(string.notNullOrEmpty())
     }
 
     @Test
-    fun notNullOrEmptyDetectsNotEmpty() {
+    fun notNullOrEmptyDetectsNotEmpty()
+    {
         val string = " "
         assertTrue(string.notNullOrEmpty())
     }
 
     @Test
-    fun notNullWithinInclusiveRangeDetectsNull() {
+    fun notNullWithinInclusiveRangeDetectsNull()
+    {
         val int: Int? = null
         assertFalse(int.notNullWithinInclusiveRange(0, 10))
     }
 
     @Test
-    fun notNullWithinInclusiveRangeDetectsMinAllowedValue() {
+    fun notNullWithinInclusiveRangeDetectsMinAllowedValue()
+    {
         val int: Int? = 10
         assertTrue(int.notNullWithinInclusiveRange(10, 15))
     }
 
     @Test
-    fun notNullWithinInclusiveRangeDetectsMaxAllowedValue() {
+    fun notNullWithinInclusiveRangeDetectsMaxAllowedValue()
+    {
         val int: Int? = 50
         assertTrue(int.notNullWithinInclusiveRange(30, 50))
     }
 
     @Test
-    fun notNullWithinInclusiveRangeDetectsBelowMinAllowedValue() {
+    fun notNullWithinInclusiveRangeDetectsBelowMinAllowedValue()
+    {
         val int: Int? = 174
         assertFalse(int.notNullWithinInclusiveRange(175, 250))
     }
 
     @Test
-    fun notNullWithinInclusiveRangeDetectsAboveMaxAllowedValue() {
+    fun notNullWithinInclusiveRangeDetectsAboveMaxAllowedValue()
+    {
         val int: Int? = 45
         assertFalse(int.notNullWithinInclusiveRange(24, 44))
     }
 
     @Test
-    fun executeIfNotNullOrEmptyDetectsNullAndExecutesCorrectly() {
+    fun executeIfNotNullOrEmptyDetectsNullAndExecutesCorrectly()
+    {
         val ifNullMock = mock<() -> Unit>()
         val notNullMock = mock<(String) -> Unit>()
         val string: String? = null
@@ -88,7 +100,8 @@ class NullHelperExtensionsTests {
     }
 
     @Test
-    fun executeIfNotNullOrEmptyDetectsEmptyAndExecutesCorrectly() {
+    fun executeIfNotNullOrEmptyDetectsEmptyAndExecutesCorrectly()
+    {
         val ifNullMock = mock<() -> Unit>()
         val notNullMock = mock<(String) -> Unit>()
         val string = ""
@@ -100,7 +113,8 @@ class NullHelperExtensionsTests {
     }
 
     @Test
-    fun executeIfNotNullOrEmptyDetectsNotNullOrEmptyAndExecutesCorrectly() {
+    fun executeIfNotNullOrEmptyDetectsNotNullOrEmptyAndExecutesCorrectly()
+    {
         val ifNullMock = mock<() -> Unit>()
         val notNullMock = mock<(String) -> Unit>()
         val string = "test me"

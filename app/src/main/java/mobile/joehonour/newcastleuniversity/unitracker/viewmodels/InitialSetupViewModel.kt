@@ -5,8 +5,8 @@ import android.arch.lifecycle.ViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupDataModel
 import mobile.joehonour.newcastleuniversity.unitracker.model.InitialSetupDataModelValidator
 
-class InitialSetupViewModel(private val dataValidator: InitialSetupDataModelValidator) : ViewModel() {
-
+class InitialSetupViewModel(private val dataValidator: InitialSetupDataModelValidator) : ViewModel()
+{
     val universityName: MutableLiveData<String> = MutableLiveData()
     val yearStarted: MutableLiveData<Int> = MutableLiveData()
     val courseLength: MutableLiveData<Int> = MutableLiveData()
@@ -22,8 +22,8 @@ class InitialSetupViewModel(private val dataValidator: InitialSetupDataModelVali
                 totalCredits.value
         )
 
-    fun buildInitialSetupData() : InitialSetupDataModel {
-
+    fun buildInitialSetupData() : InitialSetupDataModel
+    {
         if(!validDataEntered)
         {
             throw IllegalStateException("You cannot complete initial setup with the values entered")
