@@ -1,6 +1,5 @@
 package mobile.joehonour.newcastleuniversity.unitracker.viewmodels
 
-import android.app.Application
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import com.nhaarman.mockito_kotlin.*
@@ -162,7 +161,7 @@ class InitialSetupYearWeightingViewModelTests {
         val onError = mock<((String?) -> Unit)>()
         val storageProvider = mock<IProvideDataStorage> {
             on { addItemToDatabase<AppConfiguration>(
-                    eq("id"),
+                    eq("id" + "/configuration"),
                     any(),
                     eq(onError),
                     eq(onSuccess))} doAnswer { onSuccess() }
@@ -195,7 +194,7 @@ class InitialSetupYearWeightingViewModelTests {
         val onError = mock<((String?) -> Unit)>()
         val storageProvider = mock<IProvideDataStorage> {
             on { addItemToDatabase<AppConfiguration>(
-                    eq("id"),
+                    eq("id" + "/configuration"),
                     any(),
                     eq(onError),
                     eq(onSuccess))} doAnswer { onSuccess() }

@@ -24,11 +24,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun redirectFromSuccessfulLogin() {
-        when(viewModel.userHasCompletedSetup) {
-            true -> startActivity(Intent(this, MainActivity::class.java))
-            false -> startActivity(Intent(this, InitialSetupActivity::class.java))
+        viewModel.userHasCompletedSetup {
+            when(it) {
+                true -> startActivity(Intent(this, MainActivity::class.java))
+                false -> startActivity(Intent(this, InitialSetupActivity::class.java))
+            }
         }
-
         finish()
     }
 

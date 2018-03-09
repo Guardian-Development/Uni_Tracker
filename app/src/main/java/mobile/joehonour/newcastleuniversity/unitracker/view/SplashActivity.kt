@@ -15,14 +15,15 @@ class SplashActivity : AppCompatActivity() {
 
         when(viewModel.userLoggedIn) {
             true -> {
-                when(viewModel.userHasCompletedSetup) {
-                    true -> startActivity(Intent(this, MainActivity::class.java))
-                    false -> startActivity(Intent(this, InitialSetupActivity::class.java))
+                viewModel.userHasCompletedSetup {
+                    when(it) {
+                        true -> startActivity(Intent(this, MainActivity::class.java))
+                        false -> startActivity(Intent(this, InitialSetupActivity::class.java))
+                    }
                 }
             }
             false -> startActivity(Intent(this, LoginActivity::class.java))
         }
-
         finish()
     }
 }

@@ -62,7 +62,7 @@ class InitialSetupYearWeightingViewModel(
 
         when(authProvider.userLoggedIn) {
             true -> dataStorage.addItemToDatabase(
-                    authProvider.userUniqueId!!,
+                    authProvider.userUniqueId!! + "/configuration",
                     appConfiguration,
                     onError,
                     onSuccess)

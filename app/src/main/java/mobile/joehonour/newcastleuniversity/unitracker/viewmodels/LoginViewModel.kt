@@ -3,10 +3,13 @@ package mobile.joehonour.newcastleuniversity.unitracker.viewmodels
 import android.arch.lifecycle.ViewModel
 import com.twitter.sdk.android.core.TwitterSession
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
+import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 
-class LoginViewModel(private val authProvider: IProvideAuthentication) : ViewModel() {
+class LoginViewModel(private val authProvider: IProvideAuthentication,
+                     private val userStateQuery: IQueryUserState) : ViewModel() {
 
-    val userHasCompletedSetup: Boolean = false
+    fun userHasCompletedSetup(result: (Boolean) -> Unit) =
+        userStateQuery.userHasCompletedInitialSetup(result)
 
     val userLoggedIn: Boolean by lazy { authProvider.userLoggedIn }
 
