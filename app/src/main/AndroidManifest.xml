@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".login.view.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.InitialSetupActivity" />
-        <activity android:name=".view.InitialSetupYearWeightingActivity" />
-        <activity android:name=".view.CoreAppTabContainerActivity" />
+        <activity android:name=".login.view.LoginActivity" />
+        <activity android:name=".configuration.view.ConfigurationActivity" />
+        <activity android:name=".configuration.view.ConfigurationYearWeightingActivity" />
+        <activity android:name=".coreapp.CoreAppTabContainerActivity" />
     </application>
 
 </manifest>

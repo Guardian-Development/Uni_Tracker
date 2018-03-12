@@ -19,10 +19,8 @@ android {
         }
     }
     testOptions {
-        //this allows the mocking of Firebase classes with the mock-maker-inline flag
-        unitTests.all {
-            jvmArgs '-noverify'
-        }
+        //mock Android APIs to not throw exceptions, but null, to solve static logging throwing exception
+        unitTests.returnDefaultValues = true
     }
 }
 
