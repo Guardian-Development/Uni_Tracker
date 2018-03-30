@@ -1,10 +1,12 @@
-package mobile.joehonour.newcastleuniversity.unitracker.coreapp.fragments
+package mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_modules.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 
 class ModulesFragment : Fragment()
@@ -13,6 +15,14 @@ class ModulesFragment : Fragment()
                               savedInstanceState: Bundle?): View?
     {
         return inflater!!.inflate(R.layout.fragment_modules, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
+        add_module_button.setOnClickListener {
+            startActivity(Intent(this.context, AddModuleActivity::class.java))
+        }
     }
 
     companion object

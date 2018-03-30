@@ -26,6 +26,7 @@
         <activity android:name=".configuration.view.ConfigurationActivity" />
         <activity android:name=".configuration.view.ConfigurationYearWeightingActivity" />
         <activity android:name=".coreapp.CoreAppTabContainerActivity" />
+        <activity android:name=".coreapp.modules.view.AddModuleActivity"></activity>
     </application>
 
 </manifest>

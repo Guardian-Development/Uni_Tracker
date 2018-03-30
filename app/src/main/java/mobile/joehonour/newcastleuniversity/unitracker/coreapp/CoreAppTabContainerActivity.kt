@@ -8,7 +8,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.fragments.AddResultFragment
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.configuration.view.ConfigurationFragment
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.fragments.DashboardFragment
-import mobile.joehonour.newcastleuniversity.unitracker.coreapp.fragments.ModulesFragment
+import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.view.ModulesFragment
 
 class CoreAppTabContainerActivity : AppCompatActivity()
 {
