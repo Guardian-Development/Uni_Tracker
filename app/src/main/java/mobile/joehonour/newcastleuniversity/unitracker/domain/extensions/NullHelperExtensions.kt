@@ -18,6 +18,14 @@ fun Int?.notNullWithinInclusiveRange(start: Int, end: Int): Boolean
     }
 }
 
+fun Double?.notNullWithinInclusiveRange(start: Double, end: Double): Boolean
+{
+    return when(this.notNull()) {
+        true -> this!! in start..end
+        false -> false
+    }
+}
+
 fun String?.executeIfNotNullOrEmpty(ifNull: () -> Unit, notNull: (String) -> Unit)
 {
     when(this.notNullOrEmpty()) {

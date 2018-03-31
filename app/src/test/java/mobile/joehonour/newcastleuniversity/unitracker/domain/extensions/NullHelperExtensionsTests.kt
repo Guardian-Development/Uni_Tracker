@@ -87,6 +87,41 @@ class NullHelperExtensionsTests
     }
 
     @Test
+    fun notNullDoubleWithinInclusiveRangeDetectsNull()
+    {
+        val double: Double? = null
+        assertFalse(double.notNullWithinInclusiveRange(0.0, 10.0))
+    }
+
+    @Test
+    fun notNullDoubleWithinInclusiveRangeDetectsMinAllowedValue()
+    {
+        val double: Double? = 10.1
+        assertTrue(double.notNullWithinInclusiveRange(10.1, 15.0))
+    }
+
+    @Test
+    fun notNullDoubleWithinInclusiveRangeDetectsMaxAllowedValue()
+    {
+        val double: Double? = 50.78
+        assertTrue(double.notNullWithinInclusiveRange(30.0, 50.78))
+    }
+
+    @Test
+    fun notNullDoubleWithinInclusiveRangeDetectsBelowMinAllowedValue()
+    {
+        val double: Double? = 174.99
+        assertFalse(double.notNullWithinInclusiveRange(175.0, 250.0))
+    }
+
+    @Test
+    fun notNullDoubleWithinInclusiveRangeDetectsAboveMaxAllowedValue()
+    {
+        val double: Double? = 45.01
+        assertFalse(double.notNullWithinInclusiveRange(24.89, 45.0))
+    }
+
+    @Test
     fun executeIfNotNullOrEmptyDetectsNullAndExecutesCorrectly()
     {
         val ifNullMock = mock<() -> Unit>()
