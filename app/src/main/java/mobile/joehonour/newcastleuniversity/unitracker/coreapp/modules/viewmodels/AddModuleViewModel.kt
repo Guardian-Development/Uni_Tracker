@@ -36,12 +36,7 @@ class AddModuleViewModel(private val userState: IQueryUserState,
     {
         if(validDataEntered)
         {
-            val module = Module(
-                    moduleCode.value!!,
-                    moduleName.value!!,
-                    moduleCredits.value!!,
-                    moduleYearStudied.value!!)
-
+            val module = buildModuleFromViewModelFields()
             when(authProvider.userLoggedIn)
             {
                 true -> dataStorage.addItemToDatabase(
@@ -57,4 +52,10 @@ class AddModuleViewModel(private val userState: IQueryUserState,
             onError("Invalid data entered")
         }
     }
+
+    private fun buildModuleFromViewModelFields() : Module =
+            Module(moduleCode.value!!,
+                    moduleName.value!!,
+                    moduleCredits.value!!,
+                    moduleYearStudied.value!!)
 }

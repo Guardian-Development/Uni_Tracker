@@ -2,6 +2,7 @@ package mobile.joehonour.newcastleuniversity.unitracker.domain.queries
 
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configuration
+import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
 
 class UserStateQuery(private val dataAccess: IProvideDataAccess,
@@ -21,6 +22,19 @@ class UserStateQuery(private val dataAccess: IProvideDataAccess,
                     Configuration::class.java,
                     onError,
                     onSuccess)
+        }
+    }
+
+    override fun getUserModules(onError: (String?) -> Unit, onSuccess: (List<Module>) -> Unit)
+    {
+        when(authProvider.userLoggedIn) {
+            false -> onError("User not logged in")
+            true -> dataAccess.readCollectionFromDatabase(
+                    authProvider.userUniqueId!! + "/modules",
+                    Module::class.java,
+                    onError,
+                    onSuccess
+            )
         }
     }
 }

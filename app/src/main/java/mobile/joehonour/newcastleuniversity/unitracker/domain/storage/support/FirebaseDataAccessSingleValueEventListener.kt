@@ -4,7 +4,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class FirebaseDataAccessValueEventListener<T>(
+class FirebaseDataAccessSingleValueEventListener<T : Any>(
         private val onError: (String?) -> Unit,
         private val onSuccess: (T) -> Unit,
         private val type: Class<T>) : ValueEventListener
@@ -26,3 +26,4 @@ class FirebaseDataAccessValueEventListener<T>(
 
     override fun onCancelled(error: DatabaseError?) = onError.invoke(error?.message)
 }
+
