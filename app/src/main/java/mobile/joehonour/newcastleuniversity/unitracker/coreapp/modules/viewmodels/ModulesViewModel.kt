@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
+import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleResultModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 
 class ModulesViewModel(private val userState: IQueryUserState) : ViewModel()
@@ -18,7 +19,13 @@ class ModulesViewModel(private val userState: IQueryUserState) : ViewModel()
                             it.moduleCode,
                             it.moduleName,
                             it.moduleCredits,
-                            it.moduleYearStudied) })
+                            it.moduleYearStudied,
+                            it.results.values.map { ModuleResultModel(
+                                    it.resultId,
+                                    it.resultName,
+                                    it.resultWeighting,
+                                    it.resultPercentage) })
+                    })
         }
     }
 }

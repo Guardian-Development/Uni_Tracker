@@ -59,8 +59,6 @@ class ConfigurationActivity : AppCompatActivity()
             when (viewModel.validDataEntered) {
                 true -> {
                     val data = viewModel.buildConfigurationData()
-                    Log.e("Test", data.toString())
-
                     val intent = Intent(this@ConfigurationActivity, ConfigurationYearWeightingActivity::class.java)
                     intent.putExtra("setupData", data)
                     startActivity(intent)

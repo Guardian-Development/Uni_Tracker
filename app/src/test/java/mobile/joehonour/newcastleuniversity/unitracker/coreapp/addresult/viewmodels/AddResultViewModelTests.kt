@@ -7,13 +7,12 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.models.
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.viewmodels.AddResultViewModelTester.Companion.addResultViewModelTester
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
-import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Result
+import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ModuleResult
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
-import java.util.*
 
 class AddResultViewModelTests
 {
@@ -60,8 +59,8 @@ class AddResultViewModelTests
     fun refreshCurrentModulesSuccessSetsPublicData()
     {
         val modules = listOf(
-                Module("CSC3123", "module", 10, 2),
-                Module("CSC9876", "module2", 20, 1))
+                Module("CSC3123", "module", 10, 2, emptyMap()),
+                Module("CSC9876", "module2", 20, 1, emptyMap()))
 
         val userStateQuery = mock<IQueryUserState> {
             on { getUserModules(any(), any()) } doAnswer {
@@ -109,12 +108,8 @@ class AddResultViewModelTests
             on { userLoggedIn } doReturn true
         }
 
-        val uuid = mock<UUID> {
-            on { toString() } doReturn "resultid"
-        }
-
         val dataStore = mock<IProvideDataStorage> {
-            on { addItemToDatabase<Result>(
+            on { addItemToDatabase<ModuleResult>(
                     eq("testuser/modules/CSC123/results/resultid"), any(), eq(onError), eq(onSuccess)) } doAnswer {
                 onSuccess()
             }
@@ -128,7 +123,7 @@ class AddResultViewModelTests
                     addResultPercentage.value = 82.1
                 }
                 .performActions {
-                    saveResultForModule(uuid, onError, onSuccess)
+                    saveResultForModule("resultid", onError, onSuccess)
                 }
 
         verify(onSuccess).invoke()
@@ -157,7 +152,7 @@ class AddResultViewModelTests
                     addResultPercentage.value = 82.1
                 }
                 .performActions {
-                    saveResultForModule(UUID.randomUUID(), onError, onSuccess)
+                    saveResultForModule("test", onError, onSuccess)
                 }
 
         verify(onError).invoke("User not logged in")
@@ -187,7 +182,7 @@ class AddResultViewModelTests
                     addResultPercentage.value = 82.1
                 }
                 .performActions {
-                    saveResultForModule(UUID.randomUUID(), onError, onSuccess)
+                    saveResultForModule("test", onError, onSuccess)
                 }
 
         verify(onError).invoke("Invalid data entered")
@@ -216,7 +211,7 @@ class AddResultViewModelTests
                     addResultPercentage.value = 82.1
                 }
                 .performActions {
-                    saveResultForModule(UUID.randomUUID(), onError, onSuccess)
+                    saveResultForModule("test", onError, onSuccess)
                 }
 
         verify(onError).invoke("Invalid data entered")

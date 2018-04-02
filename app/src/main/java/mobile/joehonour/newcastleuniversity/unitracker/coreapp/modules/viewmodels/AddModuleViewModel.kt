@@ -57,5 +57,6 @@ class AddModuleViewModel(private val userState: IQueryUserState,
             Module(moduleCode.value!!,
                     moduleName.value!!,
                     moduleCredits.value!!,
-                    moduleYearStudied.value!!)
+                    moduleYearStudied.value!!,
+                    emptyMap())
 }

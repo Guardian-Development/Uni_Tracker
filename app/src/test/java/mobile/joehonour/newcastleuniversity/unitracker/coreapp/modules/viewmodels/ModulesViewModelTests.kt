@@ -15,6 +15,7 @@ import org.junit.rules.TestRule
 
 class ModulesViewModelTests
 {
+    // allows live data to work outside of an android environment
     @Rule
     @JvmField
     val rule: TestRule = InstantTaskExecutorRule()
@@ -23,8 +24,8 @@ class ModulesViewModelTests
     fun refreshCurrentModulesSuccessSetsPublicData()
     {
         val modules = listOf(
-                Module("CSC3123", "module", 10, 2),
-                Module("CSC9876", "module2", 20, 1))
+                Module("CSC3123", "module", 10, 2, emptyMap()),
+                Module("CSC9876", "module2", 20, 1, emptyMap()))
 
         val userStateQuery = mock<IQueryUserState> {
             on { getUserModules(any(), any()) } doAnswer {

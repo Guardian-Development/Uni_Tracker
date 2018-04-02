@@ -6,7 +6,7 @@ import android.util.Log
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.models.AddResultModelValidator
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
-import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Result
+import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ModuleResult
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
 import java.util.*
@@ -41,7 +41,7 @@ class AddResultViewModel(private val userState: IQueryUserState,
         }
     }
 
-    fun saveResultForModule(resultId: UUID, onError: (String?) -> Unit, onSuccess: () -> Unit)
+    fun saveResultForModule(resultId: String, onError: (String?) -> Unit, onSuccess: () -> Unit)
     {
         if(validDataEntered)
         {
@@ -50,7 +50,7 @@ class AddResultViewModel(private val userState: IQueryUserState,
             {
                 true -> {
                     dataStorage.addItemToDatabase(
-                            authProvider.userUniqueId!! + "/modules/" + addResultModule.value!!.moduleCode + "/results/" + result.resultId.toString(),
+                            authProvider.userUniqueId!! + "/modules/" + addResultModule.value!!.moduleCode + "/results/" + result.resultId,
                             result,
                             onError,
                             onSuccess)
@@ -64,8 +64,8 @@ class AddResultViewModel(private val userState: IQueryUserState,
         }
     }
 
-    private fun buildResultForModule(resultId: UUID) : Result =
-            Result(resultId,
+    private fun buildResultForModule(resultId: String) : ModuleResult =
+            ModuleResult(resultId,
                     addResultName.value!!,
                     addResultWeightingPercentage.value!!,
                     addResultPercentage.value!!)

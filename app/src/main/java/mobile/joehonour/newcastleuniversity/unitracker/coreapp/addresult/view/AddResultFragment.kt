@@ -73,7 +73,7 @@ class AddResultFragment : Fragment()
         bindButtonClickedListener(addResultButton, viewModel) {
             when (viewModel.validDataEntered) {
                 true -> {
-                    viewModel.saveResultForModule(UUID.randomUUID(), { Log.e("AddResultFragment", it)}) {
+                    viewModel.saveResultForModule(UUID.randomUUID().toString(), { Log.e("AddResultFragment", it)}) {
                        clearFieldsAndValues()
                     }
                 }
