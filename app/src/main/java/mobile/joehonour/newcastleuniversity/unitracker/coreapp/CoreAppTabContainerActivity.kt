@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_core_app_tab_container.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.view.AddResultFragment
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.configuration.view.ConfigurationFragment
-import mobile.joehonour.newcastleuniversity.unitracker.coreapp.fragments.DashboardFragment
+import mobile.joehonour.newcastleuniversity.unitracker.coreapp.dashboard.view.DashboardFragment
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.view.ModulesFragment
 
 class CoreAppTabContainerActivity : AppCompatActivity()
