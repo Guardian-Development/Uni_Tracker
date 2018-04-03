@@ -241,4 +241,192 @@ class StudentTargetCalculatorTests
             calculator.calculatePercentageOfDegreeCreditsCompleted(record)
         }
     }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsSuccess()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 70.0 }
+            }
+            withModule {
+                withProperties { moduleCredits = 20 }
+                withResult { resultPercentage = 70.0 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 70.0 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(70.0, result, 0.001)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsSingleModule()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 40.45 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(40.45, result, 0.001)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsSingleModuleMultipleResults()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 60.0 }
+                withResult { resultPercentage = 50.42 }
+                withResult { resultPercentage = 22.89 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(44.44, result, 0.001)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsMultipleModulesSingleResult()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 78.87 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 25.29 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 42.31 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(48.82, result, 0.001)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsMultipleModulesMultipleResults()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 78.87 }
+                withResult { resultPercentage = 25.29 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 25.29 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 42.31 }
+                withResult { resultPercentage = 25.29 }
+                withResult { resultPercentage = 25.29 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(37.06, result, 0.001)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsSingleModuleWithNoResultOnly()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(0.0, result, 0.001)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsSomeModulesWithNoResults()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 62.765 }
+                withResult { resultPercentage = 98.23 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 25.29 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(62.1, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsNoModulesRegistered()
+    {
+        StudentRecordCalculationTester {}.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(0.0, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsRoundsUpToTwoDecimalPlacesCorrectly()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 61.76 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 61.75 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(61.76, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculateAverageGradeAchievedInAllRecordedResultsRoundsDownToTwoDecimalPlacesCorrectly()
+    {
+        StudentRecordCalculationTester {
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 62.764 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+                withResult { resultPercentage = 62.764 }
+            }
+            withModule {
+                withProperties { moduleCredits = 10 }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
+            assertEquals(62.76, result, 0.01)
+        }
+    }
 }

@@ -3,7 +3,6 @@ package mobile.joehonour.newcastleuniversity.unitracker.domain.calculations
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.roundToTwoDecimalPlaces
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 
-
 fun moduleCreditsToModuleCompletionPercentage(module: Module) : Pair<Int, Int>
 {
     return module.moduleCredits to module.results.values.map { it.resultWeighting }.sum()

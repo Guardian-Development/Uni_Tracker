@@ -1,5 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.calculations
 
+import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.roundToTwoDecimalPlaces
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.StudentRecord
 
 class StudentTargetCalculator : IProvideStudentTargetCalculations
@@ -27,7 +28,12 @@ class StudentTargetCalculator : IProvideStudentTargetCalculations
 
     override fun calculateAverageGradeAchievedInAllRecordedResults(studentRecord: StudentRecord): Double
     {
-        return 12.0
+        return studentRecord.modules.values
+                .filter { it.results.isNotEmpty() }
+                .flatMap { it.results.values }
+                .map { it.resultPercentage }
+                .average()
+                .takeIf { it.isFinite() }
+                ?.roundToTwoDecimalPlaces() ?: 0.0
     }
-
 }
