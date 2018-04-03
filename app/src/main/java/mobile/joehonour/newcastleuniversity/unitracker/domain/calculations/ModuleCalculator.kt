@@ -1,6 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.calculations
 
-import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.roundTo2DecimalPlaces
+import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.roundToTwoDecimalPlaces
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 
 class ModuleCalculator : IProvideModuleCalculations
@@ -19,11 +19,11 @@ class ModuleCalculator : IProvideModuleCalculations
     override fun calculateCurrentAverageGradeOf(module: Module): Double
     {
         return when {
-            module.results.isEmpty() -> 0.0.roundTo2DecimalPlaces()
+            module.results.isEmpty() -> 0.0.roundToTwoDecimalPlaces()
             else -> module.results.values
                     .map { it.resultPercentage }
                     .average()
-                    .roundTo2DecimalPlaces()
+                    .roundToTwoDecimalPlaces()
         }
     }
 }
