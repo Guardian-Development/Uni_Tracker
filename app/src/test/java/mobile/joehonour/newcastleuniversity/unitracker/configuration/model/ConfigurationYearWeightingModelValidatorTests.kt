@@ -20,6 +20,7 @@ class ConfigurationYearWeightingModelValidatorTests
                 .withEdits {
                     year = 1
                     weighting = 75
+                    creditsCompletedWithinYear = 120
                 }
                 .validateConformsTo(configurationYearWeightingValidator)
     }
@@ -56,6 +57,44 @@ class ConfigurationYearWeightingModelValidatorTests
                 .withEdits {
                     year = 2
                     weighting = 101
+                }
+                .validateDoesNotConformTo(configurationYearWeightingValidator)
+    }
+
+    @Test
+    fun validateYearWeightingModelWeightingNullDetected()
+    {
+        val configurationYearWeightingValidator = configurationYearWeightingModelValidatorBuilder()
+                .withEdits {
+                    weightingMinimum = 0
+                    weightingMaximum = 100
+                }
+                .build()
+
+        configurationYearWeightingModelTester(configurationYearWeightingValidator)
+                .withEdits {
+                    year = 2
+                    weighting = null
+                    creditsCompletedWithinYear = 120
+                }
+                .validateDoesNotConformTo(configurationYearWeightingValidator)
+    }
+
+    @Test
+    fun validateYearWeightingModelCreditsCompletedWithinYearNullDetected()
+    {
+        val configurationYearWeightingValidator = configurationYearWeightingModelValidatorBuilder()
+                .withEdits {
+                    weightingMinimum = 0
+                    weightingMaximum = 100
+                }
+                .build()
+
+        configurationYearWeightingModelTester(configurationYearWeightingValidator)
+                .withEdits {
+                    year = 2
+                    weighting = 101
+                    creditsCompletedWithinYear = null
                 }
                 .validateDoesNotConformTo(configurationYearWeightingValidator)
     }

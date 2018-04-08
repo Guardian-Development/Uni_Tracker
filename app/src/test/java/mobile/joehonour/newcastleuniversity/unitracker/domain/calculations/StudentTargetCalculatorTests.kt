@@ -1,6 +1,7 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.calculations
 
 import junit.framework.Assert.assertEquals
+import junit.framework.Assert.fail
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
@@ -427,6 +428,386 @@ class StudentTargetCalculatorTests
         }.performCalculationOnStudentRecord { record, calculator ->
             val result = calculator.calculateAverageGradeAchievedInAllRecordedResults(record)
             assertEquals(62.76, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetSingleYearSuccess()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 70 //2800
+                totalCredits = 40
+                withYearWeighting {
+                    year = 1
+                    weighting = 100
+                    creditsCompletedWithinYear = 40 //4000
+                }
+            } //achieved 2082.92 //1000 remaining //required 717.08 //percentage 71.708
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 10
+                }
+                withResult {
+                    resultWeighting = 100 //627.64
+                    resultPercentage = 62.764
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 20
+                }
+                withResult {
+                    resultWeighting = 100 //1455.28
+                    resultPercentage = 72.764
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(71.71, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetMultipleYearsSuccess()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 65 //7800
+                totalCredits = 120 //12000
+                withYearWeighting {
+                    year = 1
+                    weighting = 50
+                    creditsCompletedWithinYear = 60 //6000
+                }
+                withYearWeighting {
+                    year = 2
+                    weighting = 50
+                    creditsCompletedWithinYear = 60 //6000
+                }
+            } //achieved 6339.42 //remaining 3500 //required 1460.58 //percentage 41.730857
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30 //3000
+                }
+                withResult {
+                    resultWeighting = 50 //1110
+                    resultPercentage = 74.0
+                }
+                withResult {
+                    resultWeighting = 50 //1020
+                    resultPercentage = 68.0
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30 //3000
+                }
+                withResult {
+                    resultWeighting = 100 //2182.92
+                    resultPercentage = 72.764
+                }
+            }
+            withModule { //2000
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 40 //4000
+                }
+                withResult {
+                    resultWeighting = 50
+                    resultPercentage = 84.1 //1682
+                }
+                withResult {
+                    resultWeighting = 0
+                    resultPercentage = 91.0
+                }
+            }
+            withModule { //1500
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 20 //2000
+                }
+                withResult {
+                    resultWeighting = 25 //344.5
+                    resultPercentage = 68.9
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(41.73, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetNoModulesRegistered()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 70
+                totalCredits = 120
+                withYearWeighting {
+                    year = 1
+                    weighting = 50
+                    creditsCompletedWithinYear = 60
+                }
+                withYearWeighting {
+                    year = 2
+                    weighting = 50
+                    creditsCompletedWithinYear = 60
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(70.0, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetNoResultsRegistered()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 70
+                totalCredits = 240
+                withYearWeighting {
+                    year = 1
+                    weighting = 100
+                    creditsCompletedWithinYear = 120
+                }
+                withYearWeighting {
+                    year = 2
+                    weighting = 120
+                    creditsCompletedWithinYear = 120
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 40
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 20
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(70.0, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetAchievableTarget()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 65 //15600
+                totalCredits = 240 //24000
+                withYearWeighting {
+                    year = 1
+                    weighting = 0
+                    creditsCompletedWithinYear = 0
+                }
+                withYearWeighting {
+                    year = 2
+                    weighting = 30
+                    creditsCompletedWithinYear = 120 //7200
+                }
+                withYearWeighting {
+                    year = 3
+                    weighting = 70
+                    creditsCompletedWithinYear = 120 //16800
+                } //achieved 1795.2 //remaining 21600 //required 13804.8 //percentage 41.730857
+            }
+            withModule { //0
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30
+                }
+                withResult {
+                    resultWeighting = 100
+                    resultPercentage = 72.764
+                }
+            }
+            withModule { //820.8
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 20 //1200
+                }
+                withResult {
+                    resultWeighting = 100
+                    resultPercentage = 68.4
+                }
+            }
+            withModule { //974.4
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 20 //1200
+                }
+                withResult {
+                    resultWeighting = 100
+                    resultPercentage = 81.2
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(63.91, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetTargetAlreadyAchieved()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 52 //6339.42
+                totalCredits = 120 //12000
+                withYearWeighting {
+                    year = 1
+                    weighting = 50
+                    creditsCompletedWithinYear = 60 //6000
+                }
+                withYearWeighting {
+                    year = 2
+                    weighting = 50
+                    creditsCompletedWithinYear = 60 //6000
+                } //9839.42
+            } //achieved 6339.42
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30 //3000
+                }
+                withResult {
+                    resultWeighting = 50 //1110
+                    resultPercentage = 74.0
+                }
+                withResult {
+                    resultWeighting = 50 //1020
+                    resultPercentage = 68.0
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30 //3000
+                }
+                withResult {
+                    resultWeighting = 100 //2182.92
+                    resultPercentage = 72.764
+                }
+            }
+            withModule { //2000
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 40 //4000
+                }
+                withResult {
+                    resultWeighting = 50
+                    resultPercentage = 84.1 //1682
+                }
+                withResult {
+                    resultWeighting = 0
+                    resultPercentage = 91.0
+                }
+            }
+            withModule { //1500
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 20 //2000
+                }
+                withResult {
+                    resultWeighting = 25 //344.5
+                    resultPercentage = 68.9
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(0.0, result, 0.01)
+        }
+    }
+
+    @Test
+    fun calculatePercentageRequiredToMeetTargetUnAchievableTarget()
+    {
+        StudentRecordCalculationTester {
+            withConfiguration {
+                targetPercentage = 82 //9840
+                totalCredits = 120 //12000
+                withYearWeighting {
+                    year = 1
+                    weighting = 50
+                    creditsCompletedWithinYear = 60 //6000
+                }
+                withYearWeighting {
+                    year = 2
+                    weighting = 50
+                    creditsCompletedWithinYear = 60 //6000
+                } //9839.42
+            } //achieved 6339.42
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30 //3000
+                }
+                withResult {
+                    resultWeighting = 50 //1110
+                    resultPercentage = 74.0
+                }
+                withResult {
+                    resultWeighting = 50 //1020
+                    resultPercentage = 68.0
+                }
+            }
+            withModule {
+                withProperties {
+                    moduleYearSudied = 1
+                    moduleCredits = 30 //3000
+                }
+                withResult {
+                    resultWeighting = 100 //2182.92
+                    resultPercentage = 72.764
+                }
+            }
+            withModule { //2000
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 40 //4000
+                }
+                withResult {
+                    resultWeighting = 50
+                    resultPercentage = 84.1 //1682
+                }
+                withResult {
+                    resultWeighting = 0
+                    resultPercentage = 91.0
+                }
+            }
+            withModule { //1500
+                withProperties {
+                    moduleYearSudied = 2
+                    moduleCredits = 20 //2000
+                }
+                withResult {
+                    resultWeighting = 25 //344.5
+                    resultPercentage = 68.9
+                }
+            }
+        }.performCalculationOnStudentRecord { record, calculator ->
+            val result = calculator.calculatePercentageRequiredToMeetTarget(record)
+            assertEquals(Double.POSITIVE_INFINITY, result, 0.01)
         }
     }
 }

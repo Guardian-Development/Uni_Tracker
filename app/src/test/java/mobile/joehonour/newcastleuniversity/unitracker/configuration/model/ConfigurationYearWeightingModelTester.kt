@@ -4,7 +4,8 @@ import org.junit.Assert
 
 class ConfigurationYearWeightingModelTester(
         var year: Int,
-        var weighting: Int
+        var weighting: Int?,
+        var creditsCompletedWithinYear: Int?
 ){
     fun withEdits(tester: ConfigurationYearWeightingModelTester.() -> Unit) : ConfigurationYearWeightingModelTester
     {
@@ -23,7 +24,7 @@ class ConfigurationYearWeightingModelTester(
     }
 
     private fun validate(validator: ConfigurationYearWeightingModelValidator) : Boolean =
-            validator.validate(weighting)
+            validator.validate(weighting, creditsCompletedWithinYear)
 
     companion object
     {
@@ -31,6 +32,7 @@ class ConfigurationYearWeightingModelTester(
                 : ConfigurationYearWeightingModelTester =
                 ConfigurationYearWeightingModelTester(
                         year = 1,
-                        weighting = validator.weightingMinimum + 1)
+                        weighting = validator.weightingMinimum + 1,
+                        creditsCompletedWithinYear = 0)
     }
 }

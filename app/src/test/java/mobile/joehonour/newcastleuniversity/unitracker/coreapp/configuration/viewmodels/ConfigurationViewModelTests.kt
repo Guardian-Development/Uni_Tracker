@@ -24,9 +24,9 @@ class ConfigurationViewModelTests
     fun canGetConfigurationSuccess()
     {
         val weightings = listOf(
-                ConfigurationYearWeighting(1, 20),
-                ConfigurationYearWeighting(2, 40),
-                ConfigurationYearWeighting(3, 60))
+                ConfigurationYearWeighting(1, 20, 120),
+                ConfigurationYearWeighting(2, 40, 0),
+                ConfigurationYearWeighting(3, 60, 120))
 
         val configuration = Configuration(
                 "Leeds",

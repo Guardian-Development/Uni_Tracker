@@ -7,6 +7,8 @@ import java.util.*
 class ModuleBuilder
 {
     var moduleCredits: Int = 0
+    var moduleYearSudied: Int = 0
+
     private val results: MutableList<ModuleResult> = mutableListOf()
 
     fun withProperties(builder: ModuleBuilder.() -> Unit) : ModuleBuilder
@@ -28,7 +30,7 @@ class ModuleBuilder
         return Module(UUID.randomUUID().toString(),
                 "default name",
                 moduleCredits,
-                1,
+                moduleYearSudied,
                 results.map { it.resultId to it }.toMap())
     }
 }

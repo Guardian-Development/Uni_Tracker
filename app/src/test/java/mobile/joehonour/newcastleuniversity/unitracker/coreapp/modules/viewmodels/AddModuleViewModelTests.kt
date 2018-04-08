@@ -62,8 +62,8 @@ class AddModuleViewModelTests
     {
         val onError = mock<((String?) -> Unit)>()
         val configuration = Configuration("name", 2016, 2, 70, 260, listOf(
-                ConfigurationYearWeighting(1, 50),
-                ConfigurationYearWeighting(2, 50)))
+                ConfigurationYearWeighting(1, 50, 120),
+                ConfigurationYearWeighting(2, 50, 120)))
 
         val userState = mock<IQueryUserState> {
             on { getUserConfiguration(eq(onError), any()) } doAnswer {

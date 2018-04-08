@@ -24,17 +24,19 @@ class ConfigurationYearWeightingViewModel(
         get() = configurationData?.courseLength == enteredYearWeightings.size
 
     val validDataEnteredForCurrentYearWeighting: Boolean
-        get() = dataValidator.validate(currentYearWeighting.value)
+        get() = dataValidator.validate(currentYearWeighting.value, currentYearCreditsCompleted.value)
 
     private val enteredYearWeightings: MutableList<ConfigurationYearWeightingModel> = mutableListOf()
-    private var currentYearWeighting: MutableLiveData<Int> = MutableLiveData()
 
-    fun bindModelForCurrentYear(bind: (MutableLiveData<Int>) -> Unit)
+    var currentYearWeighting: MutableLiveData<Int> = MutableLiveData()
+    var currentYearCreditsCompleted: MutableLiveData<Int> = MutableLiveData()
+
+    fun bindModelForCurrentYear(bind: ConfigurationYearWeightingViewModel.() -> Unit)
     {
         when(configurationData) {
             null -> throw IllegalStateException("cannot get model without setting configurationData")
             else -> {
-                bind(currentYearWeighting)
+                this.bind()
             }
         }
     }
@@ -46,7 +48,10 @@ class ConfigurationYearWeightingViewModel(
         }
 
         enteredYearWeightings.add(
-                ConfigurationYearWeightingModel(currentYear, currentYearWeighting.value!!))
+                ConfigurationYearWeightingModel(
+                        currentYear,
+                        currentYearWeighting.value!!,
+                        currentYearCreditsCompleted.value!!))
 
         if (completedWeightingsForAllYear) {
             return
@@ -73,7 +78,7 @@ class ConfigurationYearWeightingViewModel(
     private fun buildAppConfiguration() : Configuration
     {
         val yearWeightings = enteredYearWeightings.map {
-            ConfigurationYearWeighting(it.year, it.weighting)
+            ConfigurationYearWeighting(it.year, it.weighting, it.creditsCompletedWithinYear)
         }
 
         return Configuration(

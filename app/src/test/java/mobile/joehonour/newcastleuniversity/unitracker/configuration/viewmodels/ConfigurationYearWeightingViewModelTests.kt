@@ -1,18 +1,16 @@
 package mobile.joehonour.newcastleuniversity.unitracker.configuration.viewmodels
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.MutableLiveData
 import com.nhaarman.mockito_kotlin.*
+import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationYearWeightingModelValidator
+import mobile.joehonour.newcastleuniversity.unitracker.configuration.viewmodels.ConfigurationYearWeightingViewModelTester.Companion.configurationYearWeightingViewModelTester
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configuration
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
-import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationYearWeightingModelValidator
-import mobile.joehonour.newcastleuniversity.unitracker.configuration.viewmodels.ConfigurationYearWeightingViewModelTester.Companion.configurationYearWeightingViewModelTester
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 import org.junit.rules.TestRule
-import org.mockito.ArgumentMatchers
 
 
 class ConfigurationYearWeightingViewModelTests
@@ -42,15 +40,21 @@ class ConfigurationYearWeightingViewModelTests
     fun completedWeightingsForAllYearsFalseWhenNotCompleted()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(ArgumentMatchers.any()) } doReturn true
+            on { validate(any(), any()) } doReturn true
         }
 
         configurationYearWeightingViewModelTester(validator)
                 .withConfigurationDataModel(courseLength = 3)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 10 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 10
+                        currentYearCreditsCompleted.value = 50
+                    }
                     finishEditingCurrentYear()
-                    bindModelForCurrentYear { it.value = 10 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 10
+                        currentYearCreditsCompleted.value = 50
+                    }
                     finishEditingCurrentYear()
                 }
                 .assertCompletedWeightingsForAllYearsFalse()
@@ -60,15 +64,21 @@ class ConfigurationYearWeightingViewModelTests
     fun completedWeightingsForAllYearsTrueWhenCompleted()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(ArgumentMatchers.any()) } doReturn true
+            on { validate(any(), any()) } doReturn true
         }
 
         configurationYearWeightingViewModelTester(validator)
                 .withConfigurationDataModel(courseLength = 2)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 50 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 50
+                        currentYearCreditsCompleted.value = 120
+                    }
                     finishEditingCurrentYear()
-                    bindModelForCurrentYear { it.value = 20 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 20
+                        currentYearCreditsCompleted.value = 50
+                    }
                     finishEditingCurrentYear()
                 }
                 .assertCompletedWeightingsForAllYearsTrue()
@@ -78,7 +88,7 @@ class ConfigurationYearWeightingViewModelTests
     fun bindModelForCurrentYearCallsBindCorrectly()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator>()
-        val bindingFunction = mock<(MutableLiveData<Int>) -> Unit>()
+        val bindingFunction = mock<(ConfigurationYearWeightingViewModel) -> Unit>()
 
         configurationYearWeightingViewModelTester(validator)
                 .withConfigurationDataModel(courseLength = 5)
@@ -107,18 +117,24 @@ class ConfigurationYearWeightingViewModelTests
     fun finishEditingCurrentYearOnLastYearSetsCompletedWeightingsForAllYearsTrue()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(ArgumentMatchers.any()) } doReturn true
+            on { validate(any(), any()) } doReturn true
         }
 
         configurationYearWeightingViewModelTester(validator)
                 .withConfigurationDataModel(courseLength = 2)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 50 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 50
+                        currentYearCreditsCompleted.value = 120
+                    }
                     finishEditingCurrentYear()
                 }
                 .assertCompletedWeightingsForAllYearsFalse()
                 .performActions {
-                    bindModelForCurrentYear { it.value = 20 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 20
+                        currentYearCreditsCompleted.value = 10
+                    }
                     finishEditingCurrentYear()
                 }
                 .assertCompletedWeightingsForAllYearsTrue()
@@ -128,13 +144,16 @@ class ConfigurationYearWeightingViewModelTests
     fun validDataEnteredForCurrentYearWeightingReturnsTrueCorrectly()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(20) } doReturn true
+            on { validate(20, 120) } doReturn true
         }
 
         configurationYearWeightingViewModelTester(validator)
                 .withConfigurationDataModel(courseLength = 3)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 20 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 20
+                        currentYearCreditsCompleted.value = 120
+                    }
                 }
                 .assertValidDataEnteredForCurrentYearWeightingTrue()
     }
@@ -143,13 +162,16 @@ class ConfigurationYearWeightingViewModelTests
     fun validDataEnteredForCurrentYearWeightingReturnsFalseCorrectly()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(78) } doReturn false
+            on { validate(78, 240) } doReturn false
         }
 
         configurationYearWeightingViewModelTester(validator)
                 .withConfigurationDataModel(courseLength = 1)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 78 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 78
+                        currentYearCreditsCompleted.value = 240
+                    }
                 }
                 .assertValidDataEnteredForCurrentYearWeightingFalse()
     }
@@ -158,7 +180,7 @@ class ConfigurationYearWeightingViewModelTests
     fun userLoggedInSaveConfigurationExecutesSuccess()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(any()) } doReturn true
+            on { validate(any(), any()) } doReturn true
         }
         val authProvider = mock<IProvideAuthentication> {
             on { userLoggedIn } doReturn true
@@ -179,7 +201,10 @@ class ConfigurationYearWeightingViewModelTests
         configurationYearWeightingViewModelTester(validator, storageProvider, authProvider)
                 .withConfigurationDataModel(courseLength = 1)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 50 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 50
+                        currentYearCreditsCompleted.value = 120
+                    }
                     finishEditingCurrentYear()
                     saveConfiguration(onError, onSuccess)
                 }
@@ -192,7 +217,7 @@ class ConfigurationYearWeightingViewModelTests
     fun userNotLoggedInSaveConfigurationExecutesFailure()
     {
         val validator = mock<ConfigurationYearWeightingModelValidator> {
-            on { validate(any()) } doReturn true
+            on { validate(any(), any()) } doReturn true
         }
         val authProvider = mock<IProvideAuthentication> {
             on { userLoggedIn } doReturn false
@@ -213,7 +238,10 @@ class ConfigurationYearWeightingViewModelTests
         configurationYearWeightingViewModelTester(validator, storageProvider, authProvider)
                 .withConfigurationDataModel(courseLength = 1)
                 .performActions {
-                    bindModelForCurrentYear { it.value = 50 }
+                    bindModelForCurrentYear {
+                        currentYearWeighting.value = 50
+                        currentYearCreditsCompleted.value = 30
+                    }
                     finishEditingCurrentYear()
                     saveConfiguration(onError, onSuccess)
                 }

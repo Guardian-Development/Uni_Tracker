@@ -36,13 +36,18 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
     private fun bindNewYearWeightingToModel()
     {
         viewModel.bindModelForCurrentYear {
-            currentYearWeighting ->
                 yearBeingSelected.text = viewModel.currentYear.toString()
                 yearWeighting.text = null
+                creditsCompletedWithinYear.text = null
                 bindTextChangedListener(yearWeighting, this) {
                     it.executeIfNotNullOrEmpty(
                             { currentYearWeighting.value = null },
                             { currentYearWeighting.value = it.toInt()})
+                }
+                bindTextChangedListener(creditsCompletedWithinYear, this) {
+                    it.executeIfNotNullOrEmpty(
+                            { currentYearCreditsCompleted.value = null },
+                            { currentYearCreditsCompleted.value = it.toInt()})
                 }
         }
     }
@@ -68,6 +73,7 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
                 yearBeingSelected.visibility = View.INVISIBLE
                 yearBeingSelectedMessage.visibility = View.INVISIBLE
                 yearWeighting.visibility = View.INVISIBLE
+                creditsCompletedWithinYear.visibility = View.INVISIBLE
                 continueButton.visibility = View.INVISIBLE
                 completeSetup.visibility = View.VISIBLE
             }

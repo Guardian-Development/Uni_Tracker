@@ -8,10 +8,17 @@ class ConfigurationBuilder
     private val universityName: String = "default name"
     private val yearStarted: Int = 1
     private val courseLength: Int = 4
-    private val targetPercentage: Int = 70
-    private val yearWeightings: List<ConfigurationYearWeighting> = emptyList()
-
+    var targetPercentage: Int = 70
     var totalCredits: Int = 0
+    private val yearWeightings: MutableList<ConfigurationYearWeighting> = mutableListOf()
+
+    fun withYearWeighting(builder: ConfigurationYearWeightingBuilder.() -> Unit) : ConfigurationBuilder
+    {
+        val yearWeightingBuilder = ConfigurationYearWeightingBuilder()
+        yearWeightingBuilder.builder()
+        yearWeightings.add(yearWeightingBuilder.build())
+        return this
+    }
 
     fun build() : Configuration
     {
@@ -23,3 +30,4 @@ class ConfigurationBuilder
                 yearWeightings)
     }
 }
+

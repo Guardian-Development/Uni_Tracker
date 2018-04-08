@@ -51,7 +51,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="%"
+        android:hint="Weighting of Year %"
         android:inputType="numberSigned"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,12 +65,12 @@
         android:layout_height="51dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="140dp"
         android:text="Continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearWeighting" />
+        app:layout_constraintTop_toBottomOf="@+id/creditsCompletedWithinYear" />
 
     <Button
         android:id="@+id/completeSetup"
@@ -78,10 +78,27 @@
         android:layout_height="51dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="16dp"
         android:text="Complete Setup"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/continueButton" />
+
+    <EditText
+        android:id="@+id/creditsCompletedWithinYear"
+        android:layout_width="279dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Credits Completed Within Year"
+        android:inputType="numberSigned"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearWeighting" />
+
 </android.support.constraint.ConstraintLayout>

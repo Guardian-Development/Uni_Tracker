@@ -7,7 +7,32 @@ class StudentTargetCalculator : IProvideStudentTargetCalculations
 {
     override fun calculatePercentageRequiredToMeetTarget(studentRecord: StudentRecord): Double
     {
-        return 10.0
+        val totalWeightedCreditsAvailable = totalWeightedCreditsAvailable(
+                studentRecord.configuration.yearWeightings)
+
+        val weightedCreditsRequiredToHitTarget = weightedCreditsRequiredToHitTargetPercentage(
+                studentRecord.configuration.targetPercentage,
+                totalWeightedCreditsAvailable)
+
+        val currentlyAchievedWeightedCredits = currentlyAchievedWeightedCredits(studentRecord)
+        val weightedCreditsNeededToHitTarget = weightedCreditsNeededToHitTargetCredits(
+                weightedCreditsRequiredToHitTarget,
+                currentlyAchievedWeightedCredits)
+
+        val totalWeightedCreditsTaken = totalAmountOfWeightedCreditsTaken(studentRecord)
+        val remainingAmountOfWeightedCredits = remainingAmountOfWeightedCreditsAvailable(
+                totalWeightedCreditsAvailable,
+                totalWeightedCreditsTaken)
+
+        val result = percentageRequiredInRemainingWeightedCreditsToHitTarget(
+                weightedCreditsNeededToHitTarget,
+                remainingAmountOfWeightedCredits)
+
+        return when
+        {
+            result.isFinite() -> result.roundToTwoDecimalPlaces()
+            else -> result
+        }
     }
 
     override fun calculatePercentageOfDegreeCreditsCompleted(studentRecord: StudentRecord): Double

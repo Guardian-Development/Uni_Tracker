@@ -21,12 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity" />
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".configuration.view.ConfigurationActivity" />
         <activity android:name=".configuration.view.ConfigurationYearWeightingActivity" />
         <activity android:name=".coreapp.CoreAppTabContainerActivity" />
-        <activity android:name=".coreapp.modules.view.AddModuleActivity"></activity>
+        <activity android:name=".coreapp.modules.view.AddModuleActivity" />
         <activity android:name=".coreapp.modules.view.IndividualModuleActivity" />
     </application>
 

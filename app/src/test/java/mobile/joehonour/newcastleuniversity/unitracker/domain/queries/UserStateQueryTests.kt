@@ -80,9 +80,9 @@ class UserStateQueryTests
         }
 
         val yearWeightings = listOf(
-                ConfigurationYearWeighting(1, 10),
-                ConfigurationYearWeighting(2, 20),
-                ConfigurationYearWeighting(3, 40))
+                ConfigurationYearWeighting(1, 10, 120),
+                ConfigurationYearWeighting(2, 20, 120),
+                ConfigurationYearWeighting(3, 40, 120))
 
         val configuration = Configuration(
                 "Newcastle",
