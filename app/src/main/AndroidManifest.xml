@@ -17,14 +17,15 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".configuration.view.ConfigurationActivity" />
         <activity android:name=".configuration.view.ConfigurationYearWeightingActivity" />
-        <activity android:name=".coreapp.CoreAppTabContainerActivity" />
+        <activity
+            android:name=".coreapp.CoreAppTabContainerActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".coreapp.modules.view.AddModuleActivity" />
         <activity android:name=".coreapp.modules.view.IndividualModuleActivity" />
     </application>

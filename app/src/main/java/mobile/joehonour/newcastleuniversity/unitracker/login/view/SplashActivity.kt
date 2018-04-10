@@ -3,6 +3,7 @@ package mobile.joehonour.newcastleuniversity.unitracker.login.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.content.Intent
+import android.util.Log
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.view.ConfigurationActivity
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.CoreAppTabContainerActivity
 import mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels.LoginViewModel
