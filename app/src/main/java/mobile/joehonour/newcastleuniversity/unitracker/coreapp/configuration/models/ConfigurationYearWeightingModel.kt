@@ -4,14 +4,18 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configurati
 
 data class ConfigurationYearWeightingModel(
         val year: Int,
-        val weighting: Int
+        val weighting: Int,
+        val creditsCompletedWithinYear: Int
 ){
     companion object
     {
         fun instanceFromConfigurationYearWeighting(
                 yearWeighting: ConfigurationYearWeighting) : ConfigurationYearWeightingModel
         {
-            return ConfigurationYearWeightingModel(yearWeighting.year, yearWeighting.weighting)
+            return ConfigurationYearWeightingModel(
+                    yearWeighting.year,
+                    yearWeighting.weighting,
+                    yearWeighting.creditsCompletedWithinYear)
         }
     }
 }

@@ -32,14 +32,14 @@ class ConfigurationFragment : Fragment()
 
     private fun bindDisplayToConfiguration(configurationModel: ConfigurationModel)
     {
-        configUniversity.text = configurationModel.universityName
-        configYearStarted.text = configurationModel.yearStarted.toString()
-        configCourseLength.text = configurationModel.courseLength.toString()
-        configTargetPercentage.text = configurationModel.targetPercentage.toString() + " %"
-        configTotalCredits.text = configurationModel.totalCredits.toString()
+        coreAppConfigurationFragmentUniversity.text = configurationModel.universityName
+        coreAppConfigurationFragmentYearStarted.text = configurationModel.yearStarted.toString()
+        coreAppConfigurationFragmentCourseLength.text = configurationModel.courseLength.toString()
+        coreAppConfigurationFragmentTargetPercentage.text = getString(R.string.displayedPercentage, configurationModel.targetPercentage)
+        coreAppConfigurationFragmentTotalCredits.text = configurationModel.totalCredits.toString()
 
-        configYearWeightingList.layoutManager = LinearLayoutManager(context)
-        configYearWeightingList.adapter =
+        coreAppConfigurationFragmentYearWeightingList.layoutManager = LinearLayoutManager(context)
+        coreAppConfigurationFragmentYearWeightingList.adapter =
                 ConfigurationYearWeightingsModelRecyclerAdapter(configurationModel.yearWeightings)
     }
 

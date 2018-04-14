@@ -10,6 +10,7 @@ secrets.xml resource file should be added to values folder containing:
 
     <string name="continueButtonLabel">Continue</string>
     <string name="completeSetupButtonLabel">Complete Setup</string>
+    <string name="displayedPercentage">%d %%</string>
 
     <string name="configurationActivityTitle">Enter Course Details:</string>
     <string name="configurationActivityUniversityNameHint">University Name</string>
@@ -28,4 +29,21 @@ secrets.xml resource file should be added to values folder containing:
     <string name="configurationYearWeightingYearBeingSelectedDefaultYear">1</string>
     <string name="configurationYearWeightingActivityYeatWeightingHint">Weighting of Year %</string>
     <string name="configurationYearWeightingActivityCreditsCompletedHint">Credits Completed Within Year</string>
+    <string name="coreAppConfigurationTotalCreditsDefault">total_credits</string>
+    <string name="coreAppConfigurationTargetPercentageDefault">target_percentage</string>
+    <string name="coreAppConfigurationCourseLengthDefault">course_length</string>
+    <string name="coreAppConfigurationYearStartedDefault">year_started</string>
+    <string name="coreAppConfigurationUniversityDefault">university</string>
+    <string name="coreAppConfigurationTotalCreditsLabel">Total Credits</string>
+    <string name="coreAppConfigurationTargetPercentageLabel">Target Percentage</string>
+    <string name="coreAppConfigurationCourseLengthLabel">Course Length</string>
+    <string name="coreAppConfigurationYearStartedLabel">Year Started</string>
+    <string name="coreAppConfigurationUniversityLabel">University</string>
+    <string name="coreAppConfigurationYearBreakdownLabel">Year Breakdown</string>
+    <string name="yearWeightingListItemYearLabel">Year</string>
+    <string name="yearWeightingListItemWeightingLabel">Weighting:</string>
+    <string name="yearWeightingListItemCreditsTakenLabel">Credits Taken:</string>
+    <string name="yearWeightingListItemDefault">1</string>
+    <string name="yearWeightingListItemItemWeightingDefault">100</string>
+    <string name="yearWeightingListItemCreditsTakenDefault">240</string>
 </resources>

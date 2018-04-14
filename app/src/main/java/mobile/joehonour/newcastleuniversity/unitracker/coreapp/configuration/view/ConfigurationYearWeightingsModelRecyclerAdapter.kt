@@ -26,8 +26,9 @@ class ConfigurationYearWeightingsModelRecyclerAdapter(private val yearWeightingM
     class ConfigurationYearWeightingHolder(v: View?) : RecyclerView.ViewHolder(v)
     {
         fun bindYearWeighting(yearWeightingModel: ConfigurationYearWeightingModel) {
-            itemView.yearNumber.text = "Year: " + yearWeightingModel.year.toString()
-            itemView.yearWeighting.text = "Credits: " + yearWeightingModel.weighting.toString()
+            itemView.yearWeightingListItemYear.text = yearWeightingModel.year.toString()
+            itemView.yearWeightingListItemWeighting.text = yearWeightingModel.weighting.toString()
+            itemView.yearWeightingListItemCreditsTaken.text = yearWeightingModel.creditsCompletedWithinYear.toString()
         }
     }
 }

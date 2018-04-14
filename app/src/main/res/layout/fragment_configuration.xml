@@ -1,131 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/configTotalCredits"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="16dp"
-        android:text="total_credits"
+        android:id="@+id/coreAppConfigurationFragmentTotalCredits"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/coreAppConfigurationTotalCreditsDefault"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configTargetPercentage" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentTotalCreditsLabel" />
 
     <TextView
-        android:id="@+id/configTargetPercentage"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="16dp"
-        android:text="target_percentage"
+        android:id="@+id/coreAppConfigurationFragmentTargetPercentage"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/coreAppConfigurationTargetPercentageDefault"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configCourseLength" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentTargetPercentageLabel" />
 
     <TextView
-        android:id="@+id/configCourseLength"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="16dp"
-        android:text="course_length"
+        android:id="@+id/coreAppConfigurationFragmentCourseLength"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/coreAppConfigurationCourseLengthDefault"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configYearStarted" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentCourseLengthLabel" />
 
     <TextView
-        android:id="@+id/configYearStarted"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="16dp"
-        android:text="year_started"
+        android:id="@+id/coreAppConfigurationFragmentYearStarted"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/coreAppConfigurationYearStartedDefault"
         android:textAlignment="textStart"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configUniversity" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentYearStartedLabel" />
 
     <TextView
-        android:id="@+id/configUniversity"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="28dp"
-        android:text="university"
+        android:id="@+id/coreAppConfigurationFragmentUniversity"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/coreAppConfigurationUniversityDefault"
         android:textAlignment="textStart"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentUniversityLabel" />
 
     <TextView
-        android:id="@+id/total_credits_label"
+        android:id="@+id/coreAppConfigurationFragmentTotalCreditsLabel"
         android:layout_width="142dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/coreAppConfigurationTotalCreditsLabel"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentTargetPercentage" />
+
+    <TextView
+        android:id="@+id/coreAppConfigurationFragmentTargetPercentageLabel"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/coreAppConfigurationTargetPercentageLabel"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentCourseLength" />
+
+    <TextView
+        android:id="@+id/coreAppConfigurationFragmentCourseLengthLabel"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/coreAppConfigurationCourseLengthLabel"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentYearStarted" />
+
+    <TextView
+        android:id="@+id/coreAppConfigurationFragmentYearStartedLabel"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/coreAppConfigurationYearStartedLabel"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentUniversity" />
+
+    <TextView
+        android:id="@+id/coreAppConfigurationFragmentUniversityLabel"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
-        android:text="Total Credits"
-        android:textAlignment="textEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/target_percentage_label2" />
-
-    <TextView
-        android:id="@+id/target_percentage_label2"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:text="Target Percentage"
-        android:textAlignment="textEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_length_label2" />
-
-    <TextView
-        android:id="@+id/course_length_label2"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:text="Course Length"
-        android:textAlignment="textEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/year_started_label2" />
-
-    <TextView
-        android:id="@+id/year_started_label2"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:text="Year Started"
-        android:textAlignment="textEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/university_label2" />
-
-    <TextView
-        android:id="@+id/university_label2"
-        android:layout_width="142dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:text="University"
-        android:textAlignment="textEnd"
+        android:text="@string/coreAppConfigurationUniversityLabel"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/configYearWeightingList"
-        android:layout_width="336dp"
-        android:layout_height="281dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/coreAppConfigurationFragmentYearWeightingList"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/configTotalCredits"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/year_breakdown_label" />
+
+    <TextView
+        android:id="@+id/year_breakdown_label"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/coreAppConfigurationYearBreakdownLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coreAppConfigurationFragmentTotalCredits" />
 
 </android.support.constraint.ConstraintLayout>
