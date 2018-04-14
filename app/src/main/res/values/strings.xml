@@ -7,4 +7,18 @@ secrets.xml resource file should be added to values folder containing:
 
 <resources>
     <string name="app_name">Uni_Tracker</string>
+
+    <string name="configurationActivityTitle">Enter Course Details:</string>
+    <string name="configurationActivityUniversityNameHint">University Name</string>
+    <string name="configurationActivityYearStartedHint">Year Started</string>
+    <string name="configurationActivityCourseLengthHint">Course Length</string>
+    <string name="configurationActivityTargetPercentageHint">Target Percentage</string>
+    <string name="configurationActivityTotalCreditsHint">Total Credits</string>
+    <string name="configurationUniversityNameErrorMessage">University Name must be supplied</string>
+    <string name="configurationYearStartedErrorMessage">Year Started must be supplied</string>
+    <string name="configurationCourseLengthErrorMessage">Course Length must be supplied</string>
+    <string name="configurationTargetPercentageErrorMessage">Target Percentage must be supplied</string>
+    <string name="configurationTotalCreditsErrorMessage">Total Credits must be supplied</string>
+
+    <string name="continueButtonLabel">Continue</string>
 </resources>

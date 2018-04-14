@@ -1,84 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/universityName"
-        android:layout_width="325dp"
+    <TextView
+        android:id="@+id/loginActivityAppName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="University Name"
-        android:inputType="text"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/configurationActivityTitle"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/yearStarted"
-        android:layout_width="325dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:hint="Year Started"
-        android:inputType="numberSigned"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseLength" />
-
-    <EditText
-        android:id="@+id/courseLength"
-        android:layout_width="325dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/universityNameTextInput"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:hint="Course Length"
-        android:inputType="numberSigned"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetPercentage" />
+        app:layout_constraintTop_toBottomOf="@+id/loginActivityAppName">
 
-    <EditText
-        android:id="@+id/targetPercentage"
-        android:layout_width="325dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:hint="Target Percentage"
-        android:inputType="numberSigned"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalCredits" />
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/configurationActivityUniversityName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/configurationActivityUniversityNameHint"
+            android:inputType="textCapWords"
+            android:textColor="@color/textColorPrimary" />
 
-    <EditText
-        android:id="@+id/totalCredits"
-        android:layout_width="325dp"
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/yearStartedTextInput"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:hint="Total Credits"
-        android:inputType="numberSigned"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/universityName" />
+        app:layout_constraintTop_toBottomOf="@+id/courseLengthTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/configurationActivityYearStarted"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/configurationActivityYearStartedHint"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/courseLengthTextInput"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/targetPercentageTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/configurationActivityCourseLength"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/configurationActivityCourseLengthHint"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/targetPercentageTextInput"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalCreditsTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/configurationActivityTargetPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/configurationActivityTargetPercentageHint"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/totalCreditsTextInput"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/universityNameTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/configurationActivityTotalCredits"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/configurationActivityTotalCreditsHint"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/continueSetup"
-        android:layout_width="248dp"
+        android:layout_width="325dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:text="Continue"
+        android:background="@drawable/button_with_border"
+        android:text="@string/continueButtonLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearStarted" />
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

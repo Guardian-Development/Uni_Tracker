@@ -28,28 +28,54 @@ class ConfigurationActivity : AppCompatActivity()
 
     private fun bindDataFieldsToViewModel()
     {
-        bindTextChangedListener(universityName, viewModel) {
-            universityName.value = it
-        }
-        bindTextChangedListener(yearStarted, viewModel) {
+        bindTextChangedListener(configurationActivityUniversityName, viewModel) {
+            universityName.value = it?.trim()
             it.executeIfNotNullOrEmpty(
-                    { yearStarted.value = null },
-                    { yearStarted.value = it.toInt()})
+                    { universityNameTextInput.error = getString(R.string.configurationUniversityNameErrorMessage) },
+                    { universityNameTextInput.error = null })
         }
-        bindTextChangedListener(courseLength, viewModel) {
+        bindTextChangedListener(configurationActivityYearStarted, viewModel) {
             it.executeIfNotNullOrEmpty(
-                    { courseLength.value = null },
-                    { courseLength.value = it.toInt()})
+                    {
+                        yearStarted.value = null
+                        yearStartedTextInput.error = getString(R.string.configurationYearStartedErrorMessage) },
+                    {
+                        yearStarted.value = it.toInt()
+                        yearStartedTextInput.error = null
+                    })
         }
-        bindTextChangedListener(targetPercentage, viewModel) {
+        bindTextChangedListener(configurationActivityCourseLength, viewModel) {
             it.executeIfNotNullOrEmpty(
-                    { targetPercentage.value = null },
-                    { targetPercentage.value = it.toInt()})
+                    {
+                        courseLength.value = null
+                        courseLengthTextInput.error = getString(R.string.configurationCourseLengthErrorMessage)
+                    },
+                    {
+                        courseLength.value = it.toInt()
+                        courseLengthTextInput.error = null
+                    })
         }
-        bindTextChangedListener(totalCredits, viewModel) {
+        bindTextChangedListener(configurationActivityTargetPercentage, viewModel) {
             it.executeIfNotNullOrEmpty(
-                    { totalCredits.value = null },
-                    { totalCredits.value = it.toInt()})
+                    {
+                        targetPercentage.value = null
+                        targetPercentageTextInput.error = getString(R.string.configurationTargetPercentageErrorMessage)
+                    },
+                    {
+                        targetPercentage.value = it.toInt()
+                        targetPercentageTextInput.error = null
+                    })
+        }
+        bindTextChangedListener(configurationActivityTotalCredits, viewModel) {
+            it.executeIfNotNullOrEmpty(
+                    {
+                        totalCredits.value = null
+                        totalCreditsTextInput.error = getString(R.string.configurationTotalCreditsErrorMessage)
+                    },
+                    {
+                        totalCredits.value = it.toInt()
+                        totalCreditsTextInput.error = null
+                    })
         }
     }
 
