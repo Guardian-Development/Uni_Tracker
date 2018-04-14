@@ -8,12 +8,13 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_configuration_year_weighting.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
-import mobile.joehonour.newcastleuniversity.unitracker.configuration.viewmodels.ConfigurationYearWeightingViewModel
-import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.executeIfNotNullOrEmpty
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationDataModel
+import mobile.joehonour.newcastleuniversity.unitracker.configuration.viewmodels.ConfigurationYearWeightingViewModel
+import mobile.joehonour.newcastleuniversity.unitracker.coreapp.CoreAppTabContainerActivity
+import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.executeIfNotNullOrEmpty
+import mobile.joehonour.newcastleuniversity.unitracker.extensions.hideKeyboard
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListener.Companion.bindTextChangedListener
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
-import mobile.joehonour.newcastleuniversity.unitracker.coreapp.CoreAppTabContainerActivity
 import org.koin.android.architecture.ext.viewModel
 
 class ConfigurationYearWeightingActivity : AppCompatActivity()
@@ -37,17 +38,29 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
     {
         viewModel.bindModelForCurrentYear {
                 yearBeingSelected.text = viewModel.currentYear.toString()
-                yearWeighting.text = null
-                creditsCompletedWithinYear.text = null
-                bindTextChangedListener(yearWeighting, this) {
+                configurationYearWeightingActivityYearWeighting.text = null
+                configurationYearWeightingActivityCreditsCompletedWithinYear.text = null
+                bindTextChangedListener(configurationYearWeightingActivityYearWeighting, this) {
                     it.executeIfNotNullOrEmpty(
-                            { currentYearWeighting.value = null },
-                            { currentYearWeighting.value = it.toInt()})
+                            {
+                                currentYearWeighting.value = null
+                                yearWeightingTextInput.error = "Year Weighting must be supplied"
+                            },
+                            {
+                                currentYearWeighting.value = it.toInt()
+                                yearWeightingTextInput.error = null
+                            })
                 }
-                bindTextChangedListener(creditsCompletedWithinYear, this) {
+                bindTextChangedListener(configurationYearWeightingActivityCreditsCompletedWithinYear, this) {
                     it.executeIfNotNullOrEmpty(
-                            { currentYearCreditsCompleted.value = null },
-                            { currentYearCreditsCompleted.value = it.toInt()})
+                            {
+                                currentYearCreditsCompleted.value = null
+                                creditsCompletedWithinYearTextInput.error = "Credits Completed must be supplied"
+                            },
+                            {
+                                currentYearCreditsCompleted.value = it.toInt()
+                                creditsCompletedWithinYearTextInput.error = null
+                            })
                 }
         }
     }
@@ -56,7 +69,10 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
     {
         bindButtonClickedListener(continueButton, viewModel) {
             when (viewModel.validDataEnteredForCurrentYearWeighting) {
-                true -> progressYearWeightingEntry()
+                true -> {
+                    hideKeyboard()
+                    progressYearWeightingEntry()
+                }
                 false -> Toast.makeText(
                         this@ConfigurationYearWeightingActivity,
                         "Invalid Data Entered",
@@ -72,10 +88,11 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
             true -> {
                 yearBeingSelected.visibility = View.INVISIBLE
                 yearBeingSelectedMessage.visibility = View.INVISIBLE
-                yearWeighting.visibility = View.INVISIBLE
-                creditsCompletedWithinYear.visibility = View.INVISIBLE
+                yearSelectHelpMessage.visibility = View.INVISIBLE
+                yearWeightingTextInput.visibility = View.INVISIBLE
+                creditsCompletedWithinYearTextInput.visibility = View.INVISIBLE
                 continueButton.visibility = View.INVISIBLE
-                completeSetup.visibility = View.VISIBLE
+                completeSetupButton.visibility = View.VISIBLE
             }
             false -> {
                 bindNewYearWeightingToModel()
@@ -85,7 +102,7 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
 
     private fun bindCompleteSetupButtonToAction()
     {
-        bindButtonClickedListener(completeSetup, viewModel) {
+        bindButtonClickedListener(completeSetupButton, viewModel) {
             saveConfiguration({ Log.e("initial setup", it ?: "error") }) {
                 startActivity(Intent(
                         this@ConfigurationYearWeightingActivity,

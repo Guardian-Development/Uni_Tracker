@@ -8,17 +8,24 @@ secrets.xml resource file should be added to values folder containing:
 <resources>
     <string name="app_name">Uni_Tracker</string>
 
+    <string name="continueButtonLabel">Continue</string>
+    <string name="completeSetupButtonLabel">Complete Setup</string>
+
     <string name="configurationActivityTitle">Enter Course Details:</string>
     <string name="configurationActivityUniversityNameHint">University Name</string>
     <string name="configurationActivityYearStartedHint">Year Started</string>
     <string name="configurationActivityCourseLengthHint">Course Length</string>
     <string name="configurationActivityTargetPercentageHint">Target Percentage</string>
     <string name="configurationActivityTotalCreditsHint">Total Credits</string>
-    <string name="configurationUniversityNameErrorMessage">University Name must be supplied</string>
-    <string name="configurationYearStartedErrorMessage">Year Started must be supplied</string>
-    <string name="configurationCourseLengthErrorMessage">Course Length must be supplied</string>
-    <string name="configurationTargetPercentageErrorMessage">Target Percentage must be supplied</string>
-    <string name="configurationTotalCreditsErrorMessage">Total Credits must be supplied</string>
+    <string name="configurationActivityUniversityNameErrorMessage">University Name must be supplied</string>
+    <string name="configurationActivityYearStartedErrorMessage">Year Started must be supplied</string>
+    <string name="configurationActivityCourseLengthErrorMessage">Course Length must be supplied</string>
+    <string name="configurationActivityTargetPercentageErrorMessage">Target Percentage must be supplied</string>
+    <string name="configurationActivityTotalCreditsErrorMessage">Total Credits must be supplied</string>
 
-    <string name="continueButtonLabel">Continue</string>
+    <string name="configurationYearWeightingActivityYearSelectHelpMessage">In order to provide accurate grade predictions, we need to know how much each year contributes to your degree classification</string>
+    <string name="configurationYearWeightingActivityYearBeingSelectedMessage">Enter Information For Year:</string>
+    <string name="configurationYearWeightingYearBeingSelectedDefaultYear">1</string>
+    <string name="configurationYearWeightingActivityYeatWeightingHint">Weighting of Year %</string>
+    <string name="configurationYearWeightingActivityCreditsCompletedHint">Credits Completed Within Year</string>
 </resources>

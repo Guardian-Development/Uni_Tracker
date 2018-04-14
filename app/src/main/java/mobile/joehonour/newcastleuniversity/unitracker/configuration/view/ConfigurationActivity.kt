@@ -31,14 +31,14 @@ class ConfigurationActivity : AppCompatActivity()
         bindTextChangedListener(configurationActivityUniversityName, viewModel) {
             universityName.value = it?.trim()
             it.executeIfNotNullOrEmpty(
-                    { universityNameTextInput.error = getString(R.string.configurationUniversityNameErrorMessage) },
+                    { universityNameTextInput.error = getString(R.string.configurationActivityUniversityNameErrorMessage) },
                     { universityNameTextInput.error = null })
         }
         bindTextChangedListener(configurationActivityYearStarted, viewModel) {
             it.executeIfNotNullOrEmpty(
                     {
                         yearStarted.value = null
-                        yearStartedTextInput.error = getString(R.string.configurationYearStartedErrorMessage) },
+                        yearStartedTextInput.error = getString(R.string.configurationActivityYearStartedErrorMessage) },
                     {
                         yearStarted.value = it.toInt()
                         yearStartedTextInput.error = null
@@ -48,7 +48,7 @@ class ConfigurationActivity : AppCompatActivity()
             it.executeIfNotNullOrEmpty(
                     {
                         courseLength.value = null
-                        courseLengthTextInput.error = getString(R.string.configurationCourseLengthErrorMessage)
+                        courseLengthTextInput.error = getString(R.string.configurationActivityCourseLengthErrorMessage)
                     },
                     {
                         courseLength.value = it.toInt()
@@ -59,7 +59,7 @@ class ConfigurationActivity : AppCompatActivity()
             it.executeIfNotNullOrEmpty(
                     {
                         targetPercentage.value = null
-                        targetPercentageTextInput.error = getString(R.string.configurationTargetPercentageErrorMessage)
+                        targetPercentageTextInput.error = getString(R.string.configurationActivityTargetPercentageErrorMessage)
                     },
                     {
                         targetPercentage.value = it.toInt()
@@ -70,7 +70,7 @@ class ConfigurationActivity : AppCompatActivity()
             it.executeIfNotNullOrEmpty(
                     {
                         totalCredits.value = null
-                        totalCreditsTextInput.error = getString(R.string.configurationTotalCreditsErrorMessage)
+                        totalCreditsTextInput.error = getString(R.string.configurationActivityTotalCreditsErrorMessage)
                     },
                     {
                         totalCredits.value = it.toInt()
