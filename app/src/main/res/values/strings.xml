@@ -10,7 +10,9 @@ secrets.xml resource file should be added to values folder containing:
 
     <string name="continueButtonLabel">Continue</string>
     <string name="completeSetupButtonLabel">Complete Setup</string>
-    <string name="displayedPercentage">%d %%</string>
+    <string name="displayedPercentageInt">%d %%</string>
+    <string name="displayedPercentageDouble">%.2f %%</string>
+    <string name="displayedPercentageWithLabel">%.2f %%\n%s</string>
 
     <string name="configurationActivityTitle">Enter Course Details:</string>
     <string name="configurationActivityUniversityNameHint">University Name</string>
@@ -46,4 +48,11 @@ secrets.xml resource file should be added to values folder containing:
     <string name="yearWeightingListItemDefault">1</string>
     <string name="yearWeightingListItemItemWeightingDefault">100</string>
     <string name="yearWeightingListItemCreditsTakenDefault">240</string>
+
+    <string name="coreAppDashboardRequiredToMeetTargetLabel">Required to meet target:</string>
+    <string name="coreAppDashboardRequiredToMeetTargetDefaultValue">-/-</string>
+    <string name="coreAppDashboardAverageGradeAchievedLabel">Average grade achieved:</string>
+    <string name="coreAppDashboardAverageGradeAchievedDefaultValue">-/-</string>
+    <string name="coreAppDashboardRequiredToMeetTargetCompleteKeyword">Complete</string>
+    <string name="coreAppDashboardFragmentPercentageDegreeCompletedLabel">Degree completion percentage:</string>
 </resources>

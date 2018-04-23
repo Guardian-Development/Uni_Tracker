@@ -8,10 +8,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_modules.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
-import mobile.joehonour.newcastleuniversity.unitracker.configuration.view.ConfigurationYearWeightingActivity
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.viewmodels.ModulesViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull

@@ -35,7 +35,7 @@ class ConfigurationFragment : Fragment()
         coreAppConfigurationFragmentUniversity.text = configurationModel.universityName
         coreAppConfigurationFragmentYearStarted.text = configurationModel.yearStarted.toString()
         coreAppConfigurationFragmentCourseLength.text = configurationModel.courseLength.toString()
-        coreAppConfigurationFragmentTargetPercentage.text = getString(R.string.displayedPercentage, configurationModel.targetPercentage)
+        coreAppConfigurationFragmentTargetPercentage.text = getString(R.string.displayedPercentageInt, configurationModel.targetPercentage)
         coreAppConfigurationFragmentTotalCredits.text = configurationModel.totalCredits.toString()
 
         coreAppConfigurationFragmentYearWeightingList.layoutManager = LinearLayoutManager(context)

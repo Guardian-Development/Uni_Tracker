@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation 'com.android.support:design:26.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 
