@@ -31,10 +31,8 @@ class ModuleModelRecyclerAdapter(private val modules: List<ModuleModel>,
     inner class ModuleHolder(v: View?) : RecyclerView.ViewHolder(v)
     {
         fun bindYearWeighting(module: ModuleModel) : RecyclerView.ViewHolder {
-            itemView.moduleCode.text = "Code: " + module.moduleCode
-            itemView.moduleName.text = "Name: " + module.moduleName
-            itemView.moduleCredits.text = "Credits: " + module.moduleCredits.toString()
-            itemView.moduleYearStudied.text = "Year Studied: " + module.moduleYearStudied.toString()
+            itemView.recyclerModuleListItemModuleCode.text = module.moduleCode
+            itemView.recyclerModuleListItemModuleName.text = module.moduleName
             return this
         }
     }

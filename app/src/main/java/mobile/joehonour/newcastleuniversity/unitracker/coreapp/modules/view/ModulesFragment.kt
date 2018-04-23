@@ -33,21 +33,21 @@ class ModulesFragment : Fragment()
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-        moduleListSwipeRefresh.setOnRefreshListener {
-            moduleListSwipeRefresh.isRefreshing = true
+        coreAppModulesFragmentModuleListSwipeRefresh.setOnRefreshListener {
+            coreAppModulesFragmentModuleListSwipeRefresh.isRefreshing = true
             viewModel.refreshCurrentModules()
-            moduleListSwipeRefresh.isRefreshing = false
+            coreAppModulesFragmentModuleListSwipeRefresh.isRefreshing = false
         }
         viewModel.refreshCurrentModules()
-        add_module_button.setOnClickListener {
+        coreAppModulesFragmentAddModuleButton.setOnClickListener {
             startActivity(Intent(this.context, AddModuleActivity::class.java))
         }
     }
 
     private fun bindListOfModules(modules: List<ModuleModel>)
     {
-        moduleList.layoutManager = LinearLayoutManager(context)
-        moduleList.adapter = ModuleModelRecyclerAdapter(modules) {
+        coreAppModulesFragmentModulesList.layoutManager = LinearLayoutManager(context)
+        coreAppModulesFragmentModulesList.adapter = ModuleModelRecyclerAdapter(modules) {
             val intent = Intent(this.context, IndividualModuleActivity::class.java)
             intent.putExtra("module", it)
             startActivity(intent)
