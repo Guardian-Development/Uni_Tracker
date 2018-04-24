@@ -42,7 +42,7 @@ secrets.xml resource file should be added to values folder containing:
     <string name="coreAppConfigurationYearStartedLabel">Year Started</string>
     <string name="coreAppConfigurationUniversityLabel">University</string>
     <string name="coreAppConfigurationYearBreakdownLabel">Year Breakdown</string>
-    <string name="yearWeightingListItemYearLabel">Year</string>
+    <string name="yearWeightingListItemYearLabel">Year:</string>
     <string name="yearWeightingListItemWeightingLabel">Weighting:</string>
     <string name="yearWeightingListItemCreditsTakenLabel">Credits Taken:</string>
     <string name="yearWeightingListItemDefault">1</string>
