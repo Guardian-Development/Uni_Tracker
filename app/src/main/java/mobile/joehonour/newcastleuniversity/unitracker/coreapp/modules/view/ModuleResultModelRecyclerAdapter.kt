@@ -25,12 +25,14 @@ class ModuleResultModelRecyclerAdapter(private val results: List<ModuleResultMod
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ModuleResultHolder =
             ModuleResultHolder(parent?.inflate(R.layout.recycler_result_list_item))
 
-    inner class ModuleResultHolder(v: View?) : RecyclerView.ViewHolder(v)
+    inner class ModuleResultHolder(private val v: View?) : RecyclerView.ViewHolder(v)
     {
         fun bindYearWeighting(result: ModuleResultModel) : RecyclerView.ViewHolder {
-            itemView.individualResultName.text = result.resultName
-            itemView.individualResultWeightingPercentage.text = result.resultWeighting.toString()
-            itemView.individualResultPercentage.text = result.resultPercentage.toString()
+            itemView.recyclerResultListItemResultName.text = result.resultName
+            itemView.recyclerResultListItemResultWeightingPercentage.text =
+                    v?.context?.getString(R.string.displayedPercentageInt, result.resultWeighting)
+            itemView.recyclerResultListItemResultPercentage.text =
+                    v?.context?.getString(R.string.displayedPercentageDouble, result.resultPercentage)
             return this
         }
     }

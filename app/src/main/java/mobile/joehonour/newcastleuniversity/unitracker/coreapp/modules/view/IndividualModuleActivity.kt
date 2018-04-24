@@ -40,15 +40,15 @@ class IndividualModuleActivity : AppCompatActivity()
 
         viewModel.percentageComplete.observe(this, Observer {
             when {
-                it.notNull() -> individualModulePercentageComplete.text =
-                        "Percentage Complete: " + it.toString()
+                it.notNull() -> individualModuleActivityPercentageComplete.text =
+                        getString(R.string.displayedPercentageDouble, it)
             }
         })
 
         viewModel.currentGrade.observe(this, Observer {
             when {
-                it.notNull() -> individualModuleCurrentGrade.text =
-                        "Current Grade: " + it.toString()
+                it.notNull() -> individualModuleActivityModuleCurrentGrade.text =
+                        getString(R.string.displayedPercentageDouble, it)
             }
         })
     }
@@ -66,16 +66,16 @@ class IndividualModuleActivity : AppCompatActivity()
 
     private fun bindIndividualModuleData(moduleModel: ModuleModel)
     {
-        individualModuleCode.text = moduleModel.moduleCode
-        individualModuleName.text = moduleModel.moduleName
-        individualModuleCredits.text = moduleModel.moduleCredits.toString()
+        individualModuleActivityModuleCode.text = moduleModel.moduleCode
+        individualModuleActivityModuleName.text = moduleModel.moduleName
+        individualModuleActivityModuleCredits.text = moduleModel.moduleCredits.toString()
 
         bindListOfResults(moduleModel.results)
     }
 
     private fun bindListOfResults(results: List<ModuleResultModel>)
     {
-        individualModuleResultsList.layoutManager = LinearLayoutManager(this)
-        individualModuleResultsList.adapter = ModuleResultModelRecyclerAdapter(results)
+        individualModuleActivityModuleResultsList.layoutManager = LinearLayoutManager(this)
+        individualModuleActivityModuleResultsList.adapter = ModuleResultModelRecyclerAdapter(results)
     }
 }

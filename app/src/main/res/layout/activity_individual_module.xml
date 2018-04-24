@@ -6,83 +6,120 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/individualModuleCode"
+    <ImageView
+        android:id="@+id/individualModuleActivityAppLogo"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Module Code"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo" />
 
     <TextView
-        android:id="@+id/individualModuleName"
-        android:layout_width="361dp"
+        android:id="@+id/individualModuleActivityModuleCode"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Module Name"
+        android:layout_marginTop="24dp"
         android:textAlignment="center"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/individualModuleCode" />
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityAppLogo" />
 
     <TextView
-        android:id="@+id/individualModuleCredits"
-        android:layout_width="100dp"
+        android:id="@+id/individualModuleActivityModuleName"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Module Credits"
         android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/individualModuleName" />
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleCode" />
 
     <TextView
-        android:id="@+id/individualModulePercentageComplete"
+        android:id="@+id/individualModuleActivityPercentageCompleteLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="Percentage Complete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/individualModuleActivityPercentageCompleteLabel"
+        android:textAlignment="viewStart"
+        android:textColor="@color/textColorSecondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/individualModuleCredits" />
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleName" />
 
     <TextView
-        android:id="@+id/individualModuleCurrentGrade"
+        android:id="@+id/individualModuleActivityPercentageComplete"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/individualModuleActivityPercentageCompleteDefaultValue"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityPercentageCompleteLabel" />
+
+    <TextView
+        android:id="@+id/individualModuleActivityModuleCreditsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="Current Grade"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/individualModuleActivityCreditsLabel"
+        android:textColor="@color/textColorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleName" />
+
+    <TextView
+        android:id="@+id/individualModuleActivityModuleCredits"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/individualModuleActivityModuleCreditsDefaultValue"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleCreditsLabel" />
+
+    <TextView
+        android:id="@+id/individualModuleActivityModuleCurrentGradeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/individualModuleActivityCurrentGradeLabel"
+        android:textColor="@color/textColorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/individualModulePercentageComplete" />
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleName" />
+
+    <TextView
+        android:id="@+id/individualModuleActivityModuleCurrentGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/individualModuleActivityCurrentGradeDefaultValue"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleCurrentGradeLabel" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/individualModuleResultsList"
-        android:layout_width="361dp"
-        android:layout_height="333dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:scrollbars="vertical"
+        android:id="@+id/individualModuleActivityModuleResultsList"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/individualModuleCurrentGrade" />
+        app:layout_constraintTop_toBottomOf="@+id/individualModuleActivityModuleCurrentGrade"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

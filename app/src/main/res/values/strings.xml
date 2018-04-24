@@ -55,4 +55,17 @@ secrets.xml resource file should be added to values folder containing:
     <string name="coreAppDashboardAverageGradeAchievedDefaultValue">-/-</string>
     <string name="coreAppDashboardRequiredToMeetTargetCompleteKeyword">Complete</string>
     <string name="coreAppDashboardFragmentPercentageDegreeCompletedLabel">Degree completion percentage:</string>
+
+    <string name="individualModuleActivityPercentageCompleteLabel">Percentage complete</string>
+    <string name="individualModuleActivityPercentageCompleteDefaultValue">-/-</string>
+    <string name="individualModuleActivityCreditsLabel">Credits</string>
+    <string name="individualModuleActivityModuleCreditsDefaultValue">-/-</string>
+    <string name="individualModuleActivityCurrentGradeLabel">Current grade</string>
+    <string name="individualModuleActivityCurrentGradeDefaultValue">-/-</string>
+
+    <string name="recyclerResultListItemResultWeightingPercentageLabel">Weight:</string>
+    <string name="recyclerResultListItemResultWeightingPercentageDefaultValue">-/-</string>
+    <string name="recyclerResultListItemResultNameDefaultValue">Result Name</string>
+    <string name="recyclerResultListItemResultPercentageLabel">Result</string>
+    <string name="recyclerResultListItemResultPercentageDefaultValue">-/-</string>
 </resources>
