@@ -15,6 +15,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.models.
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.viewmodels.AddResultViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.executeIfNotNullOrEmpty
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
+import mobile.joehonour.newcastleuniversity.unitracker.extensions.hideKeyboard
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.ItemSelectedListener.Companion.bindItemSelectedListener
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListener.Companion.bindTextChangedListener
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
@@ -41,20 +42,35 @@ class AddResultFragment : Fragment()
     {
         super.onViewCreated(view, savedInstanceState)
         bindAddResultButtonToAction()
-        bindTextChangedListener(addResultName, viewModel) {
-            addResultName.value = it
-        }
-        bindTextChangedListener(addResultWeighting, viewModel) {
+        bindTextChangedListener(addResultFragmentResultName, viewModel) {
+            addResultName.value = it?.trim()
             it.executeIfNotNullOrEmpty(
-                    { addResultWeightingPercentage.value = null },
-                    { addResultWeightingPercentage.value = it.toInt()})
+                    { addResultFragmentResultNameTextInput.error = getString(R.string.addResultFragmentResultNameErrorMessage) },
+                    { addResultFragmentResultNameTextInput.error = null })
         }
-        bindTextChangedListener(addResultResultPercentage, viewModel) {
+        bindTextChangedListener(addResultFragmentResultWeighting, viewModel) {
             it.executeIfNotNullOrEmpty(
-                    { addResultPercentage.value = null },
-                    { addResultPercentage.value = it.toDouble()})
+                    {
+                        addResultWeightingPercentage.value = null
+                        addResultFragmentResultWeightingTextInput.error = getString(R.string.addResultFragmentResultWeightingErrorMessage)
+                    },
+                    {
+                        addResultWeightingPercentage.value = it.toInt()
+                        addResultFragmentResultWeightingTextInput.error = null
+                    })
         }
-        bindItemSelectedListener(addResultSelectModuleSpinner, viewModel) {
+        bindTextChangedListener(addResultFragmentResultPercentage, viewModel) {
+            it.executeIfNotNullOrEmpty(
+                    {
+                        addResultPercentage.value = null
+                        addResultFragmentResultPercentageTextInput.error = getString(R.string.addResultFragmentResultPercentageErrorMessage)
+                    },
+                    {
+                        addResultPercentage.value = it.toDouble()
+                        addResultFragmentResultPercentageTextInput.error = null
+                    })
+        }
+        bindItemSelectedListener(addResultFragmentSelectModuleSpinner, viewModel) {
             when (it) {
                 is ModuleModel -> addResultModule.value = it
             }
@@ -65,12 +81,12 @@ class AddResultFragment : Fragment()
     {
         val dataAdapter = ArrayAdapter(this.context, android.R.layout.simple_spinner_item, modules)
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        addResultSelectModuleSpinner.adapter = dataAdapter
+        addResultFragmentSelectModuleSpinner.adapter = dataAdapter
     }
 
     private fun bindAddResultButtonToAction()
     {
-        bindButtonClickedListener(addResultButton, viewModel) {
+        bindButtonClickedListener(addResultFragmentAddResultButton, viewModel) {
             when (viewModel.validDataEntered) {
                 true -> {
                     viewModel.saveResultForModule(UUID.randomUUID().toString(), { Log.e("AddResultFragment", it)}) {
@@ -89,10 +105,14 @@ class AddResultFragment : Fragment()
 
     private fun clearFieldsAndValues()
     {
-        addResultSelectModuleSpinner.setSelection(0)
-        addResultName.setText("")
-        addResultWeighting.setText("")
-        addResultResultPercentage.setText("")
+        addResultFragmentSelectModuleSpinner.setSelection(0)
+        addResultFragmentResultName.setText("")
+        addResultFragmentResultWeighting.setText("")
+        addResultFragmentResultPercentage.setText("")
+        addResultFragmentResultNameTextInput.error = null
+        addResultFragmentResultWeightingTextInput.error = null
+        addResultFragmentResultPercentageTextInput.error = null
+        this.activity.hideKeyboard()
     }
 
     companion object

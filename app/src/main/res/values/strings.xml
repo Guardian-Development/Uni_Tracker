@@ -78,4 +78,14 @@ secrets.xml resource file should be added to values folder containing:
     <string name="addModuleActivityModuleCreditsHint">Module Credits</string>
     <string name="addModuleActivityYearStudiedLabel">Year Studied:</string>
     <string name="addModuleActivityAddModuleButtonText">Add Module</string>
+
+    <string name="addResultFragmentResultNameErrorMessage">Result Name must be supplied</string>
+    <string name="addResultFragmentResultWeightingErrorMessage">Result Weighting must be supplied</string>
+    <string name="addResultFragmentResultPercentageErrorMessage">Result Percentage must be supplied</string>
+    <string name="addResultFragmentTitle">Add Result</string>
+    <string name="addResultFragmentModuleSpinnerLabel">Module:</string>
+    <string name="addResultFragmentResultNameHint">Result Name</string>
+    <string name="addResultFragmentResultWeightingHint">Result Weighting</string>
+    <string name="addResultFragmentResultPercentageHint">Result Percentage</string>
+    <string name="addResultFragmentAddResultButtonText">Add Result</string>
 </resources>

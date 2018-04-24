@@ -3,76 +3,146 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/addResultFragmentAppLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/addResultFragmentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/addResultFragmentTitle"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addResultFragmentAppLogo" />
+
+    <TextView
+        android:id="@+id/addResultFragmentModuleSpinnerLabel"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/addResultFragmentModuleSpinnerLabel"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addResultFragmentTitle" />
+
     <Spinner
-        android:id="@+id/addResultSelectModuleSpinner"
-        android:layout_width="361dp"
+        android:id="@+id/addResultFragmentSelectModuleSpinner"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="2dp"
+        android:popupBackground="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/addResultFragmentModuleSpinnerLabel" />
 
-    <EditText
-        android:id="@+id/addResultName"
-        android:layout_width="361dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addResultFragmentResultNameTextInput"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:hint="Enter Result Name"
-        android:inputType="textPersonName"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addResultSelectModuleSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/addResultFragmentSelectModuleSpinner">
 
-    <EditText
-        android:id="@+id/addResultWeighting"
-        android:layout_width="361dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Enter Result Weighting"
-        android:inputType="numberSigned"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addResultName" />
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/addResultFragmentResultName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/addResultFragmentResultNameHint"
+            android:inputType="textCapWords"
+            android:textColor="@color/textColorPrimary" />
 
-    <EditText
-        android:id="@+id/addResultResultPercentage"
-        android:layout_width="361dp"
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addResultFragmentResultWeightingTextInput"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Enter Result Percentage"
-        android:inputType="numberSigned"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addResultWeighting" />
+        app:layout_constraintTop_toBottomOf="@+id/addResultFragmentResultNameTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/addResultFragmentResultWeighting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/addResultFragmentResultWeightingHint"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addResultFragmentResultPercentageTextInput"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addResultFragmentResultWeightingTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/addResultFragmentResultPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/addResultFragmentResultPercentageHint"
+            android:inputType="numberDecimal"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/addResultButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/addResultFragmentAddResultButton"
+        android:layout_width="325dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="184dp"
-        android:text="Add Result"
+        android:background="@drawable/button_with_border"
+        android:text="@string/addResultFragmentAddResultButtonText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addResultResultPercentage" />
+        app:layout_constraintStart_toStartOf="parent"  />
 
 </android.support.constraint.ConstraintLayout>
