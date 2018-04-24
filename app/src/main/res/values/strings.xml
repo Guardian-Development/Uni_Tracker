@@ -68,4 +68,14 @@ secrets.xml resource file should be added to values folder containing:
     <string name="recyclerResultListItemResultNameDefaultValue">Result Name</string>
     <string name="recyclerResultListItemResultPercentageLabel">Result</string>
     <string name="recyclerResultListItemResultPercentageDefaultValue">-/-</string>
+
+    <string name="addModuleActivityModuleCodeErrorMessage">Module Code must be supplied</string>
+    <string name="addModuleActivityModuleNameErrorMessage">Module Name must be supplied</string>
+    <string name="addModuleActivityModuleCreditsErrorMessage">Module Credits must be supplied</string>
+    <string name="addModuleActivityTitle">Add Module</string>
+    <string name="addModuleActivityModuleCodeHint">Module Code</string>
+    <string name="addModuleActivityModuleNameHint">Module Name</string>
+    <string name="addModuleActivityModuleCreditsHint">Module Credits</string>
+    <string name="addModuleActivityYearStudiedLabel">Year Studied:</string>
+    <string name="addModuleActivityAddModuleButtonText">Add Module</string>
 </resources>

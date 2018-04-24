@@ -30,18 +30,30 @@ class AddModuleActivity : AppCompatActivity()
 
     private fun bindDataFieldsToViewModel()
     {
-        bindTextChangedListener(moduleCode, viewModel) {
-            moduleCode.value = it
-        }
-        bindTextChangedListener(moduleName, viewModel) {
-            moduleName.value = it
-        }
-        bindTextChangedListener(moduleCredits, viewModel) {
+        bindTextChangedListener(addModuleActivityModuleCode, viewModel) {
+            moduleCode.value = it?.trim()
             it.executeIfNotNullOrEmpty(
-                    { moduleCredits.value = null },
-                    { moduleCredits.value = it.toInt()})
+                    { addModuleActivityModuleCodeTextInput.error = getString(R.string.addModuleActivityModuleCodeErrorMessage) },
+                    { addModuleActivityModuleCodeTextInput.error = null })
         }
-        bindItemSelectedListener(yearStudiedSpinner, viewModel) {
+        bindTextChangedListener(addModuleActivityModuleName, viewModel) {
+            moduleName.value = it?.trim()
+            it.executeIfNotNullOrEmpty(
+                    { addModuleActivityModuleNameTextInput.error = getString(R.string.addModuleActivityModuleNameErrorMessage) },
+                    { addModuleActivityModuleNameTextInput.error = null })
+        }
+        bindTextChangedListener(addModuleActivityModuleCredits, viewModel) {
+            it.executeIfNotNullOrEmpty(
+                    {
+                        moduleCredits.value = null
+                        addModuleActivityModuleCreditsTextInput.error = getString(R.string.addModuleActivityModuleCreditsErrorMessage)
+                    },
+                    {
+                        moduleCredits.value = it.toInt()
+                        addModuleActivityModuleCreditsTextInput.error = null
+                    })
+        }
+        bindItemSelectedListener(addModuleActivityYearStudiedSpinner, viewModel) {
             moduleYearStudied.value = it.toString().toInt()
         }
     }
@@ -52,13 +64,13 @@ class AddModuleActivity : AppCompatActivity()
         {
             val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, it)
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            yearStudiedSpinner.adapter = dataAdapter
+            addModuleActivityYearStudiedSpinner.adapter = dataAdapter
         }
     }
 
     private fun bindAddModuleButtonToAction()
     {
-        bindButtonClickedListener(addModuleButton, viewModel) {
+        bindButtonClickedListener(addModuleActivityAddModuleButton, viewModel) {
             when (viewModel.validDataEntered) {
                 true -> {
                     viewModel.saveModule({ Log.e("AddModuleActivity", it)}) {
