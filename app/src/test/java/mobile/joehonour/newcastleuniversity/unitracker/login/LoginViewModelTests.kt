@@ -1,5 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker.login
 
+import com.facebook.AccessToken
 import com.nhaarman.mockito_kotlin.doAnswer
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -58,6 +59,43 @@ class LoginViewModelTests
 
         viewModel.authenticateWithTwitterSession(twitterSession, callback)
         verify(callback).invoke(false, "failed twitter")
+    }
+
+    @Test
+    fun canAuthenticateWithFacebookSuccess()
+    {
+        val callback = mock<(Boolean, String?) -> Unit>()
+
+        val authProvider = mock<IProvideAuthentication> {
+            on {
+                authenticateWithFacebookSession("token", callback)
+            } doAnswer { callback.invoke(true, null) }
+        }
+
+        val accessToken = AccessToken("token", "appId", "userId", null, null, null, null, null)
+
+        val viewModel = LoginViewModel(authProvider, mock())
+
+        viewModel.authenticateWithFacebookSession(accessToken, callback)
+        verify(callback).invoke(true, null)
+    }
+
+    @Test
+    fun canAuthenticateWithFacebookFailure()
+    {
+        val callback = mock<(Boolean, String?) -> Unit>()
+
+        val authProvider = mock<IProvideAuthentication> {
+            on {
+                authenticateWithFacebookSession("token", callback)
+            } doAnswer { callback.invoke(false, "failed facebook") }
+        }
+
+        val accessToken = AccessToken("token", "appId", "userId", null, null, null, null, null)
+        val viewModel = LoginViewModel(authProvider, mock())
+
+        viewModel.authenticateWithFacebookSession(accessToken, callback)
+        verify(callback).invoke(false, "failed facebook")
     }
 
     @Test

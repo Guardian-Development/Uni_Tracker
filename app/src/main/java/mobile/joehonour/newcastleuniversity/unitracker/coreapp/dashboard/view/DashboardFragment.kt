@@ -24,15 +24,15 @@ class DashboardFragment : Fragment()
 {
     val viewModel: DashboardViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
         registerObservers()
         requestCalculationUpdates()
-        return inflater!!.inflate(R.layout.fragment_dashboard, container, false)
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
 
@@ -99,8 +99,8 @@ class DashboardFragment : Fragment()
     {
         val dataSet = PieDataSet(values, "Degree Completion")
         val availableColors = mutableListOf(
-                ContextCompat.getColor(context, R.color.colorAccent),
-                ContextCompat.getColor(context, R.color.colorPrimary))
+                ContextCompat.getColor(context!!, R.color.colorAccent),
+                ContextCompat.getColor(context!!, R.color.colorPrimary))
         dataSet.colors = availableColors
 
         return PieData(dataSet)
@@ -115,7 +115,7 @@ class DashboardFragment : Fragment()
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad)
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.setHoleColor(Color.TRANSPARENT)
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.setCenterTextColor(
-                ContextCompat.getColor(context, R.color.textColorPrimary))
+                ContextCompat.getColor(context!!, R.color.textColorPrimary))
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.setCenterTextSize(30f)
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.centerText =
                 getString(R.string.displayedPercentageWithLabel, percentageComplete,

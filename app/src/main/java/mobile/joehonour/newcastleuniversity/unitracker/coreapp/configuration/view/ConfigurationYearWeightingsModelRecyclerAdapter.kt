@@ -20,8 +20,8 @@ class ConfigurationYearWeightingsModelRecyclerAdapter(private val yearWeightingM
 
     override fun getItemCount(): Int = yearWeightingModels.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ConfigurationYearWeightingHolder
-            = ConfigurationYearWeightingHolder(parent?.inflate(R.layout.recycler_year_weightings_list_item))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConfigurationYearWeightingHolder
+            = ConfigurationYearWeightingHolder(parent.inflate(R.layout.recycler_year_weightings_list_item))
 
     class ConfigurationYearWeightingHolder(v: View?) : RecyclerView.ViewHolder(v)
     {

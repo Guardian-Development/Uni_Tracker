@@ -18,7 +18,7 @@ class ConfigurationFragment : Fragment()
 {
     private val viewModel: ConfigurationViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
         viewModel.configuration.observe(this, Observer {
@@ -27,7 +27,7 @@ class ConfigurationFragment : Fragment()
             }
         })
 
-        return inflater!!.inflate(R.layout.fragment_configuration, container, false)
+        return inflater.inflate(R.layout.fragment_configuration, container, false)
     }
 
     private fun bindDisplayToConfiguration(configurationModel: ConfigurationModel)

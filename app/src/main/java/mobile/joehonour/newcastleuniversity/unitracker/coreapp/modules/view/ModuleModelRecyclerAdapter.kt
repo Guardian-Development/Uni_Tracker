@@ -24,8 +24,8 @@ class ModuleModelRecyclerAdapter(private val modules: List<ModuleModel>,
 
     override fun getItemCount(): Int = modules.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ModuleHolder =
-            ModuleHolder(parent?.inflate(R.layout.recycler_module_list_item))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleHolder =
+            ModuleHolder(parent.inflate(R.layout.recycler_module_list_item))
                 .listenForClick { clickHandler(modules[it]) }
 
     inner class ModuleHolder(v: View?) : RecyclerView.ViewHolder(v)

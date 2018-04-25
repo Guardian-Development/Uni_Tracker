@@ -19,7 +19,7 @@ class ModulesFragment : Fragment()
 {
     val viewModel : ModulesViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
         viewModel.currentModules.observe(this, Observer {
@@ -27,10 +27,10 @@ class ModulesFragment : Fragment()
                 it.notNull() -> bindListOfModules(it!!)
             }
         })
-        return inflater!!.inflate(R.layout.fragment_modules, container, false)
+        return inflater.inflate(R.layout.fragment_modules, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
         coreAppModulesFragmentModuleListSwipeRefresh.setOnRefreshListener {

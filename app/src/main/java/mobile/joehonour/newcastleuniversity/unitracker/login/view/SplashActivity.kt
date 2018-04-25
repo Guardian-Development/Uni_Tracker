@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.content.Intent
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.view.ConfigurationActivity
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.CoreAppTabContainerActivity
 import mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels.LoginViewModel

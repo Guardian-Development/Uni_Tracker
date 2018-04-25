@@ -22,8 +22,8 @@ class ModuleResultModelRecyclerAdapter(private val results: List<ModuleResultMod
 
     override fun getItemCount(): Int = results.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ModuleResultHolder =
-            ModuleResultHolder(parent?.inflate(R.layout.recycler_result_list_item))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleResultHolder =
+            ModuleResultHolder(parent.inflate(R.layout.recycler_result_list_item))
 
     inner class ModuleResultHolder(private val v: View?) : RecyclerView.ViewHolder(v)
     {

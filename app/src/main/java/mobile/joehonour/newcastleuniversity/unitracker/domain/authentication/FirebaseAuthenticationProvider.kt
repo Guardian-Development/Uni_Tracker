@@ -1,8 +1,7 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.authentication
 
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.TwitterAuthProvider
+import com.google.firebase.auth.*
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 
 class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : IProvideAuthentication
@@ -19,12 +18,26 @@ class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : I
             callback: (status: Boolean, errorMessage: String?) -> Unit)
     {
         val credential = TwitterAuthProvider.getCredential(userToken, userSecret)
+        authenticateWithCredential(credential, callback)
+    }
 
+    override fun authenticateWithFacebookSession(
+            accessToken: String,
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
+        val credential = FacebookAuthProvider.getCredential(accessToken)
+        authenticateWithCredential(credential, callback)
+    }
+
+    private fun authenticateWithCredential(
+            credential: AuthCredential,
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
         firebaseAuth
                 .signInWithCredential(credential)
                 .addOnCompleteListener({ it.run() })
                 {
-                    when(it.isSuccessful) {
+                    when (it.isSuccessful) {
                         true -> Log.i("auth", firebaseAuth.currentUser?.displayName)
                         false -> Log.e("auth", it.exception?.message)
                     }

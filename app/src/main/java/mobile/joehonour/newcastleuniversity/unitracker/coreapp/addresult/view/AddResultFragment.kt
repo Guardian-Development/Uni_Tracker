@@ -26,7 +26,8 @@ class AddResultFragment : Fragment()
 {
     val viewModel: AddResultViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
         viewModel.availableModules.observe(this, Observer {
@@ -35,10 +36,10 @@ class AddResultFragment : Fragment()
             }
         })
         viewModel.refreshAvailableModules()
-        return inflater!!.inflate(R.layout.fragment_add_result, container, false)
+        return inflater.inflate(R.layout.fragment_add_result, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
         bindAddResultButtonToAction()
@@ -112,7 +113,7 @@ class AddResultFragment : Fragment()
         addResultFragmentResultNameTextInput.error = null
         addResultFragmentResultWeightingTextInput.error = null
         addResultFragmentResultPercentageTextInput.error = null
-        this.activity.hideKeyboard()
+        this.activity?.hideKeyboard()
     }
 
     companion object
