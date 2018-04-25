@@ -11,6 +11,10 @@ interface IProvideAuthentication
             accessToken: String,
             callback: (status: Boolean, errorMessage: String?) -> Unit)
 
+    fun authenticateWithGoogleSession(
+            accessToken: String,
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+
     fun logout(callback: (status: Boolean, errorMessage: String?) -> Unit)
 
     val userLoggedIn: Boolean

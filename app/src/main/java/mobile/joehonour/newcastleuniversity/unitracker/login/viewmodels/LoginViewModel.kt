@@ -16,8 +16,8 @@ class LoginViewModel(private val authProvider: IProvideAuthentication,
 
     fun authenticateWithTwitterSession(
             session: TwitterSession,
-            callback: (status: Boolean, errorMessage: String?) -> Unit) {
-
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
         authProvider.authenticateWithTwitterSession(
                 session.authToken.token,
                 session.authToken.secret,
@@ -29,5 +29,12 @@ class LoginViewModel(private val authProvider: IProvideAuthentication,
             callback: (status: Boolean, errorMessage: String?) -> Unit)
     {
         authProvider.authenticateWithFacebookSession(accessToken.token, callback)
+    }
+
+    fun authenticateWithGoogleSession(
+            idToken: String,
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
+        authProvider.authenticateWithGoogleSession(idToken, callback)
     }
 }

@@ -3,11 +3,13 @@ package mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 import com.twitter.sdk.android.core.TwitterSession
-import mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels.LoginViewModel
 
 fun LoginViewModel.handleTwitterSession(
         failureCallback: ((String?) -> Unit)? = null,
@@ -54,5 +56,32 @@ fun LoginViewModel.handleFacebookSession(
                 }
             }
         }
+    }
+}
+
+fun LoginViewModel.handleGoogleSession(
+        failureCallback: ((String?) -> Unit)? = null,
+        signInTask: Task<GoogleSignInAccount>,
+        successCallback: () -> Unit)
+{
+    try
+    {
+        val account = signInTask.getResult(ApiException::class.java)
+
+        when(account.idToken) {
+            null -> failureCallback?.invoke("ID token was null")
+            else -> {
+                authenticateWithGoogleSession(account.idToken!!) { status, message ->
+                    when (status) {
+                        true -> successCallback()
+                        false -> failureCallback?.invoke(message)
+                    }
+                }
+            }
+        }
+    }
+    catch (e: ApiException)
+    {
+        failureCallback?.invoke(e.message)
     }
 }

@@ -29,6 +29,14 @@ class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : I
         authenticateWithCredential(credential, callback)
     }
 
+    override fun authenticateWithGoogleSession(
+            accessToken: String,
+            callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
+        val credential = GoogleAuthProvider.getCredential(accessToken, null)
+        authenticateWithCredential(credential, callback)
+    }
+
     private fun authenticateWithCredential(
             credential: AuthCredential,
             callback: (status: Boolean, errorMessage: String?) -> Unit)

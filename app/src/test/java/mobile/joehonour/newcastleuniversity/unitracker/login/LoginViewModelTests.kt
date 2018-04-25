@@ -1,6 +1,7 @@
 package mobile.joehonour.newcastleuniversity.unitracker.login
 
 import com.facebook.AccessToken
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.nhaarman.mockito_kotlin.doAnswer
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -96,6 +97,40 @@ class LoginViewModelTests
 
         viewModel.authenticateWithFacebookSession(accessToken, callback)
         verify(callback).invoke(false, "failed facebook")
+    }
+
+    @Test
+    fun canAuthenticateWithGoogleSuccess()
+    {
+        val callback = mock<(Boolean, String?) -> Unit>()
+
+        val authProvider = mock<IProvideAuthentication> {
+            on {
+                authenticateWithGoogleSession("token", callback)
+            } doAnswer { callback.invoke(true, null) }
+        }
+
+        val viewModel = LoginViewModel(authProvider, mock())
+
+        viewModel.authenticateWithGoogleSession("token", callback)
+        verify(callback).invoke(true, null)
+    }
+
+    @Test
+    fun canAuthenticateWithGoogleFailure()
+    {
+        val callback = mock<(Boolean, String?) -> Unit>()
+
+        val authProvider = mock<IProvideAuthentication> {
+            on {
+                authenticateWithGoogleSession("token", callback)
+            } doAnswer { callback.invoke(false, "failed google") }
+        }
+
+        val viewModel = LoginViewModel(authProvider, mock())
+
+        viewModel.authenticateWithGoogleSession("token", callback)
+        verify(callback).invoke(false, "failed google")
     }
 
     @Test

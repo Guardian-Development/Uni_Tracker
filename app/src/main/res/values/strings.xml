@@ -5,6 +5,7 @@ secrets.xml resource file should be added to values folder containing:
     - com.twitter.sdk.android.CONSUMER_SECRET
     - facebook_app_id
     - fb_login_protocol_scheme
+    - google_client_id
 -->
 
 <resources>
