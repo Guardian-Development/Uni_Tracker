@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.facebook.AccessToken
 import com.facebook.CallbackManager
+import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activity_login.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels.LoginViewModel
@@ -24,9 +26,23 @@ class LoginActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        registerTwitterLoginButton()
+        registerFacebookLoginButton()
+    }
+
+    private fun registerTwitterLoginButton()
+    {
         twitterLoginButton.callback = viewModel.handleTwitterSession(
                 { Log.e("LoginViewModel", it) },
                 this::redirectFromSuccessfulLogin)
+    }
+
+    private fun registerFacebookLoginButton()
+    {
+        if (AccessToken.getCurrentAccessToken() != null)
+        {
+            LoginManager.getInstance().logOut()
+        }
 
         facebookLoginButton.setReadPermissions("email", "public_profile")
         facebookLoginButton.registerCallback(facebookCallbackManager, viewModel.handleFacebookSession(

@@ -11,6 +11,8 @@ interface IProvideAuthentication
             accessToken: String,
             callback: (status: Boolean, errorMessage: String?) -> Unit)
 
+    fun logout(callback: (status: Boolean, errorMessage: String?) -> Unit)
+
     val userLoggedIn: Boolean
     val userUniqueId: String?
 }

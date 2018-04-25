@@ -8,6 +8,6 @@ import org.koin.dsl.module.applicationContext
 object CoreAppConfigurationDI
 {
     val configurationModule : Module = applicationContext {
-        viewModel { ConfigurationViewModel(get()) }
+        viewModel { ConfigurationViewModel(get(), get()) }
     }
 }

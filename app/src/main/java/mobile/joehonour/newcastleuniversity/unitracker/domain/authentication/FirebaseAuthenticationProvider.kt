@@ -45,4 +45,10 @@ class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : I
                     callback(it.isSuccessful, it.exception?.message)
                 }
     }
+
+    override fun logout(callback: (status: Boolean, errorMessage: String?) -> Unit)
+    {
+        FirebaseAuth.getInstance().signOut()
+        callback(true, null)
+    }
 }

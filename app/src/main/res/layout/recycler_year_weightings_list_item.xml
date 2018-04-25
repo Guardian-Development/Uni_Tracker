@@ -9,8 +9,9 @@
 
     <TextView
         android:id="@+id/yearWeightingListItemYearLabel"
-        android:layout_width="110dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:text="@string/yearWeightingListItemYearLabel"
         android:textAlignment="center"
@@ -29,6 +30,7 @@
         android:textAlignment="center"
         android:textColor="@color/textColorSecondary"
         app:layout_constraintEnd_toStartOf="@+id/yearWeightingListItemCreditsTakenLabel"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toEndOf="@+id/yearWeightingListItemYearLabel"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,6 +38,7 @@
         android:id="@+id/yearWeightingListItemCreditsTakenLabel"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="104dp"
         android:text="@string/yearWeightingListItemCreditsTakenLabel"
         android:textAlignment="center"
         android:textColor="@color/textColorSecondary"
@@ -44,8 +47,9 @@
 
     <TextView
         android:id="@+id/yearWeightingListItemYear"
-        android:layout_width="110dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="@string/yearWeightingListItemDefault"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -62,6 +66,7 @@
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/yearWeightingListItemCreditsTaken"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toEndOf="@+id/yearWeightingListItemYear"
         app:layout_constraintTop_toBottomOf="@+id/yearWeightingListItemWeightingLabel" />
 
@@ -69,6 +74,7 @@
         android:id="@+id/yearWeightingListItemCreditsTaken"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="104dp"
         android:text="@string/yearWeightingListItemCreditsTakenDefault"
         android:textAlignment="center"
         android:textSize="18sp"
