@@ -35,8 +35,22 @@ class AddResultFragment : Fragment()
                 it.notNull() -> bindSpinnerWithModules(it!!)
             }
         })
-        viewModel.refreshAvailableModules()
         return inflater.inflate(R.layout.fragment_add_result, container, false)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean)
+    {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser)
+        {
+            onResume()
+        }
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        viewModel.refreshAvailableModules()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
