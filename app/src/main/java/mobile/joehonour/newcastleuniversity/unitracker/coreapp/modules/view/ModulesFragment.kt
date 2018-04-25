@@ -38,10 +38,24 @@ class ModulesFragment : Fragment()
             viewModel.refreshCurrentModules()
             coreAppModulesFragmentModuleListSwipeRefresh.isRefreshing = false
         }
-        viewModel.refreshCurrentModules()
         coreAppModulesFragmentAddModuleButton.setOnClickListener {
             startActivity(Intent(this.context, AddModuleActivity::class.java))
         }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean)
+    {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser)
+        {
+            onResume()
+        }
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        viewModel.refreshCurrentModules()
     }
 
     private fun bindListOfModules(modules: List<ModuleModel>)
