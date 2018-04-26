@@ -83,18 +83,18 @@ class IndividualModuleViewModelTests
     fun calculateCurrentGradeModuleValueNotNullSuccess()
     {
         val onError = mock<((String?) -> Unit)>()
-        val onSuccess = mock<((Double) -> Unit)> {
-            on { invoke(any()) } doAnswer { FieldAssert(30.0).doAssert(it.arguments[0] as Double) }
+        val onSuccess = mock<((Int) -> Unit)> {
+            on { invoke(any()) } doAnswer { FieldAssert(30).doAssert(it.arguments[0] as Int) }
         }
         val calculator = mock<IProvideModuleCalculations> {
-            on { calculateCurrentAverageGradeOf(any()) } doReturn 30.0
+            on { calculateCurrentAverageGradeOf(any()) } doReturn 30
         }
         val viewModel = IndividualModuleViewModel(calculator)
         viewModel.module.value = ModuleModel("CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculateCurrentGrade(onError, onSuccess)
 
-        verify(onSuccess).invoke(30.0)
+        verify(onSuccess).invoke(30)
         verifyZeroInteractions(onError)
     }
 
@@ -106,7 +106,7 @@ class IndividualModuleViewModelTests
                 FieldAssert("exception message").doAssert(it.arguments[0] as String)
             }
         }
-        val onSuccess = mock<((Double) -> Unit)>()
+        val onSuccess = mock<((Int) -> Unit)>()
 
         val calculator = mock<IProvideModuleCalculations> {
             on { calculateCurrentAverageGradeOf(any()) } doAnswer {
@@ -132,7 +132,7 @@ class IndividualModuleViewModelTests
             }
         }
 
-        val onSuccess = mock<((Double) -> Unit)>()
+        val onSuccess = mock<((Int) -> Unit)>()
 
         val viewModel = IndividualModuleViewModel(mock())
         viewModel.calculateCurrentGrade(onError, onSuccess)

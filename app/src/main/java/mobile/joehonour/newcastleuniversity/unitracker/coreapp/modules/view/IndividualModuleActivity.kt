@@ -48,7 +48,7 @@ class IndividualModuleActivity : AppCompatActivity()
         viewModel.currentGrade.observe(this, Observer {
             when {
                 it.notNull() -> individualModuleActivityModuleCurrentGrade.text =
-                        getString(R.string.displayedPercentageDouble, it)
+                        getString(R.string.displayedPercentageInt, it)
             }
         })
     }

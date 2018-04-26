@@ -109,7 +109,7 @@ class ModuleCalculatorTests
         val calculator = ModuleCalculator()
         val results = listOf(ModuleResult("1", "name", 50, 82.5))
         val module = moduleWithResults(results)
-        Assert.assertEquals(82.5, calculator.calculateCurrentAverageGradeOf(module))
+        Assert.assertEquals(83, calculator.calculateCurrentAverageGradeOf(module))
     }
 
     @Test
@@ -117,7 +117,7 @@ class ModuleCalculatorTests
     {
         val calculator = ModuleCalculator()
         val module = moduleWithResults(emptyList())
-        Assert.assertEquals(0.0, calculator.calculateCurrentAverageGradeOf(module))
+        Assert.assertEquals(0, calculator.calculateCurrentAverageGradeOf(module))
     }
 
     @Test
@@ -130,7 +130,7 @@ class ModuleCalculatorTests
                 ModuleResult("3", "name", 20, 65.71),
                 ModuleResult("4", "name", 5, 22.29))
         val module = moduleWithResults(results)
-        Assert.assertEquals(57.27, calculator.calculateCurrentAverageGradeOf(module))
+        Assert.assertEquals(65, calculator.calculateCurrentAverageGradeOf(module))
     }
 
     @Test
@@ -143,7 +143,7 @@ class ModuleCalculatorTests
                 ModuleResult("3", "name", 20, 82.5),
                 ModuleResult("4", "name", 5, 82.5))
         val module = moduleWithResults(results)
-        Assert.assertEquals(82.50, calculator.calculateCurrentAverageGradeOf(module))
+        Assert.assertEquals(83, calculator.calculateCurrentAverageGradeOf(module))
     }
 
     @Test
@@ -151,25 +151,37 @@ class ModuleCalculatorTests
     {
         val calculator = ModuleCalculator()
         val results = listOf(
-                ModuleResult("1", "name", 50, 75.55),
-                ModuleResult("2", "name", 10, 75.55),
-                ModuleResult("3", "name", 20, 75.54),
-                ModuleResult("4", "name", 5, 75.54))
+                ModuleResult("1", "name", 10, 75.5),
+                ModuleResult("2", "name", 10, 75.5),
+                ModuleResult("3", "name", 10, 75.54),
+                ModuleResult("4", "name", 10, 75.54))
         val module = moduleWithResults(results)
-        Assert.assertEquals(75.55, calculator.calculateCurrentAverageGradeOf(module))
+        Assert.assertEquals(76, calculator.calculateCurrentAverageGradeOf(module))
     }
 
     @Test
-    fun calculateCurrentAverageGradeRoundsDownToTwoDecimalPlacesSuccess()
+    fun calculateCurrentAverageGradeRoundsDownToNearestIntegerSuccess()
     {
         val calculator = ModuleCalculator()
         val results = listOf(
-                ModuleResult("1", "name", 50, 75.55),
-                ModuleResult("2", "name", 10, 75.55),
-                ModuleResult("3", "name", 20, 75.54),
-                ModuleResult("4", "name", 5, 75.54),
-                ModuleResult("5", "name", 5, 75.54))
+                ModuleResult("1", "name", 20, 75.5),
+                ModuleResult("2", "name", 20, 75.5),
+                ModuleResult("3", "name", 20, 75.4),
+                ModuleResult("4", "name", 20, 75.4),
+                ModuleResult("5", "name", 20, 75.4))
         val module = moduleWithResults(results)
-        Assert.assertEquals(75.54, calculator.calculateCurrentAverageGradeOf(module))
+        Assert.assertEquals(75, calculator.calculateCurrentAverageGradeOf(module))
+    }
+
+    @Test
+    fun calculateCurrentAverageGradeTakesIntoAccountWeightings()
+    {
+        val calculator = ModuleCalculator()
+        val results = listOf(
+                ModuleResult("1", "name", 50, 62.15),
+                ModuleResult("2", "name", 20, 78.2),
+                ModuleResult("3", "name", 30, 51.5))
+        val module = moduleWithResults(results)
+        Assert.assertEquals(62, calculator.calculateCurrentAverageGradeOf(module))
     }
 }

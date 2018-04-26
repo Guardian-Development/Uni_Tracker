@@ -12,7 +12,7 @@ class IndividualModuleViewModel(private val moduleCalculator: IProvideModuleCalc
 {
     val module: MutableLiveData<ModuleModel> = MutableLiveData()
     val percentageComplete: MutableLiveData<Double> = MutableLiveData()
-    val currentGrade: MutableLiveData<Double> = MutableLiveData()
+    val currentGrade: MutableLiveData<Int> = MutableLiveData()
 
     fun calculatePercentageComplete(onError: (String?) -> Unit, onSuccess: (Double) -> Unit) =
             performCalculationOnModule(
@@ -20,15 +20,15 @@ class IndividualModuleViewModel(private val moduleCalculator: IProvideModuleCalc
                     onSuccess,
                     moduleCalculator::calculatePercentageCompleteOf)
 
-    fun calculateCurrentGrade(onError: (String?) -> Unit, onSuccess: (Double) -> Unit) =
+    fun calculateCurrentGrade(onError: (String?) -> Unit, onSuccess: (Int) -> Unit) =
         performCalculationOnModule(
                 onError,
                 onSuccess,
                 moduleCalculator::calculateCurrentAverageGradeOf)
 
-    private fun performCalculationOnModule(onError: (String?) -> Unit,
-                                           onSuccess: (Double) -> Unit,
-                                           calculation: (Module) -> Double)
+    private fun <T> performCalculationOnModule(onError: (String?) -> Unit,
+                                               onSuccess: (T) -> Unit,
+                                               calculation: (Module) -> T)
     {
         when {
             module.value.notNull() -> {
