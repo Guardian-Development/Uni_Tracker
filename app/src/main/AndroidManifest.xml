@@ -21,12 +21,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.view.LoginActivity" />
-        <activity android:name=".configuration.view.ConfigurationActivity" />
-        <activity android:name=".configuration.view.ConfigurationYearWeightingActivity" />
+        <activity
+            android:name=".configuration.view.ConfigurationActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".configuration.view.ConfigurationYearWeightingActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".coreapp.CoreAppTabContainerActivity"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".coreapp.modules.view.AddModuleActivity" />
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".coreapp.modules.view.AddModuleActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".coreapp.modules.view.IndividualModuleActivity" />
         <activity android:name=".appentry.view.LoadingScreenActivity" />
 
