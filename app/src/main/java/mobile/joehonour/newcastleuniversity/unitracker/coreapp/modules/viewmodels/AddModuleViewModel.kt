@@ -7,6 +7,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
 class AddModuleViewModel(private val userState: IQueryUserState,
                          private val moduleModelValidator: ModuleModelValidator,
@@ -40,7 +41,9 @@ class AddModuleViewModel(private val userState: IQueryUserState,
             when(authProvider.userLoggedIn)
             {
                 true -> dataStorage.addItemToDatabase(
-                        authProvider.userUniqueId!! + "/modules/" + module.moduleCode,
+                        DataLocationKeys.studentModuleLocation(
+                                authProvider.userUniqueId!!,
+                                module.moduleCode),
                         module,
                         onError,
                         onSuccess)

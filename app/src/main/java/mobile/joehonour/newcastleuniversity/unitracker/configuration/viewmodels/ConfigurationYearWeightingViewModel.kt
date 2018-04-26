@@ -9,6 +9,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDa
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationDataModel
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationYearWeightingModel
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationYearWeightingModelValidator
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
 class ConfigurationYearWeightingViewModel(
         private val dataValidator: ConfigurationYearWeightingModelValidator,
@@ -67,7 +68,7 @@ class ConfigurationYearWeightingViewModel(
 
         when(authProvider.userLoggedIn) {
             true -> dataStorage.addItemToDatabase(
-                    authProvider.userUniqueId!! + "/configuration",
+                    DataLocationKeys.studentConfigurationLocation(authProvider.userUniqueId!!),
                     appConfiguration,
                     onError,
                     onSuccess)

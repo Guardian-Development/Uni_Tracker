@@ -22,7 +22,7 @@ class UserStateQueryTests
         }
         val dataAccessor = mock<IProvideDataAccess> {
             on { readItemFromDatabase(
-                    eq("id" + "/configuration"),
+                    eq("id/configuration/"),
                     eq(Configuration::class.java),
                     any(),
                     any()) } doAnswer { callback.invoke(true) }
@@ -44,7 +44,7 @@ class UserStateQueryTests
         }
         val dataAccessor = mock<IProvideDataAccess> {
             on { readItemFromDatabase(
-                    eq("id" + "/configuration"),
+                    eq("id/configuration/"),
                     eq(Configuration::class.java),
                     any(),
                     any()) } doAnswer { callback.invoke(false) }
@@ -96,7 +96,7 @@ class UserStateQueryTests
 
         val dataAccess = mock<IProvideDataAccess> {
             on { readItemFromDatabase<Configuration>(
-                    eq("id/configuration"),
+                    eq("id/configuration/"),
                     any(),
                     any(),
                     any()) } doAnswer { onSuccess(configuration) }
@@ -190,7 +190,7 @@ class UserStateQueryTests
         }
 
         val dataAccess = mock<IProvideDataAccess> {
-            on { readCollectionFromDatabase<Module>(eq("id/modules"), any(), any(), any()) } doAnswer {
+            on { readCollectionFromDatabase<Module>(eq("id/modules/"), any(), any(), any()) } doAnswer {
                 val onError = it.arguments[2] as ((String?) -> Unit)
                 onError("database failure")
             }

@@ -4,6 +4,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configuration
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
 class UserStateQuery(private val dataAccess: IProvideDataAccess,
                      private val authProvider: IProvideAuthentication) : IQueryUserState
@@ -18,7 +19,7 @@ class UserStateQuery(private val dataAccess: IProvideDataAccess,
         when(authProvider.userLoggedIn) {
             false -> onError("user not logged in")
             true -> dataAccess.readItemFromDatabase(
-                    authProvider.userUniqueId!! + "/configuration",
+                    DataLocationKeys.studentConfigurationLocation(authProvider.userUniqueId!!),
                     Configuration::class.java,
                     onError,
                     onSuccess)
@@ -30,7 +31,7 @@ class UserStateQuery(private val dataAccess: IProvideDataAccess,
         when(authProvider.userLoggedIn) {
             false -> onError("User not logged in")
             true -> dataAccess.readCollectionFromDatabase(
-                    authProvider.userUniqueId!! + "/modules",
+                    DataLocationKeys.studentModulesLocation(authProvider.userUniqueId!!),
                     Module::class.java,
                     onError,
                     onSuccess

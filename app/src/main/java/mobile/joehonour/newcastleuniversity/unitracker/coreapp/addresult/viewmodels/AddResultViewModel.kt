@@ -9,6 +9,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ModuleResult
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 import java.util.*
 
 class AddResultViewModel(private val userState: IQueryUserState,
@@ -50,7 +51,10 @@ class AddResultViewModel(private val userState: IQueryUserState,
             {
                 true -> {
                     dataStorage.addItemToDatabase(
-                            authProvider.userUniqueId!! + "/modules/" + addResultModule.value!!.moduleCode + "/results/" + result.resultId,
+                            DataLocationKeys.resultLocationForModule(
+                                    authProvider.userUniqueId!!,
+                                    addResultModule.value!!.moduleCode,
+                                    result.resultId),
                             result,
                             onError,
                             onSuccess)

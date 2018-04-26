@@ -6,6 +6,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.IProvideStudentTargetCalculations
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.StudentRecord
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
 class DashboardViewModel(private val dataAccess: IProvideDataAccess,
                          private val authProvider: IProvideAuthentication,
@@ -43,11 +44,13 @@ class DashboardViewModel(private val dataAccess: IProvideDataAccess,
         when(authProvider.userLoggedIn)
         {
             true -> {
-                dataAccess.readItemFromDatabase(authProvider.userUniqueId!! + "/",
+                dataAccess.readItemFromDatabase(
+                        DataLocationKeys.studentRecordLocation(authProvider.userUniqueId!!),
                         StudentRecord::class.java,
                         onError)
                 {
-                    try {
+                    try
+                    {
                         onSuccess(calculation(it))
                     }
                     catch (e: Exception) { onError(e.message) }

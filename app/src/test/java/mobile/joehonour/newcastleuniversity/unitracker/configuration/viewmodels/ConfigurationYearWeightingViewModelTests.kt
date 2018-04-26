@@ -192,7 +192,7 @@ class ConfigurationYearWeightingViewModelTests
         val onError = mock<((String?) -> Unit)>()
         val storageProvider = mock<IProvideDataStorage> {
             on { addItemToDatabase<Configuration>(
-                    eq("id" + "/configuration"),
+                    eq("id/configuration/"),
                     any(),
                     eq(onError),
                     eq(onSuccess))} doAnswer { onSuccess() }

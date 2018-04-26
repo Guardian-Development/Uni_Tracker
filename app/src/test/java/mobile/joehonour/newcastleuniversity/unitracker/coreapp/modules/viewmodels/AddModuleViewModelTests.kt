@@ -102,7 +102,7 @@ class AddModuleViewModelTests
 
         val dataStore = mock<IProvideDataStorage> {
             on { addItemToDatabase<Module>(
-                    eq("testuser/modules/CSC123"), any(), eq(onError), eq(onSuccess)) } doAnswer { onSuccess() }
+                    eq("testuser/modules/CSC123/"), any(), eq(onError), eq(onSuccess)) } doAnswer { onSuccess() }
         }
 
         addModuleViewModelTester(validator = validator, authProvider = authProvider, dataStorage = dataStore)
