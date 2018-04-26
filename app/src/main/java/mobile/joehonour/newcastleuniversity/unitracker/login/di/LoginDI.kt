@@ -7,7 +7,7 @@ import org.koin.dsl.module.applicationContext
 
 object LoginDI
 {
-    val loginVModule : Module = applicationContext {
+    val loginModule: Module = applicationContext {
         viewModel { LoginViewModel(get(), get()) }
     }
 }

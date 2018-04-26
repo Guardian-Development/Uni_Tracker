@@ -1,5 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker
 
+import mobile.joehonour.newcastleuniversity.unitracker.appentry.di.AppEntryDI
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.di.ConfigurationDI
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.di.CoreAppDI
 import mobile.joehonour.newcastleuniversity.unitracker.domain.di.DomainDI
@@ -8,6 +9,7 @@ import org.koin.dsl.module.Module
 
 fun getDependencies() : List<Module> = listOf(
         DomainDI.domainModule,
-        LoginDI.loginVModule,
+        AppEntryDI.appEntryModule,
+        LoginDI.loginModule,
         ConfigurationDI.configurationModule)
         .plus(CoreAppDI.configurationModule)

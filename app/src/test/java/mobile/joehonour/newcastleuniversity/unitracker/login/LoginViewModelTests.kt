@@ -1,7 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker.login
 
 import com.facebook.AccessToken
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.nhaarman.mockito_kotlin.doAnswer
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock

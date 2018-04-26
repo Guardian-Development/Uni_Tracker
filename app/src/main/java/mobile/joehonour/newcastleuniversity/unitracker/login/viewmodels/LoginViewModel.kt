@@ -12,8 +12,6 @@ class LoginViewModel(private val authProvider: IProvideAuthentication,
     fun userHasCompletedSetup(result: (Boolean) -> Unit) =
         userStateQuery.userHasCompletedConfiguration(result)
 
-    val userLoggedIn: Boolean by lazy { authProvider.userLoggedIn }
-
     fun authenticateWithTwitterSession(
             session: TwitterSession,
             callback: (status: Boolean, errorMessage: String?) -> Unit)
