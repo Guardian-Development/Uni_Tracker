@@ -10,8 +10,16 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.configuration.vie
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.dashboard.view.DashboardFragment
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.view.ModulesFragment
 
+/**
+ * The core app container activity is responsible for containing the navigation of all the core app
+ * pages, along with providing a container to display each page.
+ */
 class CoreAppTabContainerActivity : AppCompatActivity()
 {
+    /**
+     * Responsible for binding the bottom navigation bar and view page (swiping functionality) in order
+     * to provide navigation within the application.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -21,6 +29,9 @@ class CoreAppTabContainerActivity : AppCompatActivity()
         bindBottomNavigationBar(viewpager)
     }
 
+    /**
+     * Responsible for binding the pages within the swipe layout.
+     */
     private fun bindViewPager()
     {
         val fragments = listOf(
@@ -33,6 +44,12 @@ class CoreAppTabContainerActivity : AppCompatActivity()
         viewpager.addOnPageChangeListener(CoreAppPageListener(bottom_navigation))
     }
 
+    /**
+     * Responsible for binding the bottom navigation bar, using the click events to update the
+     * view pager in order to get both swipe, and click, navigation.
+     *
+     * @param viewPager the swipe layout to keep in sync with the bottom navigation bar.
+     */
     private fun bindBottomNavigationBar(viewPager: ViewPager)
     {
         bottom_navigation.selectedItemId = R.id.dashboard

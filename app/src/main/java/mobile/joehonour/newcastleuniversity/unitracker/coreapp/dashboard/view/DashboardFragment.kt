@@ -19,11 +19,18 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.dashboard.viewmod
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import org.koin.android.architecture.ext.viewModel
 
-
+/**
+ * The dashboard screen is responsible for displaying statistics about the students degree. It is the
+ * screen presented to the user as they enter the application, after configuration.
+ */
 class DashboardFragment : Fragment()
 {
     val viewModel: DashboardViewModel by viewModel()
 
+    /**
+     * Responsible for registering the observers for the fields containing the calculation results.
+     * Also requests the calculations to be executed asynchronously on initialisation.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
@@ -32,6 +39,10 @@ class DashboardFragment : Fragment()
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
+    /**
+     * Responsible for providing the swipe refresh functionality.
+     * On the pull down on the screen, the calculation results are re-calculated.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +54,11 @@ class DashboardFragment : Fragment()
         }
     }
 
+    /**
+     * Responsible for querying the view model asking for the calculations to be performed.
+     * On receiving a successful calculation result, posts this to the view mode field which is
+     * observed by the fields within the view.
+     */
     private fun requestCalculationUpdates()
     {
         viewModel.calculatePercentageRequiredToMeetTarget({ Log.e("DashboardFragment", it) }) {
@@ -56,6 +72,10 @@ class DashboardFragment : Fragment()
         }
     }
 
+    /**
+     * Responsible for registering the field observers, updating the view whenever a calculation
+     * result is updated.
+     */
     private fun registerObservers()
     {
         viewModel.percentageRequiredToMeetTarget.observe(this, Observer {
@@ -80,6 +100,11 @@ class DashboardFragment : Fragment()
         })
     }
 
+    /**
+     * Responsible for updating the graph displaying the students degree completion percentage.
+     *
+     * @param percentageComplete the students completion percentage through their degree.
+     */
     private fun updatePercentageOfDegreeCompletedChart(percentageComplete: Float)
     {
         val values = mutableListOf(
@@ -95,6 +120,12 @@ class DashboardFragment : Fragment()
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.invalidate()
     }
 
+    /**
+     * Responsible for placing the graphs data in a format it is able to understand.
+     *
+     * @param values a list containing the 2 values the pie chart requires:
+     * remaining percentage and completion percentage.
+     */
     private fun createPercentageCompletePieChartData(values: MutableList<PieEntry>): PieData
     {
         val dataSet = PieDataSet(values, "Degree Completion")
@@ -106,6 +137,9 @@ class DashboardFragment : Fragment()
         return PieData(dataSet)
     }
 
+    /**
+     * Responsible for styling the graph using the apps current theme.
+     */
     private fun stylePercentageCompletePieChart(percentageComplete: Float, data: PieData)
     {
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.setTouchEnabled(false)
@@ -123,6 +157,9 @@ class DashboardFragment : Fragment()
         coreAppDashboardFragmentPercentageDegreeCompletedPieChart.data = data
     }
 
+    /**
+     * Responsible for creating an instance of this fragment.
+     */
     companion object
     {
         fun newInstance(): DashboardFragment = DashboardFragment()

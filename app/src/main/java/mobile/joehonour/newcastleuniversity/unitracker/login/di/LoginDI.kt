@@ -5,6 +5,10 @@ import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.applicationContext
 
+/**
+ * Responsible for providing specific dependencies for all functionality relating to the Login
+ * section of the application.
+ */
 object LoginDI
 {
     val loginModule: Module = applicationContext {

@@ -13,10 +13,18 @@ import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListen
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The configuration screen is responsible for capturing all necessary information about a students
+ * degree course.
+ */
 class ConfigurationActivity : AppCompatActivity()
 {
     private val viewModel: ConfigurationViewModel by viewModel()
 
+    /**
+     * Responsible for binding all displayed text entry fields onto the corresponding view model
+     * fields that capture the information.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -26,6 +34,13 @@ class ConfigurationActivity : AppCompatActivity()
         bindContinueButtonToAction()
     }
 
+    /**
+     * Responsible for binding the data fields the user enters their course details in, to the
+     * corresponding view model fields.
+     *
+     * This is done through posting the value the user enters on each text changed event. If the
+     * user enters an incorrect value an error message is displayed.
+     */
     private fun bindDataFieldsToViewModel()
     {
         bindTextChangedListener(configurationActivityUniversityName, viewModel) {
@@ -79,6 +94,12 @@ class ConfigurationActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for providing the action when a user clicks the continue button.
+     *
+     * If the user has not entered valid data, then an error message is displayed to screen, else
+     * the user is navigated to a screen where they can configure their year weightings.
+     */
     private fun bindContinueButtonToAction()
     {
         bindButtonClickedListener(continueSetup, viewModel) {

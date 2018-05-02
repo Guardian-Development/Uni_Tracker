@@ -4,6 +4,11 @@ import android.util.Log
 import com.google.firebase.auth.*
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 
+/**
+ * Responsible for authenticating a user with Google Firebase backend.
+ *
+ * @param firebaseAuth the Google Firebase service to authenticating with.
+ */
 class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : IProvideAuthentication
 {
     override val userUniqueId: String?
@@ -37,6 +42,13 @@ class FirebaseAuthenticationProvider(private val firebaseAuth: FirebaseAuth) : I
         authenticateWithCredential(credential, callback)
     }
 
+    /**
+     * Responsible for making an authentication attempt to Google Firebase, given a Google Firebase
+     * credential.
+     *
+     * @param credential the users credential to attempt to login with.
+     * @param callback is executed with the result of the login attempt.
+     */
     private fun authenticateWithCredential(
             credential: AuthCredential,
             callback: (status: Boolean, errorMessage: String?) -> Unit)

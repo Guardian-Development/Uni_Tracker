@@ -19,7 +19,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels.handleGo
 import mobile.joehonour.newcastleuniversity.unitracker.login.viewmodels.handleTwitterSession
 import org.koin.android.architecture.ext.viewModel
 
-
+/**
+ * The login screen provides the user the ability to login to the application using a variety of
+ * social media accounts.
+ */
 class LoginActivity : AppCompatActivity()
 {
     private val viewModel: LoginViewModel by viewModel()
@@ -27,6 +30,9 @@ class LoginActivity : AppCompatActivity()
 
     private val googleSignInCode = 10
 
+    /**
+     * Responsible for binding the social media login buttons to their respective actions.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,9 @@ class LoginActivity : AppCompatActivity()
         registerGoogleLoginButton()
     }
 
+    /**
+     * Registers the action executed when the Twitter login button is clicked.
+     */
     private fun registerTwitterLoginButton()
     {
         twitterLoginButton.callback = viewModel.handleTwitterSession(
@@ -44,6 +53,9 @@ class LoginActivity : AppCompatActivity()
                 this::redirectFromSuccessfulLogin)
     }
 
+    /**
+     * Registers the action executed when the Facebook login button is clicked.
+     */
     private fun registerFacebookLoginButton()
     {
         if (AccessToken.getCurrentAccessToken() != null)
@@ -57,6 +69,9 @@ class LoginActivity : AppCompatActivity()
                 this::redirectFromSuccessfulLogin))
     }
 
+    /**
+     * Registers the action executed when the Google login button is clicked.
+     */
     private fun registerGoogleLoginButton()
     {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -71,6 +86,11 @@ class LoginActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Redirects the user into the application on successful login.
+     * This directs the user to the core app if they completed the app setup before, else it directs
+     * them to the app setup page of the application.
+     */
     private fun redirectFromSuccessfulLogin()
     {
         viewModel.userHasCompletedSetup {
@@ -82,6 +102,10 @@ class LoginActivity : AppCompatActivity()
         finish()
     }
 
+    /**
+     * Provides the handling of each login event when it has occurred, notifying the login providers
+     * of the result.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
     {
         super.onActivityResult(requestCode, resultCode, data)

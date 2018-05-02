@@ -9,6 +9,11 @@ import kotlinx.android.synthetic.main.recycler_result_list_item.view.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleResultModel
 
+/**
+ * The module result recycler adapter is used to display a list of results for a given module.
+ *
+ * @param results the list of results you wish to display.
+ */
 class ModuleResultModelRecyclerAdapter(private val results: List<ModuleResultModel>)
     : RecyclerView.Adapter<ModuleResultModelRecyclerAdapter.ModuleResultHolder>()
 {

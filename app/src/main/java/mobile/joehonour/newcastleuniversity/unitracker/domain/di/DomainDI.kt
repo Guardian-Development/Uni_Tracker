@@ -16,6 +16,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDa
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
 import org.koin.dsl.module.applicationContext
 
+/**
+ * Responsible for providing specific dependencies for all functionality relating to the Domain
+ * of the application.
+ */
 object DomainDI
 {
     val domainModule = applicationContext {

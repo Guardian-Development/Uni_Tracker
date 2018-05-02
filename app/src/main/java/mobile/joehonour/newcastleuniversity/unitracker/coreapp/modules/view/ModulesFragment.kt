@@ -15,10 +15,18 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.viewmodel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The modules screen is responsible for displaying the list of configured modules to the user,
+ * while allowing the user to add a new module within the application.
+ */
 class ModulesFragment : Fragment()
 {
     val viewModel : ModulesViewModel by viewModel()
 
+    /**
+     * Responsible for binding the listener for binding the available modules to the list of modules
+     * displayed within the UI.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
@@ -30,6 +38,11 @@ class ModulesFragment : Fragment()
         return inflater.inflate(R.layout.fragment_modules, container, false)
     }
 
+    /**
+     * Responsible for registering the swipe refresh layout, that allows for refreshing of all
+     * available modules within the application. Also registers the button click event for the add
+     * module button.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +56,10 @@ class ModulesFragment : Fragment()
         }
     }
 
+    /**
+     * Responsible for listening for when this fragment is displayed to the user.
+     * If it is visible it automatically refreshes the list of available modules.
+     */
     override fun setUserVisibleHint(isVisibleToUser: Boolean)
     {
         super.setUserVisibleHint(isVisibleToUser)
@@ -52,12 +69,20 @@ class ModulesFragment : Fragment()
         }
     }
 
+    /**
+     * Responsible for refreshing the list of available modules when the fragment is resumed.
+     */
     override fun onResume()
     {
         super.onResume()
         viewModel.refreshCurrentModules()
     }
 
+    /**
+     * Responsible for building the list of modules displayed to the user.
+     *
+     * @param modules the list of modules you wish to display to the user.
+     */
     private fun bindListOfModules(modules: List<ModuleModel>)
     {
         coreAppModulesFragmentModulesList.layoutManager = LinearLayoutManager(context)
@@ -68,6 +93,9 @@ class ModulesFragment : Fragment()
         }
     }
 
+    /**
+     * Provides a static way of initialising the this fragment.
+     */
     companion object
     {
         fun newInstance(): ModulesFragment = ModulesFragment()

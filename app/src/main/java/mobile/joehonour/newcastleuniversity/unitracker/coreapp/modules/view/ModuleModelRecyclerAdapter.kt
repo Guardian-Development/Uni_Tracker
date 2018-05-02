@@ -10,6 +10,12 @@ import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.extensions.listenForClick
 
+/**
+ * The module recycler adapter is used to display a list of modules to the user.
+ *
+ * @param modules the modules that should be displayed within the list.
+ * @param clickHandler the action that should be executed when a list item is clicked.
+ */
 class ModuleModelRecyclerAdapter(private val modules: List<ModuleModel>,
                                  private val clickHandler: (ModuleModel) -> Unit)
     : RecyclerView.Adapter<ModuleModelRecyclerAdapter.ModuleHolder>()

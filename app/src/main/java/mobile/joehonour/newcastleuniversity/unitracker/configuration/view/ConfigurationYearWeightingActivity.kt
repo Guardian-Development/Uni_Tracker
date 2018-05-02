@@ -17,10 +17,19 @@ import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListen
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The configuration of year weightings is responsible for capturing information about each year
+ * within a students degree so we can make accurate calculations i.e. about what grade a user needs
+ * in their remaining credits.
+ */
 class ConfigurationYearWeightingActivity : AppCompatActivity()
 {
     private val viewModel: ConfigurationYearWeightingViewModel by viewModel()
 
+    /**
+     * Responsible for binding the fields a user can enter data in against the view model
+     * corresponding fields.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -34,6 +43,11 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         bindCompleteSetupButtonToAction()
     }
 
+    /**
+     * This re-binds the fields so a user can enter a new years weightings. It resets the current
+     * fields that have been entered to null, and then binds the text changed listeners in order
+     * to capture this years information.
+     */
     private fun bindNewYearWeightingToModel()
     {
         viewModel.bindModelForCurrentYear {
@@ -65,6 +79,10 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for binding the continue button, allowing the user to either enter details for
+     * the next year in their degree, or complete the setup.
+     */
     private fun bindContinueButtonToAction()
     {
         bindButtonClickedListener(continueButton, viewModel) {
@@ -81,6 +99,11 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for progressing from the current years details to the next year. If the user
+     * has entered details for all years within the course, this hides the data entry fields and
+     * presents the user with the complete setup button.
+     */
     private fun progressYearWeightingEntry()
     {
         viewModel.finishEditingCurrentYear()
@@ -100,6 +123,10 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for saving the users configuration when they click complete setup. On successful
+     * saving of the configuration the user is entered into the core app.
+     */
     private fun bindCompleteSetupButtonToAction()
     {
         bindButtonClickedListener(completeSetupButton, viewModel) {

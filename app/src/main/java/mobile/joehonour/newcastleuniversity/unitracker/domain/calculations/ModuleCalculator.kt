@@ -7,6 +7,7 @@ class ModuleCalculator : IProvideModuleCalculations
 {
     override fun calculatePercentageCompleteOf(module: Module): Double
     {
+        //sums all weightings recorded to get completion percentage.
         val resultsPercentage = module.results.values.map { it.resultWeighting }.sum()
         return when
         {

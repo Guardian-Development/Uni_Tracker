@@ -12,11 +12,22 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDa
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 import java.util.*
 
+/**
+ * The view model is responsible for responsible for presenting information to the add result view.
+ *
+ * @param userState provides functionality to query over the users configuration.
+ * @param dataStorage provides functionality to save information to the database.
+ * @param authProvider provides functionality to deem if the users authentication status.
+ * @param addResultModelValidator provides functionality to validate a result.
+ */
 class AddResultViewModel(private val userState: IQueryUserState,
                          private val dataStorage: IProvideDataStorage,
                          private val authProvider: IProvideAuthentication,
                          private val addResultModelValidator: AddResultModelValidator) : ViewModel()
 {
+    /**
+     * Responsible for providing the list of available modules a user can enter results against.
+     */
     val availableModules: MutableLiveData<List<ModuleModel>> = MutableLiveData()
 
     val addResultModule: MutableLiveData<ModuleModel> = MutableLiveData()
@@ -24,12 +35,19 @@ class AddResultViewModel(private val userState: IQueryUserState,
     val addResultWeightingPercentage: MutableLiveData<Int> = MutableLiveData()
     val addResultPercentage: MutableLiveData<Double> = MutableLiveData()
 
+    /**
+     * Responsible for displaying whether the users current information entered is valid, using the
+     * view models fields.
+     */
     val validDataEntered : Boolean
         get() = addResultModelValidator.validate(
                 addResultName.value,
                 addResultWeightingPercentage.value,
                 addResultPercentage.value)
 
+    /**
+     * Responsible for refreshing the list of available modules a user can add a result against.
+     */
     fun refreshAvailableModules()
     {
         userState.getUserModules({ Log.e("AddModuleViewModel", it)}) {
@@ -42,6 +60,14 @@ class AddResultViewModel(private val userState: IQueryUserState,
         }
     }
 
+    /**
+     * Responsible for saving an entered result to the database with the given resultId.
+     * If a user has not entered valid data, or is not logged in, then onError is immediately called.
+     *
+     * @param resultId is the id you want to be associated with this result.
+     * @param onError is executed if an error occurs during the saving of the result.
+     * @param onSuccess is executed when the result is successfully stored to the database.
+     */
     fun saveResultForModule(resultId: String, onError: (String?) -> Unit, onSuccess: () -> Unit)
     {
         if(validDataEntered)
@@ -68,6 +94,9 @@ class AddResultViewModel(private val userState: IQueryUserState,
         }
     }
 
+    /**
+     * Responsible for building the result domain model from the entered fields.
+     */
     private fun buildResultForModule(resultId: String) : ModuleResult =
             ModuleResult(resultId,
                     addResultName.value!!,

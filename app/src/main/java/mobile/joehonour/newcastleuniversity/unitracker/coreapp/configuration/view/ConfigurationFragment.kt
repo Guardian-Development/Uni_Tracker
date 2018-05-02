@@ -18,12 +18,22 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import mobile.joehonour.newcastleuniversity.unitracker.login.view.LoginActivity
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The configuration screen is responsible for displaying the users entered configuration within
+ * the application. It also provides the capability to log out of the application.
+ */
 class ConfigurationFragment : Fragment()
 {
     private val viewModel: ConfigurationViewModel by viewModel()
 
+    /**
+     * Flag to know whether to perform the open or close animation of the settings menu.
+     */
     private var isSettingsMenuOpen = false
 
+    /**
+     * Responsible for registering the bind for the users entered configuration.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View?
     {
@@ -36,6 +46,10 @@ class ConfigurationFragment : Fragment()
         return inflater.inflate(R.layout.fragment_configuration, container, false)
     }
 
+    /**
+     * Responsible for registering the settings button animations, along with registering the
+     * logout functionality.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +63,9 @@ class ConfigurationFragment : Fragment()
         }
     }
 
+    /**
+     * Responsible for binding all displayed fields to the users entered configuration.
+     */
     private fun bindDisplayToConfiguration(configurationModel: ConfigurationModel)
     {
         coreAppConfigurationFragmentUniversity.text = configurationModel.universityName
@@ -62,6 +79,9 @@ class ConfigurationFragment : Fragment()
                 ConfigurationYearWeightingsModelRecyclerAdapter(configurationModel.yearWeightings)
     }
 
+    /**
+     * Responsible for registering the closing animation of the settings button.
+     */
     private fun registerSettingsMenuButtonOpenCloseAnimation()
     {
         coreAppConfigurationFragmentSettingsMenuButton.setOnClickListener {
@@ -69,6 +89,10 @@ class ConfigurationFragment : Fragment()
         }
     }
 
+    /**
+     * Responsible for switching between the close and open state of the settings menu, based on
+     * the user clicking the settings button.
+     */
     private fun toggleButtonMenuVisibility()
     {
         val openAnimation = AnimationUtils.loadAnimation(context, R.anim.animation_fab_open)
@@ -85,6 +109,9 @@ class ConfigurationFragment : Fragment()
         isSettingsMenuOpen = !isSettingsMenuOpen
     }
 
+    /**
+     * Responsible for creating an instance of this fragment.
+     */
     companion object
     {
         fun newInstance(): ConfigurationFragment = ConfigurationFragment()

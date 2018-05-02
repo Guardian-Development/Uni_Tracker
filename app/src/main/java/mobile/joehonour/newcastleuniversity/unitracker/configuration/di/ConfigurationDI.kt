@@ -8,6 +8,10 @@ import org.koin.android.architecture.ext.viewModel
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.applicationContext
 
+/**
+ * Responsible for providing specific dependencies for all functionality relating to the
+ * Configuration section of the application.
+ */
 object ConfigurationDI
 {
     val configurationModule : Module = applicationContext {

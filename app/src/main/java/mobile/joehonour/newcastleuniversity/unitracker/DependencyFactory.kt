@@ -7,6 +7,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.di.DomainDI
 import mobile.joehonour.newcastleuniversity.unitracker.login.di.LoginDI
 import org.koin.dsl.module.Module
 
+/**
+ * Provides the dependencies required of the entire application. This allows for dependency injection
+ * to be used with Koin (DI Framework).
+ */
 fun getDependencies() : List<Module> = listOf(
         DomainDI.domainModule,
         AppEntryDI.appEntryModule,

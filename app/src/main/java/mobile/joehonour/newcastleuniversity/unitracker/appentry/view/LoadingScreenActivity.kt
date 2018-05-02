@@ -10,10 +10,21 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.CoreAppTabContain
 import mobile.joehonour.newcastleuniversity.unitracker.login.view.LoginActivity
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The loading screen is responsible for displaying an intermediate screen while the app loads the
+ * users configuration and can then work out what entry page they should be displayed.
+ */
 class LoadingScreenActivity : AppCompatActivity()
 {
     private val viewModel: AppEntryViewModel by viewModel()
 
+    /**
+     * Responsible for deciding which page the user should be entered into the app on.
+     *
+     * If the user needs to login: presents login page.
+     * If the user is logged in, but they haven't configured the app: presents configuration page.
+     * If the user is logged in, and has configured the app: presents the core application.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)

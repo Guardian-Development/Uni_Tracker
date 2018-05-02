@@ -6,6 +6,16 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNullWithinInclusiveRange
 import java.time.LocalDateTime
 
+/**
+ * Provides a model for the users configuration, specifically for binding to a view within the
+ * configuration section of the application.
+ *
+ * @param universityName the university the student attends.
+ * @param yearStarted the year the student started university.
+ * @param courseLength the length of the course the student is studying.
+ * @param targetPercentage the target percentage the student wants to achieve in their degree.
+ * @param totalCredits the total credits the user has to complete in order to finish their course.
+ */
 data class ConfigurationDataModel(
         val universityName: String,
         val yearStarted: Int,
@@ -14,6 +24,9 @@ data class ConfigurationDataModel(
         val totalCredits: Int
 ) : Parcelable
 {
+   /**
+    * Functionality to allow for this class to be passed between views.
+    */
    constructor(parcel: Parcel) : this(
            parcel.readString(),
            parcel.readInt(),
@@ -21,6 +34,9 @@ data class ConfigurationDataModel(
            parcel.readInt(),
            parcel.readInt())
 
+   /**
+    * Functionality to allow for this class to be passed between views.
+    */
    override fun writeToParcel(parcel: Parcel, flags: Int)
    {
       parcel.writeString(universityName)
@@ -30,11 +46,17 @@ data class ConfigurationDataModel(
       parcel.writeInt(totalCredits)
    }
 
+   /**
+    * Functionality to allow for this class to be passed between views.
+    */
    override fun describeContents(): Int
    {
       return 0
    }
 
+   /**
+    * Functionality to allow for this class to be passed between views.
+    */
    companion object CREATOR : Parcelable.Creator<ConfigurationDataModel>
    {
       override fun createFromParcel(parcel: Parcel): ConfigurationDataModel
@@ -49,6 +71,19 @@ data class ConfigurationDataModel(
    }
 }
 
+/**
+ * Provides functionality to validate whether a configuration data model is valid before it has a
+ * chance to become persisted to the domain.
+ *
+ * @param yearStartedMinValue the minimum year a student can start their degree.
+ * @param yearStartedMaxValue the maximum year a student can start their degree.
+ * @param courseLengthMinValue the minimum course length a student can study for.
+ * @param courseLengthMaxValue the maximum course length a student can study for.
+ * @param targetPercentageMinValue the minimum target percentage a student can aim to achieve.
+ * @param targetPercentageMaxValue the maximum target percentage a student can aim to achieve.
+ * @param totalCreditsMinValue the minimum amount of credits a student can complete.
+ * @param totalCreditsMaxValue the maximum amount of credits a student can complete.
+ */
 class ConfigurationDataModelValidator(
         val yearStartedMinValue: Int = 1950,
         val yearStartedMaxValue: Int = LocalDateTime.now().year,
@@ -59,6 +94,18 @@ class ConfigurationDataModelValidator(
         val totalCreditsMinValue: Int = 10,
         val totalCreditsMaxValue: Int = 500)
 {
+   /**
+    * Provides validation for the parameters passed, making sure they fall in their respective
+    * ranges and are not null.
+    *
+    * @param universityName the students currently entered university name.
+    * @param yearStarted the students currently entered course year started.
+    * @param courseLength the students currently entered course length.
+    * @param targetPercentage the students currently entered target percentage.
+    * @param totalCredits the students currently entered total credits.
+    *
+    * @return true if all values are not null and inclusive of their valid ranges, else false.
+    */
    fun validate(
            universityName: String?,
            yearStarted: Int?,

@@ -6,6 +6,12 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
+/**
+ * Provides the ability to query the users state, using the data and authentication providers.
+ *
+ * @param dataAccess provides functionality to access the database.
+ * @param authProvider provides functionality to access the state of the authenticated user.
+ */
 class UserStateQuery(private val dataAccess: IProvideDataAccess,
                      private val authProvider: IProvideAuthentication) : IQueryUserState
 {

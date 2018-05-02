@@ -6,6 +6,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.dashboard.di.Dash
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.di.ModulesDI
 import org.koin.dsl.module.Module
 
+/**
+ * Responsible for providing specific dependencies for all functionality relating to the Core App
+ * section of the application. This is done by asking each specific section for its dependencies.
+ */
 object CoreAppDI
 {
     val configurationModule : List<Module> = listOf(

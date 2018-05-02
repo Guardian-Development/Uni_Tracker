@@ -1,5 +1,9 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support
 
+/**
+ * Provides helper functions that can be used to build the keys to query specific elements of the
+ * database.
+ */
 object DataLocationKeys
 {
     fun studentRecordLocation(studentId: String) : String = "$studentId/"

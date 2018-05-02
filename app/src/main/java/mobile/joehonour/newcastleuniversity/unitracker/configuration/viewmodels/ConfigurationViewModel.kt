@@ -5,6 +5,11 @@ import android.arch.lifecycle.ViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationDataModel
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationDataModelValidator
 
+/**
+ * The view model is responsible for presenting information to the configuration view.
+ *
+ * @param dataValidator provides functionality to validate a users configuration.
+ */
 class ConfigurationViewModel(private val dataValidator: ConfigurationDataModelValidator) : ViewModel()
 {
     val universityName: MutableLiveData<String> = MutableLiveData()
@@ -13,6 +18,10 @@ class ConfigurationViewModel(private val dataValidator: ConfigurationDataModelVa
     val targetPercentage: MutableLiveData<Int> = MutableLiveData()
     val totalCredits: MutableLiveData<Int> = MutableLiveData()
 
+    /**
+     * Responsible for validating the users entry by evaluating the mutable data fields within this
+     * view model against the data validator.
+     */
     val validDataEntered: Boolean
         get() = dataValidator.validate(
                 universityName.value,
@@ -22,6 +31,9 @@ class ConfigurationViewModel(private val dataValidator: ConfigurationDataModelVa
                 totalCredits.value
         )
 
+    /**
+     * Responsible for building the users configuration from the mutable data fields.
+     */
     fun buildConfigurationData() : ConfigurationDataModel
     {
         if(!validDataEntered)

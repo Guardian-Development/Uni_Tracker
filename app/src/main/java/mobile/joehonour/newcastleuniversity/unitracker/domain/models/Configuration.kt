@@ -1,5 +1,8 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.models
 
+/**
+ * Represents a students configuration within the application.
+ */
 data class Configuration(
         val universityName: String,
         val yearStarted: Int,

@@ -13,10 +13,18 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.viewmodel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The individual module screen is responsible for displaying an individual module to the user,
+ * including displaying the calculated current grade a user has achieved within the module.
+ */
 class IndividualModuleActivity : AppCompatActivity()
 {
     val viewModel: IndividualModuleViewModel by viewModel()
 
+    /**
+     * Responsible for extracting the module from the data passed to the activity.
+     * It then binds the module fields that display the module to their respective view model fields.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -27,6 +35,10 @@ class IndividualModuleActivity : AppCompatActivity()
         registerObservers()
     }
 
+    /**
+     * Responsible for registering observers to listen when the module is set, and can be displayed,
+     * along with listening for when calculations have been completed.
+     */
     private fun registerObservers()
     {
         viewModel.module.observe(this, Observer {
@@ -53,6 +65,11 @@ class IndividualModuleActivity : AppCompatActivity()
         })
     }
 
+    /**
+     * Responsible for requesting calculations for the modules percentage complete and current grade.
+     * On successful completion of a calculation the view posts the result to the view model fields
+     * which are being observed by the displayed fields.
+     */
     private fun requestModuleCalculations()
     {
         viewModel.calculatePercentageComplete({ Log.e("IndividualModuleActivity", it) }) {
@@ -64,6 +81,11 @@ class IndividualModuleActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for updating the UI with the module details.
+     *
+     * @param moduleModel the module that should be displayed to the user.
+     */
     private fun bindIndividualModuleData(moduleModel: ModuleModel)
     {
         individualModuleActivityModuleCode.text = moduleModel.moduleCode
@@ -73,6 +95,11 @@ class IndividualModuleActivity : AppCompatActivity()
         bindListOfResults(moduleModel.results)
     }
 
+    /**
+     * Responsible for updating the list of results displayed to the user.
+     *
+     * @param results the list of results that should be displayed to the user.
+     */
     private fun bindListOfResults(results: List<ModuleResultModel>)
     {
         individualModuleActivityModuleResultsList.layoutManager = LinearLayoutManager(this)

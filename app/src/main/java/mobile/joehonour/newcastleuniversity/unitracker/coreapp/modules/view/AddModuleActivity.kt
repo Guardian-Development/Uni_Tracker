@@ -14,10 +14,17 @@ import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListen
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
 import org.koin.android.architecture.ext.viewModel
 
+/**
+ * The add module screen is responsible for providing an ability to add a module to a users
+ * configuration.
+ */
 class AddModuleActivity : AppCompatActivity()
 {
     val viewModel : AddModuleViewModel by viewModel()
 
+    /**
+     * Responsible for binding the fields used to capture user input to the view models fields.
+     */
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,10 @@ class AddModuleActivity : AppCompatActivity()
         bindAddModuleButtonToAction()
     }
 
+    /**
+     * Responsible for binding the text entry fields, along with the year studied selector, to the
+     * corresponding view model fields.
+     */
     private fun bindDataFieldsToViewModel()
     {
         bindTextChangedListener(addModuleActivityModuleCode, viewModel) {
@@ -58,6 +69,10 @@ class AddModuleActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for binding the available years the user has configured within their degree course,
+     * to the drop down box of year studied.
+     */
     private fun bindAvailableYearStudiedChoices()
     {
         viewModel.availableYearsStudied({ Log.e("AddModuleActivity", it)})
@@ -68,6 +83,11 @@ class AddModuleActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Responsible for binding the behaviour of the add module button.
+     * If the data a user has input is invalid, displays an error message, else it saves the module.
+     * Once saved, the user is returned to the modules page of the core app.
+     */
     private fun bindAddModuleButtonToAction()
     {
         bindButtonClickedListener(addModuleActivityAddModuleButton, viewModel) {

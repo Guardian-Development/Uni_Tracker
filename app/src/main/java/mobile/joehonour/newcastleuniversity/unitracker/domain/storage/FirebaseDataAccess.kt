@@ -4,6 +4,11 @@ import com.google.firebase.database.DatabaseReference
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.FirebaseDataAccessMultipleValueEventListener
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.FirebaseDataAccessSingleValueEventListener
 
+/**
+ * Provides reading of records within a Google Firebase database.
+ *
+ * @param databaseReference the Google Firebase database you wish to read from.
+ */
 class FirebaseDataAccess(private val databaseReference: DatabaseReference) : IProvideDataAccess
 {
     override fun <T : Any> readItemFromDatabase(
