@@ -21,9 +21,6 @@ class ConfigurationYearWeightingViewModel(
     var currentYear = 1
         private set
 
-    val completedWeightingsForAllYear: Boolean
-        get() = configurationData?.courseLength == enteredYearWeightings.size
-
     val validDataEnteredForCurrentYearWeighting: Boolean
         get() = dataValidator.validate(currentYearWeighting.value, currentYearCreditsCompleted.value)
 
@@ -54,10 +51,6 @@ class ConfigurationYearWeightingViewModel(
                         currentYearWeighting.value!!,
                         currentYearCreditsCompleted.value!!))
 
-        if (completedWeightingsForAllYear) {
-            return
-        }
-
         currentYear += 1
         currentYearWeighting = MutableLiveData()
     }
@@ -85,9 +78,9 @@ class ConfigurationYearWeightingViewModel(
         return Configuration(
                 configurationData!!.universityName,
                 configurationData!!.yearStarted,
-                configurationData!!.courseLength,
+                4,
                 configurationData!!.targetPercentage,
-                configurationData!!.totalCredits,
+                10,
                 yearWeightings)
     }
 }

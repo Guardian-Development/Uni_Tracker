@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/yearSelectHelpMessage"
         android:layout_width="323dp"
-        android:layout_height="57dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -27,87 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/configurationYearWeightingActivityYearBeingSelectedMessage"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/yearBeingSelected"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/yearBeingSelected"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/configurationYearWeightingYearBeingSelectedDefaultYear"
+        android:layout_marginTop="16dp"
+        android:text="Enter Course Details:"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/yearWeightingTextInput"
-        android:layout_width="328dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:textColor="@color/textColorSecondary"
-        android:textColorHint="@color/textColorSecondary"
-        app:errorEnabled="true"
-        app:hintTextAppearance="@style/TextAppearance.UserInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearSelectHelpMessage">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/configurationYearWeightingActivityYearWeighting"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/configurationYearWeightingActivityYeatWeightingHint"
-            android:inputType="numberSigned"
-            android:textColor="@color/textColorPrimary"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/creditsCompletedWithinYearTextInput"
-        android:layout_width="328dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/textColorSecondary"
-        android:textColorHint="@color/textColorSecondary"
-        app:errorEnabled="true"
-        app:hintTextAppearance="@style/TextAppearance.UserInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearWeightingTextInput">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/configurationYearWeightingActivityCreditsCompletedWithinYear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/configurationYearWeightingActivityCreditsCompletedHint"
-            android:inputType="numberSigned"
-            android:textColor="@color/textColorPrimary"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/continueButton"
-        android:layout_width="325dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/button_with_border"
-        android:text="@string/continueButtonLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creditsCompletedWithinYearTextInput" />
 
     <Button
         android:id="@+id/completeSetupButton"
@@ -126,5 +52,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/configurationConfigureYearsAddYearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_add_module"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearSelectHelpMessage" />
 
 </android.support.constraint.ConstraintLayout>

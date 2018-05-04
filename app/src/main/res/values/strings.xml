@@ -29,7 +29,7 @@ secrets.xml resource file should be added to values folder containing:
     <string name="configurationActivityTargetPercentageErrorMessage">Target Percentage must be supplied</string>
     <string name="configurationActivityTotalCreditsErrorMessage">Total Credits must be supplied</string>
 
-    <string name="configurationYearWeightingActivityYearSelectHelpMessage">In order to provide accurate grade predictions, we need to know how much each year contributes to your degree classification</string>
+    <string name="configurationYearWeightingActivityYearSelectHelpMessage">In order to provide accurate grade predictions, we need to know how much each year contributes to your degree classification. Please enter information for each year of your degree below.</string>
     <string name="configurationYearWeightingActivityYearBeingSelectedMessage">Enter Information For Year:</string>
     <string name="configurationYearWeightingYearBeingSelectedDefaultYear">1</string>
     <string name="configurationYearWeightingActivityYeatWeightingHint">Weighting of Year %</string>
