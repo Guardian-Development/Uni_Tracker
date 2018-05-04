@@ -16,6 +16,7 @@ class ModulesViewModel(private val userState: IQueryUserState) : ViewModel()
         userState.getUserModules({ Log.e("AddModuleViewModel", it)}) {
             currentModules.postValue(
                     it.map { ModuleModel(
+                            it.moduleId,
                             it.moduleCode,
                             it.moduleName,
                             it.moduleCredits,

@@ -30,7 +30,7 @@ class AddResultViewModelTests
 
         addResultViewModelTester(validator = validator)
                 .performActions {
-                    addResultModule.value = ModuleModel("CSC3128", "test", 10, 2)
+                    addResultModule.value = ModuleModel("id", "CSC3128", "test", 10, 2)
                     addResultName.value = "result name"
                     addResultWeightingPercentage.value = 50
                     addResultPercentage.value = 90.0
@@ -47,7 +47,7 @@ class AddResultViewModelTests
 
         addResultViewModelTester(validator = validator)
                 .performActions {
-                    addResultModule.value = ModuleModel("CSC3128", "test", 10, 2)
+                    addResultModule.value = ModuleModel("id", "CSC3128", "test", 10, 2)
                     addResultName.value = "result name"
                     addResultWeightingPercentage.value = 50
                     addResultPercentage.value = 90.0
@@ -59,8 +59,8 @@ class AddResultViewModelTests
     fun refreshCurrentModulesSuccessSetsPublicData()
     {
         val modules = listOf(
-                Module("CSC3123", "module", 10, 2, emptyMap()),
-                Module("CSC9876", "module2", 20, 1, emptyMap()))
+                Module("id", "CSC3123", "module", 10, 2, emptyMap()),
+                Module("id2", "CSC9876", "module2", 20, 1, emptyMap()))
 
         val userStateQuery = mock<IQueryUserState> {
             on { getUserModules(any(), any()) } doAnswer {
@@ -110,14 +110,14 @@ class AddResultViewModelTests
 
         val dataStore = mock<IProvideDataStorage> {
             on { addItemToDatabase<ModuleResult>(
-                    eq("testuser/modules/CSC123/results/resultid"), any(), eq(onError), eq(onSuccess)) } doAnswer {
+                    eq("testuser/modules/id/results/resultid"), any(), eq(onError), eq(onSuccess)) } doAnswer {
                 onSuccess()
             }
         }
 
         addResultViewModelTester(validator = validator, authProvider = authProvider, dataStorage = dataStore)
                 .performActions {
-                    addResultModule.value = ModuleModel("CSC123", "test", 50, 2)
+                    addResultModule.value = ModuleModel("id", "CSC123", "test", 50, 2)
                     addResultName.value = "add result"
                     addResultWeightingPercentage.value = 50
                     addResultPercentage.value = 82.1
@@ -146,7 +146,7 @@ class AddResultViewModelTests
 
         addResultViewModelTester(validator = validator, authProvider = authProvider)
                 .performActions {
-                    addResultModule.value = ModuleModel("CSC123", "test", 50, 2)
+                    addResultModule.value = ModuleModel("id", "CSC123", "test", 50, 2)
                     addResultName.value = "add result"
                     addResultWeightingPercentage.value = 50
                     addResultPercentage.value = 82.1
@@ -176,7 +176,7 @@ class AddResultViewModelTests
 
         addResultViewModelTester(validator = validator, authProvider = authProvider)
                 .performActions {
-                    addResultModule.value = ModuleModel("CSC123", "test", 50, 2)
+                    addResultModule.value = ModuleModel("id", "CSC123", "test", 50, 2)
                     addResultName.value = "add result"
                     addResultWeightingPercentage.value = 50
                     addResultPercentage.value = 82.1
@@ -205,7 +205,7 @@ class AddResultViewModelTests
 
         addResultViewModelTester(validator = validator, authProvider = authProvider)
                 .performActions {
-                    addResultModule.value = ModuleModel("CSC123", "test", 50, 2)
+                    addResultModule.value = ModuleModel("id", "CSC123", "test", 50, 2)
                     addResultName.value = "add result"
                     addResultWeightingPercentage.value = 50
                     addResultPercentage.value = 82.1

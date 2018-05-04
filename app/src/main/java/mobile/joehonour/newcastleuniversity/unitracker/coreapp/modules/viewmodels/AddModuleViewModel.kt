@@ -33,17 +33,17 @@ class AddModuleViewModel(private val userState: IQueryUserState,
         }
     }
 
-    fun saveModule(onError: (String?) -> Unit, onSuccess: () -> Unit)
+    fun saveModule(moduleId: String, onError: (String?) -> Unit, onSuccess: () -> Unit)
     {
         if(validDataEntered)
         {
-            val module = buildModuleFromViewModelFields()
+            val module = buildModuleFromViewModelFields(moduleId)
             when(authProvider.userLoggedIn)
             {
                 true -> dataStorage.addItemToDatabase(
                         DataLocationKeys.studentModuleLocation(
                                 authProvider.userUniqueId!!,
-                                module.moduleCode),
+                                module.moduleId),
                         module,
                         onError,
                         onSuccess)
@@ -56,8 +56,9 @@ class AddModuleViewModel(private val userState: IQueryUserState,
         }
     }
 
-    private fun buildModuleFromViewModelFields() : Module =
-            Module(moduleCode.value!!,
+    private fun buildModuleFromViewModelFields(moduleId: String) : Module =
+            Module(moduleId,
+                    moduleCode.value!!,
                     moduleName.value!!,
                     moduleCredits.value!!,
                     moduleYearStudied.value!!,

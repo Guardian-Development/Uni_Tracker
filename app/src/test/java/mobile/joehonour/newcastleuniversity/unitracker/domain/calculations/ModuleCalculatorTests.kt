@@ -14,7 +14,7 @@ class ModuleCalculatorTests
     var thrown: ExpectedException = ExpectedException.none()
 
     private fun moduleWithResults(results: List<ModuleResult>) : Module
-            = Module("test", "test", 10, 1, results.map { it.resultId to it }.toMap())
+            = Module("id", "test", "test", 10, 1, results.map { it.resultId to it }.toMap())
 
     @Test
     fun calculatePercentageCompleteSingleResultSuccess()

@@ -13,6 +13,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.helpers.ItemSelectedListe
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListener.Companion.bindTextChangedListener
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
 import org.koin.android.architecture.ext.viewModel
+import java.util.*
 
 class AddModuleActivity : AppCompatActivity()
 {
@@ -73,7 +74,7 @@ class AddModuleActivity : AppCompatActivity()
         bindButtonClickedListener(addModuleActivityAddModuleButton, viewModel) {
             when (viewModel.validDataEntered) {
                 true -> {
-                    viewModel.saveModule({ Log.e("AddModuleActivity", it)}) {
+                    viewModel.saveModule(UUID.randomUUID().toString(), { Log.e("AddModuleActivity", it)}) {
                         finish()
                     }
                 }

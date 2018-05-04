@@ -49,6 +49,7 @@ class IndividualModuleViewModel(private val moduleCalculator: IProvideModuleCalc
                 .toMap()
 
         return Module(
+                moduleModel.moduleId,
                 moduleModel.moduleCode,
                 moduleModel.moduleName,
                 moduleModel.moduleCredits,

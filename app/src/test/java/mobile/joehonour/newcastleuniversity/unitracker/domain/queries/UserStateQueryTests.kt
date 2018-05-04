@@ -156,8 +156,8 @@ class UserStateQueryTests
         }
 
         val modules = listOf(
-                Module("CSC3123", "module", 10, 2, emptyMap()),
-                Module("CSC9876", "module2", 20, 1, emptyMap()))
+                Module("id1", "CSC3123", "module", 10, 2, emptyMap()),
+                Module("id2", "CSC9876", "module2", 20, 1, emptyMap()))
 
         val dataAccess = mock<IProvideDataAccess> {
             on { readCollectionFromDatabase<Module>(eq("id/modules"), any(), any(), any()) } doAnswer {

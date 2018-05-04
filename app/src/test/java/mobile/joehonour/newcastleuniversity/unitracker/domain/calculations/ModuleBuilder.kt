@@ -27,7 +27,9 @@ class ModuleBuilder
 
     fun build() : Module
     {
-        return Module(UUID.randomUUID().toString(),
+        return Module(
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
                 "default name",
                 moduleCredits,
                 moduleYearSudied,

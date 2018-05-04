@@ -28,7 +28,7 @@ class IndividualModuleViewModelTests
             on { calculatePercentageCompleteOf(any()) } doReturn 10.0
         }
         val viewModel = IndividualModuleViewModel(calculator)
-        viewModel.module.value = ModuleModel("CSCTEST", "test", 10, 2, listOf(
+        viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculatePercentageComplete(onError, onSuccess)
 
@@ -53,7 +53,7 @@ class IndividualModuleViewModelTests
         }
 
         val viewModel = IndividualModuleViewModel(calculator)
-        viewModel.module.value = ModuleModel("CSCTEST", "test", 10, 2, listOf(
+        viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculatePercentageComplete(onError, onSuccess)
 
@@ -90,7 +90,7 @@ class IndividualModuleViewModelTests
             on { calculateCurrentAverageGradeOf(any()) } doReturn 30
         }
         val viewModel = IndividualModuleViewModel(calculator)
-        viewModel.module.value = ModuleModel("CSCTEST", "test", 10, 2, listOf(
+        viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculateCurrentGrade(onError, onSuccess)
 
@@ -115,7 +115,7 @@ class IndividualModuleViewModelTests
         }
 
         val viewModel = IndividualModuleViewModel(calculator)
-        viewModel.module.value = ModuleModel("CSCTEST", "test", 10, 2, listOf(
+        viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculateCurrentGrade(onError, onSuccess)
 

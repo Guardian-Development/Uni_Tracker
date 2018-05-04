@@ -24,8 +24,8 @@ class ModulesViewModelTests
     fun refreshCurrentModulesSuccessSetsPublicData()
     {
         val modules = listOf(
-                Module("CSC3123", "module", 10, 2, emptyMap()),
-                Module("CSC9876", "module2", 20, 1, emptyMap()))
+                Module("id1", "CSC3123", "module", 10, 2, emptyMap()),
+                Module("id2", "CSC9876", "module2", 20, 1, emptyMap()))
 
         val userStateQuery = mock<IQueryUserState> {
             on { getUserModules(any(), any()) } doAnswer {
@@ -40,10 +40,10 @@ class ModulesViewModelTests
 
         val assert = UnorderedListAssert<String, ModuleModel>({it.moduleCode})
         assert.asserts["CSC3123"] = ModuleModelAssert(
-                FieldAssert("CSC3123"), FieldAssert("module"), FieldAssert(10), FieldAssert(2)
+                FieldAssert("id1"), FieldAssert("CSC3123"), FieldAssert("module"), FieldAssert(10), FieldAssert(2)
         )
         assert.asserts["CSC9876"] = ModuleModelAssert(
-                FieldAssert("CSC9876"), FieldAssert("module2"), FieldAssert(20), FieldAssert(1)
+                FieldAssert("id2"), FieldAssert("CSC9876"), FieldAssert("module2"), FieldAssert(20), FieldAssert(1)
         )
 
         assert.doAssert(viewModel.currentModules.value!!)

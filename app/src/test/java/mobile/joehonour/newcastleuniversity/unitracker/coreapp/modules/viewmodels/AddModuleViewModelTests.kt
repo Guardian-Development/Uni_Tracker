@@ -102,7 +102,7 @@ class AddModuleViewModelTests
 
         val dataStore = mock<IProvideDataStorage> {
             on { addItemToDatabase<Module>(
-                    eq("testuser/modules/CSC123/"), any(), eq(onError), eq(onSuccess)) } doAnswer { onSuccess() }
+                    eq("testuser/modules/uniqueId/"), any(), eq(onError), eq(onSuccess)) } doAnswer { onSuccess() }
         }
 
         addModuleViewModelTester(validator = validator, authProvider = authProvider, dataStorage = dataStore)
@@ -113,7 +113,7 @@ class AddModuleViewModelTests
                     moduleYearStudied.value = 3
                 }
                 .performActions {
-                    saveModule(onError, onSuccess)
+                    saveModule("uniqueId", onError, onSuccess)
                 }
 
         verify(onSuccess).invoke()
@@ -142,7 +142,7 @@ class AddModuleViewModelTests
                     moduleYearStudied.value = 3
                 }
                 .performActions {
-                    saveModule(onError, onSuccess)
+                    saveModule("uniqueId", onError, onSuccess)
                 }
 
         verify(onError).invoke("User not logged in")
@@ -172,7 +172,7 @@ class AddModuleViewModelTests
                     moduleYearStudied.value = 3
                 }
                 .performActions {
-                    saveModule(onError, onSuccess)
+                    saveModule("uniqueId", onError, onSuccess)
                 }
 
         verify(onError).invoke("Invalid data entered")
@@ -201,7 +201,7 @@ class AddModuleViewModelTests
                     moduleYearStudied.value = 3
                 }
                 .performActions {
-                    saveModule(onError, onSuccess)
+                    saveModule("uniqueId", onError, onSuccess)
                 }
 
         verify(onError).invoke("Invalid data entered")

@@ -35,6 +35,7 @@ class AddResultViewModel(private val userState: IQueryUserState,
         userState.getUserModules({ Log.e("AddModuleViewModel", it)}) {
             availableModules.postValue(
                     it.map { ModuleModel(
+                            it.moduleId,
                             it.moduleCode,
                             it.moduleName,
                             it.moduleCredits,
@@ -53,7 +54,7 @@ class AddResultViewModel(private val userState: IQueryUserState,
                     dataStorage.addItemToDatabase(
                             DataLocationKeys.resultLocationForModule(
                                     authProvider.userUniqueId!!,
-                                    addResultModule.value!!.moduleCode,
+                                    addResultModule.value!!.moduleId,
                                     result.resultId),
                             result,
                             onError,

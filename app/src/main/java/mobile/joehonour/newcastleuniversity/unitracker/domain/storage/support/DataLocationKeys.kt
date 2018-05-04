@@ -10,9 +10,9 @@ object DataLocationKeys
     fun studentModulesLocation(studentId: String) : String
             = "${studentRecordLocation(studentId)}modules/"
 
-    fun studentModuleLocation(studentId: String, moduleCode: String) : String
-            = "${studentModulesLocation(studentId)}$moduleCode/"
+    fun studentModuleLocation(studentId: String, moduleId: String) : String
+            = "${studentModulesLocation(studentId)}$moduleId/"
 
-    fun resultLocationForModule(studentId: String, moduleCode: String, resultId: String) : String
-            = "${studentModuleLocation(studentId, moduleCode)}results/$resultId"
+    fun resultLocationForModule(studentId: String, moduleId: String, resultId: String) : String
+            = "${studentModuleLocation(studentId, moduleId)}results/$resultId"
 }

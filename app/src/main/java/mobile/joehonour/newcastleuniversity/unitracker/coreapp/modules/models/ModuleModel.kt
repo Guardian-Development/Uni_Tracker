@@ -3,7 +3,8 @@ package mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class ModuleModel(val moduleCode: String,
+data class ModuleModel(val moduleId: String,
+                       val moduleCode: String,
                        val moduleName: String,
                        val moduleCredits: Int,
                        val moduleYearStudied: Int,
@@ -12,12 +13,14 @@ data class ModuleModel(val moduleCode: String,
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
+            parcel.readString(),
             parcel.readInt(),
             parcel.readInt(),
             parcel.createTypedArrayList(ModuleResultModel))
 
     override fun writeToParcel(parcel: Parcel, flags: Int)
     {
+        parcel.writeString(moduleId)
         parcel.writeString(moduleCode)
         parcel.writeString(moduleName)
         parcel.writeInt(moduleCredits)
