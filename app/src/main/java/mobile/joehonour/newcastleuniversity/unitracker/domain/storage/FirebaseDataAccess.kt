@@ -13,7 +13,7 @@ class FirebaseDataAccess(private val databaseReference: DatabaseReference) : IPr
             onSuccess: (T) -> Unit)
     {
         val databaseListener = FirebaseDataAccessSingleValueEventListener(onError, onSuccess, type)
-        databaseReference.child(key).addListenerForSingleValueEvent(databaseListener)
+        databaseReference.child(key).addValueEventListener(databaseListener)
     }
 
     override fun <T : Any> readCollectionFromDatabase(
@@ -22,7 +22,7 @@ class FirebaseDataAccess(private val databaseReference: DatabaseReference) : IPr
             onError: (String?) -> Unit, onSuccess: (List<T>) -> Unit)
     {
         val databaseListener = FirebaseDataAccessMultipleValueEventListener(onError, onSuccess, itemType)
-        databaseReference.child(key).addListenerForSingleValueEvent(databaseListener)
+        databaseReference.child(key).addValueEventListener(databaseListener)
     }
 }
 

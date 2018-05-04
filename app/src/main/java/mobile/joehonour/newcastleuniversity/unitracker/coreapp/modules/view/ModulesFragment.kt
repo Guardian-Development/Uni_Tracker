@@ -27,6 +27,7 @@ class ModulesFragment : Fragment()
                 it.notNull() -> bindListOfModules(it!!)
             }
         })
+        viewModel.refreshCurrentModules()
         return inflater.inflate(R.layout.fragment_modules, container, false)
     }
 
@@ -41,21 +42,6 @@ class ModulesFragment : Fragment()
         coreAppModulesFragmentAddModuleButton.setOnClickListener {
             startActivity(Intent(this.context, AddModuleActivity::class.java))
         }
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean)
-    {
-        super.setUserVisibleHint(isVisibleToUser)
-        if(isVisibleToUser)
-        {
-            onResume()
-        }
-    }
-
-    override fun onResume()
-    {
-        super.onResume()
-        viewModel.refreshCurrentModules()
     }
 
     private fun bindListOfModules(modules: List<ModuleModel>)
