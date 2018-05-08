@@ -1,8 +1,10 @@
 package mobile.joehonour.newcastleuniversity.unitracker.configuration.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -29,7 +31,18 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         val setupData = intent.extras.get("setupData") as ConfigurationDataModel
         viewModel.configurationData = setupData
 
+        configurationConfigureYearsAddYearButton.setOnClickListener {
+            startActivityForResult(Intent(this@ConfigurationYearWeightingActivity,
+                    ConfigurationAddYearWeighting::class.java), 1)
+        }
+
         bindCompleteSetupButtonToAction()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        //todo: get result from the add year weighting activity
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun bindCompleteSetupButtonToAction()
