@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="mobile.joehonour.newcastleuniversity.unitracker.configuration.view.ConfigurationAddYearWeighting">
 
     <TextView
@@ -20,5 +22,91 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addYearWeightingActivityYearNumberTextInput"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addYearWeightingActivityTitle">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/addYearWeightingActivityYearNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Year Number"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addYearWeightingActivityYearWeightingTextInput"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addYearWeightingActivityYearNumberTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/addYearWeightingActivityYearWeighting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Year Weighting"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addYearWeightingActivityCreditsCompletedWithinYearTextInput"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/textColorSecondary"
+        android:textColorHint="@color/textColorSecondary"
+        app:errorEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.UserInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addYearWeightingActivityYearWeightingTextInput">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/addYearWeightingActivityCreditsCompletedWithinYear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Credits Completed Within Year"
+            android:inputType="numberSigned"
+            android:textColor="@color/textColorPrimary" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/addYearWeightingActivityAddYearWeightingButton"
+        android:layout_width="325dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/button_with_border"
+        android:text="@string/addModuleActivityAddModuleButtonText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"  />
 
 </android.support.constraint.ConstraintLayout>

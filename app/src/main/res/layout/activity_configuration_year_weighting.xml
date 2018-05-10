@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/completeSetupButton"
+        android:id="@+id/configurationConfigureYearsCompleteSetupButton"
         android:layout_width="325dp"
         android:layout_height="45dp"
         android:layout_marginBottom="16dp"
@@ -61,5 +60,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yearSelectHelpMessage" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/configurationYearsConfiguredRecyclerView"
+        android:layout_width="264dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/configurationConfigureYearsAddYearButton" />
 
 </android.support.constraint.ConstraintLayout>

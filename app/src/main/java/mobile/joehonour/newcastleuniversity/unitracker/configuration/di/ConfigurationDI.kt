@@ -15,7 +15,7 @@ object ConfigurationDI
         provide { ConfigurationDataModelValidator() }
         provide { ConfigurationYearWeightingModelValidator() }
         viewModel { ConfigurationViewModel(get()) }
-        viewModel { ConfigurationYearWeightingViewModel(get(), get(), get()) }
-        viewModel { ConfigurationAddYearWeightingViewModel() }
+        viewModel { ConfigurationYearWeightingViewModel(get(), get()) }
+        viewModel { ConfigurationAddYearWeightingViewModel(get()) }
     }
 }
