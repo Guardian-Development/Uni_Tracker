@@ -5,10 +5,10 @@ import android.arch.lifecycle.ViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.IProvideStudentTargetCalculations
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.StudentRecord
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataSingleReadAccess
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
-class DashboardViewModel(private val dataAccess: IProvideDataAccess,
+class DashboardViewModel(private val dataAccess: IProvideDataSingleReadAccess,
                          private val authProvider: IProvideAuthentication,
                          private val studentTargetCalculator: IProvideStudentTargetCalculations) : ViewModel()
 {

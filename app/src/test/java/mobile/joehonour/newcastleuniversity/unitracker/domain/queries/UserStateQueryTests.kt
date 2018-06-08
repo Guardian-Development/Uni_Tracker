@@ -5,7 +5,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configuration
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ConfigurationYearWeighting
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataSingleReadAccess
 import mobile.joehonour.newcastleuniversity.unitracker.support.FieldAssert
 import mobile.joehonour.newcastleuniversity.unitracker.support.UnorderedListAssert
 import org.junit.Test
@@ -20,7 +20,7 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn true
             on { userUniqueId } doReturn "id"
         }
-        val dataAccessor = mock<IProvideDataAccess> {
+        val dataAccessor = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase(
                     eq("id/configuration/"),
                     eq(Configuration::class.java),
@@ -42,7 +42,7 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn true
             on { userUniqueId } doReturn "id"
         }
-        val dataAccessor = mock<IProvideDataAccess> {
+        val dataAccessor = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase(
                     eq("id/configuration/"),
                     eq(Configuration::class.java),
@@ -94,7 +94,7 @@ class UserStateQueryTests
 
         val onSuccess = mock<(Configuration) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<Configuration>(
                     eq("id/configuration/"),
                     any(),
@@ -120,7 +120,7 @@ class UserStateQueryTests
             FieldAssert<String?>("No configuration saved").doAssert(it)
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<Configuration>(
                     eq("id/configuration"),
                     any(),
@@ -159,7 +159,7 @@ class UserStateQueryTests
                 Module("id1", "CSC3123", "module", 10, 2, emptyMap()),
                 Module("id2", "CSC9876", "module2", 20, 1, emptyMap()))
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readCollectionFromDatabase<Module>(eq("id/modules"), any(), any(), any()) } doAnswer {
                 val onSuccess = it.arguments[3] as ((List<Module>) -> Unit)
                 onSuccess(modules)
@@ -189,7 +189,7 @@ class UserStateQueryTests
             on { userUniqueId } doReturn "id"
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readCollectionFromDatabase<Module>(eq("id/modules/"), any(), any(), any()) } doAnswer {
                 val onError = it.arguments[2] as ((String?) -> Unit)
                 onError("database failure")

@@ -10,10 +10,7 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.Modul
 import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.StudentTargetCalculator
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.UserStateQuery
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.FirebaseDataAccess
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.FirebaseDataStorage
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.*
 import org.koin.dsl.module.applicationContext
 
 object DomainDI
@@ -21,8 +18,9 @@ object DomainDI
     val domainModule = applicationContext {
         provide { FirebaseAuthenticationProvider(FirebaseAuth.getInstance()) as IProvideAuthentication }
         provide { FirebaseDataStorage(FirebaseDatabase.getInstance().reference) as IProvideDataStorage }
-        provide { FirebaseDataAccess(FirebaseDatabase.getInstance().reference) as IProvideDataAccess }
-        provide { UserStateQuery(get(), get()) as IQueryUserState }
+        provide { FirebaseDataReadAccess(FirebaseDatabase.getInstance().reference) as IProvideDataSingleReadAccess }
+        provide { FirebaseDataReadAccess(FirebaseDatabase.getInstance().reference) as IProvideDataConstantListeningReadAccess }
+        provide { UserStateQuery(get(), get(), get()) as IQueryUserState }
         provide { ModuleCalculator() as IProvideModuleCalculations }
         provide { StudentTargetCalculator() as IProvideStudentTargetCalculations }
     }

@@ -3,10 +3,12 @@ package mobile.joehonour.newcastleuniversity.unitracker.domain.queries
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configuration
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataConstantListeningReadAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataSingleReadAccess
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
-class UserStateQuery(private val dataAccess: IProvideDataAccess,
+class UserStateQuery(private val dataReadAccess: IProvideDataSingleReadAccess,
+                     private val dataListenAccess: IProvideDataConstantListeningReadAccess,
                      private val authProvider: IProvideAuthentication) : IQueryUserState
 {
     override fun userHasCompletedConfiguration(result: (Boolean) -> Unit)
@@ -18,7 +20,7 @@ class UserStateQuery(private val dataAccess: IProvideDataAccess,
     {
         when(authProvider.userLoggedIn) {
             false -> onError("user not logged in")
-            true -> dataAccess.readItemFromDatabase(
+            true -> dataReadAccess.readItemFromDatabase(
                     DataLocationKeys.studentConfigurationLocation(authProvider.userUniqueId!!),
                     Configuration::class.java,
                     onError,
@@ -30,7 +32,7 @@ class UserStateQuery(private val dataAccess: IProvideDataAccess,
     {
         when(authProvider.userLoggedIn) {
             false -> onError("User not logged in")
-            true -> dataAccess.readCollectionFromDatabase(
+            true -> dataListenAccess.readCollectionFromDatabaseAndListenForChanges(
                     DataLocationKeys.studentModulesLocation(authProvider.userUniqueId!!),
                     Module::class.java,
                     onError,

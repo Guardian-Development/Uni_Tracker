@@ -4,7 +4,7 @@ import com.nhaarman.mockito_kotlin.*
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.IProvideStudentTargetCalculations
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.StudentRecord
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataSingleReadAccess
 import mobile.joehonour.newcastleuniversity.unitracker.support.FieldAssert
 import org.junit.Test
 
@@ -18,7 +18,7 @@ class DashboardViewModelTests
             on { invoke(10.0) } doAnswer { FieldAssert(10.0).doAssert(it.arguments[0] as Double) }
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[3] as (StudentRecord) -> Unit).invoke(mock())
             }
@@ -73,7 +73,7 @@ class DashboardViewModelTests
         }
         val onSuccess = mock<(Double) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[2] as (String?) -> Unit).invoke("Data read failed")
             }
@@ -102,7 +102,7 @@ class DashboardViewModelTests
         }
         val onSuccess = mock<(Double) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[3] as (StudentRecord) -> Unit).invoke(mock())
             }
@@ -135,7 +135,7 @@ class DashboardViewModelTests
             on { invoke(10.0) } doAnswer { FieldAssert(10.0).doAssert(it.arguments[0] as Double) }
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[3] as (StudentRecord) -> Unit).invoke(mock())
             }
@@ -190,7 +190,7 @@ class DashboardViewModelTests
         }
         val onSuccess = mock<(Double) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[2] as (String?) -> Unit).invoke("Data read failed")
             }
@@ -219,7 +219,7 @@ class DashboardViewModelTests
         }
         val onSuccess = mock<(Double) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[3] as (StudentRecord) -> Unit).invoke(mock())
             }
@@ -252,7 +252,7 @@ class DashboardViewModelTests
             on { invoke(10.0) } doAnswer { FieldAssert(10.0).doAssert(it.arguments[0] as Double) }
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[3] as (StudentRecord) -> Unit).invoke(mock())
             }
@@ -307,7 +307,7 @@ class DashboardViewModelTests
         }
         val onSuccess = mock<(Double) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[2] as (String?) -> Unit).invoke("Data read failed")
             }
@@ -336,7 +336,7 @@ class DashboardViewModelTests
         }
         val onSuccess = mock<(Double) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<StudentRecord>(eq("userid/"), any(), any(), any()) } doAnswer {
                 (it.arguments[3] as (StudentRecord) -> Unit).invoke(mock())
             }
