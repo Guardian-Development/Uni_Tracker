@@ -5,9 +5,7 @@ import junit.framework.Assert
 class ConfigurationDataModelTester(
         var universityName: String,
         var yearStarted: Int,
-        var courseLength: Int,
-        var targetPercentage: Int,
-        var totalCredits: Int
+        var targetPercentage: Int
 ){
     fun withEdits(tester: ConfigurationDataModelTester.() -> Unit) : ConfigurationDataModelTester
     {
@@ -29,9 +27,7 @@ class ConfigurationDataModelTester(
             validator.validate(
                     universityName,
                     yearStarted,
-                    courseLength,
-                    targetPercentage,
-                    totalCredits)
+                    targetPercentage)
 
     companion object
     {
@@ -39,8 +35,6 @@ class ConfigurationDataModelTester(
                 ConfigurationDataModelTester(
                         "Valid Name",
                         validator.yearStartedMinValue + 1,
-                        validator.courseLengthMinValue + 1,
-                        validator.targetPercentageMinValue + 1,
-                        validator.totalCreditsMinValue + 1)
+                        validator.targetPercentageMinValue + 1)
     }
 }
