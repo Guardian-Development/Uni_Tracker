@@ -59,7 +59,7 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
     {
         when {
             yearWeightings.isNotEmpty() -> configurationConfigureYearsCompleteSetupButton.visibility = View.VISIBLE
-            else -> configurationConfigureYearsCompleteSetupButton.visibility = View.VISIBLE
+            else -> configurationConfigureYearsCompleteSetupButton.visibility = View.INVISIBLE
         }
     }
 
@@ -84,13 +84,12 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
 
     private fun bindCompleteSetupButtonToAction()
     {
-        //todo: some problem with this being executed multiple times
         bindButtonClickedListener(configurationConfigureYearsCompleteSetupButton, viewModel) {
             saveConfiguration({ Log.e("initial setup", it ?: "error") }) {
-//                startActivity(Intent(
-//                        this@ConfigurationYearWeightingActivity,
-//                        CoreAppTabContainerActivity::class.java))
-//                this@ConfigurationYearWeightingActivity.finish()
+                startActivity(Intent(
+                        this@ConfigurationYearWeightingActivity,
+                        CoreAppTabContainerActivity::class.java))
+                this@ConfigurationYearWeightingActivity.finish()
             }
         }
     }
