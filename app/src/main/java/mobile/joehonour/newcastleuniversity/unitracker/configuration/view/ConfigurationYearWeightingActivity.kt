@@ -29,7 +29,7 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         val setupData = intent.extras.get("setupData") as ConfigurationDataModel
         viewModel.configurationData = setupData
 
-        configurationConfigureYearsAddYearButton.setOnClickListener {
+        configurationYearWeightingsAddYearButton.setOnClickListener {
             startActivityForResult(Intent(this@ConfigurationYearWeightingActivity,
                     ConfigurationAddYearWeighting::class.java),
                     ConfigurationYearWeightingActivity.addYearWeightingActivityCode)
@@ -58,8 +58,8 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
     private fun displayCompleteSetupButton(yearWeightings: List<ConfigurationYearWeightingModel>)
     {
         when {
-            yearWeightings.isNotEmpty() -> configurationConfigureYearsCompleteSetupButton.visibility = View.VISIBLE
-            else -> configurationConfigureYearsCompleteSetupButton.visibility = View.INVISIBLE
+            yearWeightings.isNotEmpty() -> configurationYearWeightingsCompleteSetupButton.visibility = View.VISIBLE
+            else -> configurationYearWeightingsCompleteSetupButton.visibility = View.INVISIBLE
         }
     }
 
@@ -84,7 +84,7 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
 
     private fun bindCompleteSetupButtonToAction()
     {
-        bindButtonClickedListener(configurationConfigureYearsCompleteSetupButton, viewModel) {
+        bindButtonClickedListener(configurationYearWeightingsCompleteSetupButton, viewModel) {
             saveConfiguration({ Log.e("initial setup", it ?: "error") }) {
                 startActivity(Intent(
                         this@ConfigurationYearWeightingActivity,

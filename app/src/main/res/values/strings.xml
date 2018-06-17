@@ -30,6 +30,7 @@ secrets.xml resource file should be added to values folder containing:
     <string name="configurationActivityTotalCreditsErrorMessage">Total Credits must be supplied</string>
 
     <string name="configurationYearWeightingActivityYearSelectHelpMessage">In order to provide accurate grade predictions, we need to know how much each year contributes to your degree classification. Please enter information for each year of your degree below.</string>
+    <string name="configurationYearWeightingsTitle">Enter Course Details:</string>
     <string name="configurationYearWeightingActivityYearBeingSelectedMessage">Enter Information For Year:</string>
     <string name="configurationYearWeightingYearBeingSelectedDefaultYear">1</string>
     <string name="configurationYearWeightingActivityYeatWeightingHint">Weighting of Year %</string>
@@ -91,4 +92,10 @@ secrets.xml resource file should be added to values folder containing:
     <string name="addResultFragmentResultWeightingHint">Result Weighting</string>
     <string name="addResultFragmentResultPercentageHint">Result Percentage</string>
     <string name="addResultFragmentAddResultButtonText">Add Result</string>
+
+    <string name="configurationAddYearWeightingTitle">Add Year Weighting:</string>
+    <string name="configurationAddYearWeightingYearNumberHint">Year Number</string>
+    <string name="configurationAddYearWeightingYearWeightingHint">Year Weighting</string>
+    <string name="configurationAddYearWeightingCreditsCompletedHint">Credits Completed Within Year</string>
+    <string name="configurationYearWeightingAddYearButtonText">Add Year</string>
 </resources>
