@@ -23,6 +23,12 @@ class ConfigurationYearWeightingViewModel(
 
     fun saveConfiguration(onError: (String?) -> Unit, onSuccess: () -> Unit)
     {
+        if(configurationData == null)
+        {
+            onError("Configuration Data can not be null")
+            return
+        }
+
         val appConfiguration = buildAppConfiguration()
 
         when(authProvider.userLoggedIn) {
