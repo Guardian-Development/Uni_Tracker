@@ -9,6 +9,8 @@ import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.twitter.sdk.android.core.Twitter
+import com.twitter.sdk.android.core.TwitterCore
 import kotlinx.android.synthetic.main.activity_login.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.view.ConfigurationActivity
@@ -39,6 +41,7 @@ class LoginActivity : AppCompatActivity()
 
     private fun registerTwitterLoginButton()
     {
+        TwitterCore.getInstance().sessionManager.clearActiveSession()
         twitterLoginButton.callback = viewModel.handleTwitterSession(
                 { Log.e("LoginViewModel", it) },
                 this::redirectFromSuccessfulLogin)
@@ -65,6 +68,8 @@ class LoginActivity : AppCompatActivity()
                 .build()
 
         val signInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+        signInClient.signOut()
+
         googleLoginButton.setOnClickListener {
             val signInIntent = signInClient.signInIntent
             startActivityForResult(signInIntent, googleSignInCode)

@@ -29,6 +29,9 @@
             android:name=".configuration.view.ConfigurationYearWeightingActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".configuration.view.ConfigurationAddYearWeighting"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
             android:name=".coreapp.CoreAppTabContainerActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -60,7 +63,6 @@
         </activity>
         <!-- End Facebook activities -->
 
-        <activity android:name=".configuration.view.ConfigurationAddYearWeighting"></activity>
     </application>
 
 </manifest>

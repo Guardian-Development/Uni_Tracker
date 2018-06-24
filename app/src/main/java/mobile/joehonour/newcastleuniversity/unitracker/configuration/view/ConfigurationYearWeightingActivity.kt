@@ -86,10 +86,10 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
     {
         bindButtonClickedListener(configurationYearWeightingsCompleteSetupButton, viewModel) {
             saveConfiguration({ Log.e("initial setup", it ?: "error") }) {
-                startActivity(Intent(
-                        this@ConfigurationYearWeightingActivity,
-                        CoreAppTabContainerActivity::class.java))
-                this@ConfigurationYearWeightingActivity.finish()
+                val intent = Intent(this@ConfigurationYearWeightingActivity,
+                        CoreAppTabContainerActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }
