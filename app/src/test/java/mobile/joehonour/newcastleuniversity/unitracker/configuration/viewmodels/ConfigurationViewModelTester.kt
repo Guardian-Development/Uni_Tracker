@@ -16,9 +16,7 @@ class ConfigurationViewModelTester(private val viewModel: ConfigurationViewModel
             = performActions {
                 universityName.value = "default"
                 yearStarted.value = 0
-                courseLength.value = 0
-                targetPercentage.value = 0
-                totalCredits.value = 0 }
+                targetPercentage.value = 0 }
 
     fun buildAndAssertConfiguration(builder: ConfigurationDataModelAssert.() -> Unit)
     {

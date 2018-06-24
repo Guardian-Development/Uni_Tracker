@@ -44,17 +44,6 @@ class ConfigurationActivity : AppCompatActivity()
                         yearStartedTextInput.error = null
                     })
         }
-        bindTextChangedListener(configurationActivityCourseLength, viewModel) {
-            it.executeIfNotNullOrEmpty(
-                    {
-                        courseLength.value = null
-                        courseLengthTextInput.error = getString(R.string.configurationActivityCourseLengthErrorMessage)
-                    },
-                    {
-                        courseLength.value = it.toInt()
-                        courseLengthTextInput.error = null
-                    })
-        }
         bindTextChangedListener(configurationActivityTargetPercentage, viewModel) {
             it.executeIfNotNullOrEmpty(
                     {
@@ -64,17 +53,6 @@ class ConfigurationActivity : AppCompatActivity()
                     {
                         targetPercentage.value = it.toInt()
                         targetPercentageTextInput.error = null
-                    })
-        }
-        bindTextChangedListener(configurationActivityTotalCredits, viewModel) {
-            it.executeIfNotNullOrEmpty(
-                    {
-                        totalCredits.value = null
-                        totalCreditsTextInput.error = getString(R.string.configurationActivityTotalCreditsErrorMessage)
-                    },
-                    {
-                        totalCredits.value = it.toInt()
-                        totalCreditsTextInput.error = null
                     })
         }
     }

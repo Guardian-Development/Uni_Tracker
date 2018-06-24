@@ -5,7 +5,8 @@ import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IPr
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Configuration
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ConfigurationYearWeighting
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
-import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataConstantListeningReadAccess
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataSingleReadAccess
 import mobile.joehonour.newcastleuniversity.unitracker.support.FieldAssert
 import mobile.joehonour.newcastleuniversity.unitracker.support.UnorderedListAssert
 import org.junit.Test
@@ -20,14 +21,14 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn true
             on { userUniqueId } doReturn "id"
         }
-        val dataAccessor = mock<IProvideDataAccess> {
+        val dataAccessor = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase(
                     eq("id/configuration/"),
                     eq(Configuration::class.java),
                     any(),
                     any()) } doAnswer { callback.invoke(true) }
         }
-        val query = UserStateQuery(dataAccessor, authProvider)
+        val query = UserStateQuery(dataAccessor, mock(), authProvider)
 
         query.userHasCompletedConfiguration(callback)
 
@@ -42,14 +43,14 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn true
             on { userUniqueId } doReturn "id"
         }
-        val dataAccessor = mock<IProvideDataAccess> {
+        val dataAccessor = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase(
                     eq("id/configuration/"),
                     eq(Configuration::class.java),
                     any(),
                     any()) } doAnswer { callback.invoke(false) }
         }
-        val query = UserStateQuery(dataAccessor, authProvider)
+        val query = UserStateQuery(dataAccessor, mock(), authProvider)
 
         query.userHasCompletedConfiguration(callback)
 
@@ -64,7 +65,7 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn false
             on { userUniqueId } doReturn "id"
         }
-        val query = UserStateQuery(mock(), authProvider)
+        val query = UserStateQuery(mock(), mock(), authProvider)
 
         query.userHasCompletedConfiguration(callback)
 
@@ -94,7 +95,7 @@ class UserStateQueryTests
 
         val onSuccess = mock<(Configuration) -> Unit>()
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<Configuration>(
                     eq("id/configuration/"),
                     any(),
@@ -102,7 +103,7 @@ class UserStateQueryTests
                     any()) } doAnswer { onSuccess(configuration) }
         }
 
-        UserStateQuery(dataAccess, authProvider)
+        UserStateQuery(dataAccess, mock(), authProvider)
                 .getUserConfiguration(mock(), onSuccess)
 
         verify(onSuccess).invoke(configuration)
@@ -120,7 +121,7 @@ class UserStateQueryTests
             FieldAssert<String?>("No configuration saved").doAssert(it)
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readItemFromDatabase<Configuration>(
                     eq("id/configuration"),
                     any(),
@@ -128,7 +129,7 @@ class UserStateQueryTests
                     any()) } doAnswer { onError("No configuration saved") }
         }
 
-        UserStateQuery(dataAccess, authProvider)
+        UserStateQuery(dataAccess, mock(), authProvider)
                 .getUserConfiguration(onError, mock())
     }
 
@@ -140,7 +141,7 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn false
             on { userUniqueId } doReturn "id"
         }
-        val query = UserStateQuery(mock(), authProvider)
+        val query = UserStateQuery(mock(), mock(), authProvider)
 
         query.getUserConfiguration(onError, mock())
 
@@ -159,14 +160,14 @@ class UserStateQueryTests
                 Module("id1", "CSC3123", "module", 10, 2, emptyMap()),
                 Module("id2", "CSC9876", "module2", 20, 1, emptyMap()))
 
-        val dataAccess = mock<IProvideDataAccess> {
+        val dataAccess = mock<IProvideDataSingleReadAccess> {
             on { readCollectionFromDatabase<Module>(eq("id/modules"), any(), any(), any()) } doAnswer {
                 val onSuccess = it.arguments[3] as ((List<Module>) -> Unit)
                 onSuccess(modules)
             }
         }
 
-        val query = UserStateQuery(dataAccess, authProvider)
+        val query = UserStateQuery(dataAccess, mock(), authProvider)
         val onSuccess = { modules:List<Module> ->
             val assert = UnorderedListAssert<String, Module>({ it.moduleCode })
             assert.asserts["CSC3123"] = ModuleAssert(
@@ -189,14 +190,14 @@ class UserStateQueryTests
             on { userUniqueId } doReturn "id"
         }
 
-        val dataAccess = mock<IProvideDataAccess> {
-            on { readCollectionFromDatabase<Module>(eq("id/modules/"), any(), any(), any()) } doAnswer {
+        val dataAccess = mock<IProvideDataConstantListeningReadAccess> {
+            on { readCollectionFromDatabaseAndListenForChanges<Module>(eq("id/modules/"), any(), any(), any()) } doAnswer {
                 val onError = it.arguments[2] as ((String?) -> Unit)
                 onError("database failure")
             }
         }
 
-        val query = UserStateQuery(dataAccess, authProvider)
+        val query = UserStateQuery(mock(), dataAccess, authProvider)
         val onError = mock<((String?) -> Unit)> {
             on { invoke(any()) } doAnswer {
                 FieldAssert("database failure").doAssert(it.arguments[0] as (String))
@@ -214,7 +215,7 @@ class UserStateQueryTests
             on { userLoggedIn } doReturn false
         }
 
-        val query = UserStateQuery(mock(), authProvider)
+        val query = UserStateQuery(mock(), mock(), authProvider)
         val onError = mock<((String?) -> Unit)> {
             on { invoke(any()) } doAnswer {
                 FieldAssert("User not logged in").doAssert(it.arguments[0] as (String)) }

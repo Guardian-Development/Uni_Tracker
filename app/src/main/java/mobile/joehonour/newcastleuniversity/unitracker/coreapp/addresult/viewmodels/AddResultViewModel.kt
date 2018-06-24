@@ -6,6 +6,7 @@ import android.util.Log
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.models.AddResultModelValidator
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.addresult.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
+import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ModuleResult
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
 import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
@@ -28,7 +29,7 @@ class AddResultViewModel(private val userState: IQueryUserState,
         get() = addResultModelValidator.validate(
                 addResultName.value,
                 addResultWeightingPercentage.value,
-                addResultPercentage.value)
+                addResultPercentage.value) && addResultModule.value.notNull()
 
     fun refreshAvailableModules()
     {

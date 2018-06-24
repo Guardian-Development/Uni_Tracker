@@ -24,7 +24,7 @@ class ConfigurationYearWeightingModelTester(
     }
 
     private fun validate(validator: ConfigurationYearWeightingModelValidator) : Boolean =
-            validator.validate(weighting, creditsCompletedWithinYear)
+            validator.validate(year, weighting, creditsCompletedWithinYear)
 
     companion object
     {

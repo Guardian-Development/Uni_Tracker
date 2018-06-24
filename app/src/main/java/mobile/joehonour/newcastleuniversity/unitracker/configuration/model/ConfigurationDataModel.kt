@@ -9,15 +9,11 @@ import java.time.LocalDateTime
 data class ConfigurationDataModel(
         val universityName: String,
         val yearStarted: Int,
-        val courseLength: Int,
-        val targetPercentage: Int,
-        val totalCredits: Int
+        val targetPercentage: Int
 ) : Parcelable
 {
    constructor(parcel: Parcel) : this(
            parcel.readString(),
-           parcel.readInt(),
-           parcel.readInt(),
            parcel.readInt(),
            parcel.readInt())
 
@@ -25,9 +21,7 @@ data class ConfigurationDataModel(
    {
       parcel.writeString(universityName)
       parcel.writeInt(yearStarted)
-      parcel.writeInt(courseLength)
       parcel.writeInt(targetPercentage)
-      parcel.writeInt(totalCredits)
    }
 
    override fun describeContents(): Int
@@ -52,26 +46,16 @@ data class ConfigurationDataModel(
 class ConfigurationDataModelValidator(
         val yearStartedMinValue: Int = 1950,
         val yearStartedMaxValue: Int = LocalDateTime.now().year,
-        val courseLengthMinValue: Int = 1,
-        val courseLengthMaxValue: Int = 15,
         val targetPercentageMinValue: Int = 0,
-        val targetPercentageMaxValue: Int = 100,
-        val totalCreditsMinValue: Int = 10,
-        val totalCreditsMaxValue: Int = 500)
+        val targetPercentageMaxValue: Int = 100)
 {
    fun validate(
            universityName: String?,
            yearStarted: Int?,
-           courseLength: Int?,
-           targetPercentage: Int?,
-           totalCredits: Int?) : Boolean =
+           targetPercentage: Int?) : Boolean =
                     universityName.notNullOrEmpty() &&
                     yearStarted.notNullWithinInclusiveRange(
                            yearStartedMinValue, yearStartedMaxValue) &&
-                    courseLength.notNullWithinInclusiveRange(
-                           courseLengthMinValue, courseLengthMaxValue) &&
                     targetPercentage.notNullWithinInclusiveRange(
-                           targetPercentageMinValue, targetPercentageMaxValue) &&
-                    totalCredits.notNullWithinInclusiveRange(
-                           totalCreditsMinValue, totalCreditsMaxValue)
+                           targetPercentageMinValue, targetPercentageMaxValue)
 }

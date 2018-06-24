@@ -9,17 +9,13 @@ class ConfigurationViewModel(private val dataValidator: ConfigurationDataModelVa
 {
     val universityName: MutableLiveData<String> = MutableLiveData()
     val yearStarted: MutableLiveData<Int> = MutableLiveData()
-    val courseLength: MutableLiveData<Int> = MutableLiveData()
     val targetPercentage: MutableLiveData<Int> = MutableLiveData()
-    val totalCredits: MutableLiveData<Int> = MutableLiveData()
 
     val validDataEntered: Boolean
         get() = dataValidator.validate(
                 universityName.value,
                 yearStarted.value,
-                courseLength.value,
-                targetPercentage.value,
-                totalCredits.value
+                targetPercentage.value
         )
 
     fun buildConfigurationData() : ConfigurationDataModel
@@ -32,9 +28,7 @@ class ConfigurationViewModel(private val dataValidator: ConfigurationDataModelVa
         return ConfigurationDataModel(
                 universityName.value!!,
                 yearStarted.value!!,
-                courseLength.value!!,
-                targetPercentage.value!!,
-                totalCredits.value!!)
+                targetPercentage.value!!)
     }
 }
 

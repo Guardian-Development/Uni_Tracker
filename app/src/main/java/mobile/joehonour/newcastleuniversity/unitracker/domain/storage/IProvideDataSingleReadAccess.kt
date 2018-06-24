@@ -1,6 +1,6 @@
 package mobile.joehonour.newcastleuniversity.unitracker.domain.storage
 
-interface IProvideDataAccess
+interface IProvideDataSingleReadAccess
 {
     fun <T : Any> readItemFromDatabase(key: String,
                                  type: Class<T>,

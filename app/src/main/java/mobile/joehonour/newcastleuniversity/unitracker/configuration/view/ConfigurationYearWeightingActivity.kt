@@ -1,19 +1,19 @@
 package mobile.joehonour.newcastleuniversity.unitracker.configuration.view
 
+import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_configuration_year_weighting.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationDataModel
+import mobile.joehonour.newcastleuniversity.unitracker.configuration.model.ConfigurationYearWeightingModel
 import mobile.joehonour.newcastleuniversity.unitracker.configuration.viewmodels.ConfigurationYearWeightingViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.CoreAppTabContainerActivity
-import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.executeIfNotNullOrEmpty
-import mobile.joehonour.newcastleuniversity.unitracker.extensions.hideKeyboard
-import mobile.joehonour.newcastleuniversity.unitracker.helpers.TextChangedListener.Companion.bindTextChangedListener
 import mobile.joehonour.newcastleuniversity.unitracker.helpers.bindButtonClickedListener
 import org.koin.android.architecture.ext.viewModel
 
@@ -29,85 +29,73 @@ class ConfigurationYearWeightingActivity : AppCompatActivity()
         val setupData = intent.extras.get("setupData") as ConfigurationDataModel
         viewModel.configurationData = setupData
 
-        bindNewYearWeightingToModel()
-        bindContinueButtonToAction()
-        bindCompleteSetupButtonToAction()
+        configurationYearWeightingsAddYearButton.setOnClickListener {
+            startActivityForResult(Intent(this@ConfigurationYearWeightingActivity,
+                    ConfigurationAddYearWeighting::class.java),
+                    ConfigurationYearWeightingActivity.addYearWeightingActivityCode)
+        }
+
+        viewModel.yearWeightings.observe(this, Observer {
+            when {
+                it != null -> {
+                    bindListOfConfiguredYearWeightings(it.toList())
+                    displayCompleteSetupButton(it.toList())
+                }
+            }
+        })
+
+       bindCompleteSetupButtonToAction()
     }
 
-    private fun bindNewYearWeightingToModel()
+    private fun bindListOfConfiguredYearWeightings(yearWeightings: List<ConfigurationYearWeightingModel>)
     {
-        viewModel.bindModelForCurrentYear {
-                yearBeingSelected.text = viewModel.currentYear.toString()
-                configurationYearWeightingActivityYearWeighting.text = null
-                configurationYearWeightingActivityCreditsCompletedWithinYear.text = null
-                bindTextChangedListener(configurationYearWeightingActivityYearWeighting, this) {
-                    it.executeIfNotNullOrEmpty(
-                            {
-                                currentYearWeighting.value = null
-                                yearWeightingTextInput.error = "Year Weighting must be supplied"
-                            },
-                            {
-                                currentYearWeighting.value = it.toInt()
-                                yearWeightingTextInput.error = null
-                            })
-                }
-                bindTextChangedListener(configurationYearWeightingActivityCreditsCompletedWithinYear, this) {
-                    it.executeIfNotNullOrEmpty(
-                            {
-                                currentYearCreditsCompleted.value = null
-                                creditsCompletedWithinYearTextInput.error = "Credits Completed must be supplied"
-                            },
-                            {
-                                currentYearCreditsCompleted.value = it.toInt()
-                                creditsCompletedWithinYearTextInput.error = null
-                            })
-                }
+        configurationYearsConfiguredRecyclerView.layoutManager =
+                LinearLayoutManager(this@ConfigurationYearWeightingActivity)
+        configurationYearsConfiguredRecyclerView.adapter =
+                ConfigurationYearWeightingsModelRecyclerAdapter(yearWeightings)
+    }
+
+    private fun displayCompleteSetupButton(yearWeightings: List<ConfigurationYearWeightingModel>)
+    {
+        when {
+            yearWeightings.isNotEmpty() -> configurationYearWeightingsCompleteSetupButton.visibility = View.VISIBLE
+            else -> configurationYearWeightingsCompleteSetupButton.visibility = View.INVISIBLE
         }
     }
 
-    private fun bindContinueButtonToAction()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     {
-        bindButtonClickedListener(continueButton, viewModel) {
-            when (viewModel.validDataEnteredForCurrentYearWeighting) {
-                true -> {
-                    hideKeyboard()
-                    progressYearWeightingEntry()
-                }
-                false -> Toast.makeText(
-                        this@ConfigurationYearWeightingActivity,
-                        "Invalid Data Entered",
-                        Toast.LENGTH_LONG).show()
-            }
-        }
-    }
+        super.onActivityResult(requestCode, resultCode, data)
 
-    private fun progressYearWeightingEntry()
-    {
-        viewModel.finishEditingCurrentYear()
-        when(viewModel.completedWeightingsForAllYear) {
-            true -> {
-                yearBeingSelected.visibility = View.INVISIBLE
-                yearBeingSelectedMessage.visibility = View.INVISIBLE
-                yearSelectHelpMessage.visibility = View.INVISIBLE
-                yearWeightingTextInput.visibility = View.INVISIBLE
-                creditsCompletedWithinYearTextInput.visibility = View.INVISIBLE
-                continueButton.visibility = View.INVISIBLE
-                completeSetupButton.visibility = View.VISIBLE
-            }
-            false -> {
-                bindNewYearWeightingToModel()
+        if (requestCode == ConfigurationYearWeightingActivity.addYearWeightingActivityCode)
+        {
+            if (resultCode == Activity.RESULT_OK)
+            {
+                val yearWeightingModel = data?.extras?.get("yearWeightingModel") as ConfigurationYearWeightingModel?
+                if(yearWeightingModel != null)
+                {
+                    val yearWeightings = viewModel.yearWeightings.value
+                    yearWeightings?.add(yearWeightingModel)
+                    viewModel.yearWeightings.postValue(yearWeightings)
+                }
             }
         }
     }
 
     private fun bindCompleteSetupButtonToAction()
     {
-        bindButtonClickedListener(completeSetupButton, viewModel) {
+        bindButtonClickedListener(configurationYearWeightingsCompleteSetupButton, viewModel) {
             saveConfiguration({ Log.e("initial setup", it ?: "error") }) {
                 startActivity(Intent(
                         this@ConfigurationYearWeightingActivity,
                         CoreAppTabContainerActivity::class.java))
+                this@ConfigurationYearWeightingActivity.finish()
             }
         }
+    }
+
+    companion object
+    {
+        const val addYearWeightingActivityCode = 1
     }
 }
