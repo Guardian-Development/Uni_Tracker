@@ -4,7 +4,9 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockito_kotlin.*
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleResultModel
+import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.IProvideModuleCalculations
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
 import mobile.joehonour.newcastleuniversity.unitracker.support.FieldAssert
 import org.junit.Rule
 import org.junit.Test
@@ -27,7 +29,7 @@ class IndividualModuleViewModelTests
         val calculator = mock<IProvideModuleCalculations> {
             on { calculatePercentageCompleteOf(any()) } doReturn 10.0
         }
-        val viewModel = IndividualModuleViewModel(calculator)
+        val viewModel = IndividualModuleViewModel(calculator, mock(), mock())
         viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculatePercentageComplete(onError, onSuccess)
@@ -52,7 +54,7 @@ class IndividualModuleViewModelTests
             }
         }
 
-        val viewModel = IndividualModuleViewModel(calculator)
+        val viewModel = IndividualModuleViewModel(calculator, mock(), mock())
         viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculatePercentageComplete(onError, onSuccess)
@@ -72,7 +74,7 @@ class IndividualModuleViewModelTests
 
         val onSuccess = mock<((Double) -> Unit)>()
 
-        val viewModel = IndividualModuleViewModel(mock())
+        val viewModel = IndividualModuleViewModel(mock(), mock(), mock())
         viewModel.calculatePercentageComplete(onError, onSuccess)
 
         verify(onError).invoke("Module was not set")
@@ -89,7 +91,7 @@ class IndividualModuleViewModelTests
         val calculator = mock<IProvideModuleCalculations> {
             on { calculateCurrentAverageGradeOf(any()) } doReturn 30
         }
-        val viewModel = IndividualModuleViewModel(calculator)
+        val viewModel = IndividualModuleViewModel(calculator, mock(), mock())
         viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculateCurrentGrade(onError, onSuccess)
@@ -114,7 +116,7 @@ class IndividualModuleViewModelTests
             }
         }
 
-        val viewModel = IndividualModuleViewModel(calculator)
+        val viewModel = IndividualModuleViewModel(calculator, mock(), mock())
         viewModel.module.value = ModuleModel("uniqueId", "CSCTEST", "test", 10, 2, listOf(
                 ModuleResultModel("id", "name", 40, 20.0)))
         viewModel.calculateCurrentGrade(onError, onSuccess)
@@ -124,8 +126,7 @@ class IndividualModuleViewModelTests
     }
 
     @Test
-    fun calculateCurrentGradeModuleValueNullFailure()
-    {
+    fun calculateCurrentGradeModuleValueNullFailure() {
         val onError = mock<((String?) -> Unit)> {
             on { invoke(any()) } doAnswer {
                 FieldAssert("Module was not set").doAssert(it.arguments[0] as String)
@@ -134,8 +135,95 @@ class IndividualModuleViewModelTests
 
         val onSuccess = mock<((Int) -> Unit)>()
 
-        val viewModel = IndividualModuleViewModel(mock())
+        val viewModel = IndividualModuleViewModel(mock(), mock(), mock())
         viewModel.calculateCurrentGrade(onError, onSuccess)
+
+        verify(onError).invoke("Module was not set")
+        verifyZeroInteractions(onSuccess)
+    }
+
+    @Test
+    fun canDeleteResultForModuleSuccess()
+    {
+        val authProvider = mock<IProvideAuthentication> {
+            on { userLoggedIn } doReturn true
+            on { userUniqueId } doReturn "testUser"
+        }
+        val onError = mock<((String?) -> Unit)>()
+        val onSuccess = mock<(() -> Unit)>()
+        val dataAccess = mock<IProvideDataStorage> {
+            on { deleteItemFromDatabase(
+                    eq("testUser/modules/testModule/results/testResult"),
+                    eq(onError),
+                    eq(onSuccess)) } doAnswer { (it.arguments[2] as (() -> Unit)).invoke() }
+        }
+        val module = mock<ModuleModel> {
+            on { moduleId } doReturn  "testModule"
+        }
+
+        val viewModel = IndividualModuleViewModel(mock(), dataAccess, authProvider)
+        viewModel.module.value = module
+
+        viewModel.deleteResultForModule("testResult", onError, onSuccess)
+
+        verify(onSuccess).invoke()
+        verifyZeroInteractions(onError)
+    }
+
+    @Test
+    fun canDeleteResultForModuleUserNotLoggedInFails()
+    {
+        val authProvider = mock<IProvideAuthentication> {
+            on { userLoggedIn } doReturn false
+        }
+        val onError = mock<((String?) -> Unit)>()
+        val onSuccess = mock<(() -> Unit)>()
+
+        val viewModel = IndividualModuleViewModel(mock(), mock(), authProvider)
+        viewModel.module.value = mock()
+
+        viewModel.deleteResultForModule("testResult", onError, onSuccess)
+
+        verify(onError).invoke("You must be signed in to delete a result.")
+        verifyZeroInteractions(onSuccess)
+    }
+
+    @Test
+    fun canDeleteResultForModuleDatabaseErrorFails()
+    {
+        val authProvider = mock<IProvideAuthentication> {
+            on { userLoggedIn } doReturn true
+            on { userUniqueId } doReturn "testUser"
+        }
+        val onError = mock<((String?) -> Unit)>()
+        val onSuccess = mock<(() -> Unit)>()
+        val dataAccess = mock<IProvideDataStorage> {
+            on { deleteItemFromDatabase(
+                    eq("testUser/modules/testModule/results/testResult"),
+                    eq(onError),
+                    eq(onSuccess)) } doAnswer { (it.arguments[1] as ((String?) -> Unit)).invoke("Database error") }
+        }
+        val module = mock<ModuleModel> {
+            on { moduleId } doReturn  "testModule"
+        }
+
+        val viewModel = IndividualModuleViewModel(mock(), dataAccess, authProvider)
+        viewModel.module.value = module
+
+        viewModel.deleteResultForModule("testResult", onError, onSuccess)
+
+        verify(onError).invoke("Database error")
+        verifyZeroInteractions(onSuccess)
+    }
+
+    @Test
+    fun canDeleteResultForModuleModuleNotSetFails()
+    {
+        val onError = mock<((String?) -> Unit)>()
+        val onSuccess = mock<(() -> Unit)>()
+        val viewModel = IndividualModuleViewModel(mock(), mock(), mock())
+
+        viewModel.deleteResultForModule("testResult", onError, onSuccess)
 
         verify(onError).invoke("Module was not set")
         verifyZeroInteractions(onSuccess)

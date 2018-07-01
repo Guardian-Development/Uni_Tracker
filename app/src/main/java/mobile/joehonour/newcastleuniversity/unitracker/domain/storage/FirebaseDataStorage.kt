@@ -17,4 +17,17 @@ class FirebaseDataStorage(private val databaseReference: DatabaseReference) : IP
             }
         }
     }
+
+    override fun deleteItemFromDatabase(
+            key: String,
+            onError: (String?) -> Unit,
+            onSuccess: () -> Unit)
+    {
+        databaseReference.child(key).removeValue().addOnCompleteListener {
+            when(it.isSuccessful) {
+                true -> onSuccess()
+                false -> onError(it.exception?.message)
+            }
+        }
+    }
 }

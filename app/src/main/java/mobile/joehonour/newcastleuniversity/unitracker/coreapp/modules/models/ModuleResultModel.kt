@@ -27,6 +27,8 @@ data class ModuleResultModel(val resultId: String,
         return 0
     }
 
+    override fun toString(): String = "result: $resultName with percentage $resultPercentage %"
+
     companion object CREATOR : Parcelable.Creator<ModuleResultModel>
     {
         override fun createFromParcel(parcel: Parcel): ModuleResultModel

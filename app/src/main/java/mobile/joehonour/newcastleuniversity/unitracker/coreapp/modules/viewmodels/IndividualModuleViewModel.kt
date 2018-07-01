@@ -3,12 +3,17 @@ package mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.viewmode
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
+import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.calculations.IProvideModuleCalculations
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.Module
 import mobile.joehonour.newcastleuniversity.unitracker.domain.models.ModuleResult
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
-class IndividualModuleViewModel(private val moduleCalculator: IProvideModuleCalculations) : ViewModel()
+class IndividualModuleViewModel(private val moduleCalculator: IProvideModuleCalculations,
+                                private val dataStorage: IProvideDataStorage,
+                                private val authProvider: IProvideAuthentication) : ViewModel()
 {
     val module: MutableLiveData<ModuleModel> = MutableLiveData()
     val percentageComplete: MutableLiveData<Double> = MutableLiveData()
@@ -55,5 +60,20 @@ class IndividualModuleViewModel(private val moduleCalculator: IProvideModuleCalc
                 moduleModel.moduleCredits,
                 moduleModel.moduleYearStudied,
                 mapOfResults)
+    }
+
+    fun deleteResultForModule(resultId: String, onError: (String?) -> Unit, onSuccess: () -> Unit)
+    {
+        when(module.value.notNull()) {
+            true ->
+                when(authProvider.userLoggedIn) {
+                    true -> dataStorage.deleteItemFromDatabase(
+                            DataLocationKeys.resultLocationForModule(authProvider.userUniqueId!!,
+                                    module.value!!.moduleId,
+                                    resultId), onError, onSuccess)
+                    false -> onError("You must be signed in to delete a result.")
+            }
+            false -> onError("Module was not set")
+        }
     }
 }

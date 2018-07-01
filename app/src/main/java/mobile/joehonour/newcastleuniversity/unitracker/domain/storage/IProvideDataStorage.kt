@@ -7,5 +7,10 @@ interface IProvideDataStorage
             itemToAdd: T,
             onError: (String?) -> Unit,
             onSuccess: () -> Unit)
+
+    fun deleteItemFromDatabase(
+            key: String,
+            onError: (String?) -> Unit,
+            onSuccess: () -> Unit)
 }
 

@@ -13,6 +13,6 @@ object ModulesDI
     val modulesModule: Module = applicationContext {
         viewModel { AddModuleViewModel(get(), ModuleModelValidator(), get(), get()) }
         viewModel { ModulesViewModel(get()) }
-        viewModel { IndividualModuleViewModel(get()) }
+        viewModel { IndividualModuleViewModel(get(), get(), get()) }
     }
 }

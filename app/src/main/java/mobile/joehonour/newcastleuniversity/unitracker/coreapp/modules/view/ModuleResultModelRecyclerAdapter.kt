@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.recycler_result_list_item.view.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleResultModel
+import mobile.joehonour.newcastleuniversity.unitracker.extensions.listenForLongClick
 
-class ModuleResultModelRecyclerAdapter(private val results: List<ModuleResultModel>)
+class ModuleResultModelRecyclerAdapter(private val results: List<ModuleResultModel>,
+                                       private val clickHandler: ((ModuleResultModel) -> Unit)? = null)
     : RecyclerView.Adapter<ModuleResultModelRecyclerAdapter.ModuleResultHolder>()
 {
     private fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View
@@ -24,6 +26,7 @@ class ModuleResultModelRecyclerAdapter(private val results: List<ModuleResultMod
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleResultHolder =
             ModuleResultHolder(parent.inflate(R.layout.recycler_result_list_item))
+                    .listenForLongClick {  clickHandler?.invoke(results[it]) }
 
     inner class ModuleResultHolder(private val v: View?) : RecyclerView.ViewHolder(v)
     {

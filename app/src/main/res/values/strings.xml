@@ -98,4 +98,8 @@ secrets.xml resource file should be added to values folder containing:
     <string name="configurationAddYearWeightingYearWeightingHint">Year Weighting</string>
     <string name="configurationAddYearWeightingCreditsCompletedHint">Credits Completed Within Year</string>
     <string name="configurationYearWeightingAddYearButtonText">Add Year</string>
+
+    <string name="deleteItemDialogTitle">Confirm Delete</string>
+    <string name="deleteItemDialogMessage">Do you really want to delete %s ?</string>
+    <string name="deleteItemDialogSuccessMessage">Successfully Deleted Result</string>
 </resources>

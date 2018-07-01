@@ -11,7 +11,10 @@ import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.Mo
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleResultModel
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.viewmodels.IndividualModuleViewModel
 import mobile.joehonour.newcastleuniversity.unitracker.domain.extensions.notNull
+import mobile.joehonour.newcastleuniversity.unitracker.extensions.closePageAndShowDeletionMessage
+import mobile.joehonour.newcastleuniversity.unitracker.extensions.showDeleteItemConfirmationCheckbox
 import org.koin.android.architecture.ext.viewModel
+
 
 class IndividualModuleActivity : AppCompatActivity()
 {
@@ -76,6 +79,13 @@ class IndividualModuleActivity : AppCompatActivity()
     private fun bindListOfResults(results: List<ModuleResultModel>)
     {
         individualModuleActivityModuleResultsList.layoutManager = LinearLayoutManager(this)
-        individualModuleActivityModuleResultsList.adapter = ModuleResultModelRecyclerAdapter(results)
+        individualModuleActivityModuleResultsList.adapter =
+                ModuleResultModelRecyclerAdapter(results) { result ->
+                    showDeleteItemConfirmationCheckbox(result) {
+                        viewModel.deleteResultForModule(result.resultId,
+                                { Log.e("IndividualModuleActivity", it) },
+                                { closePageAndShowDeletionMessage(it) })
+                    }
+                }
     }
 }
