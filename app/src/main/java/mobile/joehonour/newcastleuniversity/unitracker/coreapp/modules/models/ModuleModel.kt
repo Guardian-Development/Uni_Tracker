@@ -33,6 +33,8 @@ data class ModuleModel(val moduleId: String,
         return 0
     }
 
+    override fun toString(): String = "Module: $moduleCode : $moduleName"
+
     companion object CREATOR : Parcelable.Creator<ModuleModel>
     {
         override fun createFromParcel(parcel: Parcel): ModuleModel

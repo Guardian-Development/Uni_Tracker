@@ -84,7 +84,9 @@ class IndividualModuleActivity : AppCompatActivity()
                     showDeleteItemConfirmationCheckbox(result) {
                         viewModel.deleteResultForModule(result.resultId,
                                 { Log.e("IndividualModuleActivity", it) },
-                                { closePageAndShowDeletionMessage(it) })
+                                { closePageAndShowDeletionMessage(it,
+                                        getString(R.string.deleteItemDialogSuccessMessageResult))
+                                })
                     }
                 }
     }

@@ -101,5 +101,6 @@ secrets.xml resource file should be added to values folder containing:
 
     <string name="deleteItemDialogTitle">Confirm Delete</string>
     <string name="deleteItemDialogMessage">Do you really want to delete %s ?</string>
-    <string name="deleteItemDialogSuccessMessage">Successfully Deleted Result</string>
+    <string name="deleteItemDialogSuccessMessageResult">Successfully Deleted Result</string>
+    <string name="deleteItemDialogSuccessMessageModule">Successfully Deleted Module</string>
 </resources>

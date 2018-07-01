@@ -5,9 +5,14 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleResultModel
+import mobile.joehonour.newcastleuniversity.unitracker.domain.authentication.IProvideAuthentication
 import mobile.joehonour.newcastleuniversity.unitracker.domain.queries.IQueryUserState
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.IProvideDataStorage
+import mobile.joehonour.newcastleuniversity.unitracker.domain.storage.support.DataLocationKeys
 
-class ModulesViewModel(private val userState: IQueryUserState) : ViewModel()
+class ModulesViewModel(private val userState: IQueryUserState,
+                       private val dataStorage: IProvideDataStorage,
+                       private val authProvider: IProvideAuthentication) : ViewModel()
 {
     val currentModules: MutableLiveData<List<ModuleModel>> = MutableLiveData()
 
@@ -27,6 +32,17 @@ class ModulesViewModel(private val userState: IQueryUserState) : ViewModel()
                                     it.resultWeighting,
                                     it.resultPercentage) })
                     })
+        }
+    }
+
+    fun deleteModule(moduleId: String, onError: (String?) -> Unit, onSuccess: () -> Unit)
+    {
+        when(authProvider.userLoggedIn) {
+            true -> dataStorage.deleteItemFromDatabase(
+                    DataLocationKeys.studentModuleLocation(authProvider.userUniqueId!!, moduleId),
+                    onError,
+                    onSuccess)
+            false -> onError("You must be signed in to delete a result.")
         }
     }
 }

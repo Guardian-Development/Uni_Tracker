@@ -9,9 +9,11 @@ import kotlinx.android.synthetic.main.recycler_module_list_item.view.*
 import mobile.joehonour.newcastleuniversity.unitracker.R
 import mobile.joehonour.newcastleuniversity.unitracker.coreapp.modules.models.ModuleModel
 import mobile.joehonour.newcastleuniversity.unitracker.extensions.listenForClick
+import mobile.joehonour.newcastleuniversity.unitracker.extensions.listenForLongClick
 
 class ModuleModelRecyclerAdapter(private val modules: List<ModuleModel>,
-                                 private val clickHandler: (ModuleModel) -> Unit)
+                                 private val clickHandler: (ModuleModel) -> Unit,
+                                 private val longClickHandler: ((ModuleModel) -> Unit)? = null)
     : RecyclerView.Adapter<ModuleModelRecyclerAdapter.ModuleHolder>()
 {
     private fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View
@@ -27,6 +29,7 @@ class ModuleModelRecyclerAdapter(private val modules: List<ModuleModel>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleHolder =
             ModuleHolder(parent.inflate(R.layout.recycler_module_list_item))
                 .listenForClick { clickHandler(modules[it]) }
+                .listenForLongClick { longClickHandler?.invoke(modules[it]) }
 
     inner class ModuleHolder(v: View?) : RecyclerView.ViewHolder(v)
     {

@@ -32,11 +32,19 @@ fun <T> Activity.showDeleteItemConfirmationCheckbox(item: T,
             .show()
 }
 
-fun Activity.closePageAndShowDeletionMessage(dialog: DialogInterface) {
+fun Activity.closePageAndShowDeletionMessage(dialog: DialogInterface, deletionMessage: String) {
     dialog.dismiss()
     finish()
     Toast.makeText(
             this,
-            getString(R.string.deleteItemDialogSuccessMessage),
+            deletionMessage,
+            Toast.LENGTH_LONG).show()
+}
+
+fun Activity.showDeletionMessage(dialog: DialogInterface, deletionMessage: String) {
+    dialog.dismiss()
+    Toast.makeText(
+            this,
+            deletionMessage,
             Toast.LENGTH_LONG).show()
 }
